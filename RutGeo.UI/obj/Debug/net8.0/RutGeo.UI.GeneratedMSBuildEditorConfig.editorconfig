@@ -29,3 +29,9 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [C:/uct/eid calculo/RutGeo/RutGeo.UI/Views/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[C:/uct/eid calculo/RutGeo/RutGeo.UI/Views/RutInputView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[C:/uct/eid calculo/RutGeo/RutGeo.UI/Views/ValuesTable.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
