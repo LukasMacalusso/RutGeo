@@ -3,17 +3,25 @@
         xmlns:vm="using:RutGeo.UI.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="420" d:DesignHeight="240"
         x:Class="RutGeo.UI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="RutGeo.UI">
+        Title="RutGeo - Validador de RUT">
 
     <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainWindowViewModel/>
+        <vm:MainWindowViewModel />
     </Design.DataContext>
 
+    <StackPanel Margin="24" Spacing="12">
+        <TextBlock Text="Validar RUT" FontSize="20" FontWeight="SemiBold" />
 
+        <TextBox Text="{Binding RutInput, Mode=TwoWay}"
+                 PlaceholderText="Ejemplo: 22167206-2" />
+
+        <Button Content="Validar"
+                Command="{Binding ValidateRutCommand}" />
+
+        <TextBlock Text="{Binding ValidationMessage}" />
+    </StackPanel>
 </Window>
