@@ -20,12 +20,12 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = RutGeo.UI
-build_property.ProjectDir = /home/ls_macalusso/Code/csharp/RutGeo/RutGeo.UI/
+build_property.ProjectDir = C:\uct\eid calculo\RutGeo\RutGeo.UI\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 
-[/home/ls_macalusso/Code/csharp/RutGeo/RutGeo.UI/App.axaml]
+[C:/uct/eid calculo/RutGeo/RutGeo.UI/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[/home/ls_macalusso/Code/csharp/RutGeo/RutGeo.UI/Views/MainWindow.axaml]
+[C:/uct/eid calculo/RutGeo/RutGeo.UI/Views/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

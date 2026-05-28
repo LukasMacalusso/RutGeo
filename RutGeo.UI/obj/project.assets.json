@@ -1986,33 +1986,32 @@
     ]
   },
   "packageFolders": {
-    "/home/ls_macalusso/.nuget/packages/": {}
+    "C:\\Users\\ignac\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/ls_macalusso/Code/csharp/RutGeo/RutGeo.UI/RutGeo.UI.csproj",
+      "projectUniqueName": "C:\\uct\\eid calculo\\RutGeo\\RutGeo.UI\\RutGeo.UI.csproj",
       "projectName": "RutGeo.UI",
-      "projectPath": "/home/ls_macalusso/Code/csharp/RutGeo/RutGeo.UI/RutGeo.UI.csproj",
-      "packagesPath": "/home/ls_macalusso/.nuget/packages/",
-      "outputPath": "/home/ls_macalusso/Code/csharp/RutGeo/RutGeo.UI/obj/",
+      "projectPath": "C:\\uct\\eid calculo\\RutGeo\\RutGeo.UI\\RutGeo.UI.csproj",
+      "packagesPath": "C:\\Users\\ignac\\.nuget\\packages\\",
+      "outputPath": "C:\\uct\\eid calculo\\RutGeo\\RutGeo.UI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/ls_macalusso/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\ignac\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "/usr/lib/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/home/ls_macalusso/Code/csharp/RutGeo/RutGeo.Core/RutGeo.Core.csproj": {
-              "projectPath": "/home/ls_macalusso/Code/csharp/RutGeo/RutGeo.Core/RutGeo.Core.csproj"
+            "C:\\uct\\eid calculo\\RutGeo\\RutGeo.Core\\RutGeo.Core.csproj": {
+              "projectPath": "C:\\uct\\eid calculo\\RutGeo\\RutGeo.Core\\RutGeo.Core.csproj"
             }
           }
         }
@@ -2076,7 +2075,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.127/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.127/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
