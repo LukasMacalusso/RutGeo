@@ -1,4 +1,3 @@
-using System.Runtime.Serialization;
 using System.Text;
 
 namespace RutGeo.Core.Services
@@ -8,6 +7,7 @@ namespace RutGeo.Core.Services
         public bool IsValid { get; set; }   //Rut validity
         public string RutBody { get; set; } = string.Empty;
         public char Dv { get; set; } // check digit
+        public string StepByStepLog { get; set; } = string.Empty;
     }
 
     public class RutValidator
@@ -17,26 +17,34 @@ namespace RutGeo.Core.Services
             var result = new RutValidatorResult();
             var log = new StringBuilder();
 
-            // Clean Rut
-            string clean = rawRut.Replace(".","").Replace("-","").ToUpper();
-            
-            // Falta agregar el log
-
-            if(clean.Length < 7)
+            if (string.IsNullOrWhiteSpace(rawRut))
             {
+                log.AppendLine("El RUT está vacío.");
+                result.StepByStepLog = log.ToString();
                 result.IsValid = false;
-                // Mensaje de error
                 return result;
             }
 
-            //Divide body and DV
-            string body = clean.Substring(0,(clean.Length-1));
-            char DV = clean[-1];
+            // Clean Rut
+            string clean = rawRut.Replace(".", string.Empty).Replace("-", string.Empty).ToUpperInvariant();
+            log.AppendLine($"RUT limpio: {clean}");
+
+            if (clean.Length < 7)
+            {
+                log.AppendLine("El RUT debe tener al menos 7 caracteres.");
+                result.StepByStepLog = log.ToString();
+                result.IsValid = false;
+                return result;
+            }
+
+            // Divide body and DV
+            string body = clean[..^1];
+            char DV = clean[^1];
 
             result.RutBody = body;
             result.Dv = DV;
-
-            //Agregar log
+            log.AppendLine($"Cuerpo del RUT: {body}");
+            log.AppendLine($"DV extraído: {DV}");
 
 
             // Module 11
@@ -49,21 +57,23 @@ namespace RutGeo.Core.Services
                 // Validate numbers into rut body
                 if (!char.IsDigit(body[i]))
                 {
+                    log.AppendLine($"Carácter inválido en el cuerpo del RUT: '{body[i]}'.");
+                    result.StepByStepLog = log.ToString();
                     result.IsValid = false;
-                    // Mensaje de error
                     return result;
                 }
 
                 int digit = int.Parse(body[i].ToString());
                 int product = digit * multiplier;
                 sum += product;
+                log.AppendLine($"Digito {digit} * multiplicador {multiplier} = {product}");
 
-                multiplier = multiplier == 7 ? 2 : multiplier+1 ;
+                multiplier = multiplier == 7 ? 2 : multiplier + 1;
             }
             
         // Calculate residue and DV expected
 
-        int remainder = sum%11;
+        int remainder = sum % 11;
         int DvValue = 11 - remainder;
 
         char DvExpected;
@@ -71,7 +81,15 @@ namespace RutGeo.Core.Services
         else if (DvValue == 10) DvExpected = 'K';
         else DvExpected = DvValue.ToString()[0];
 
-        // Implementar validación final
+        log.AppendLine($"Suma total: {sum}");
+        log.AppendLine($"Resto módulo 11: {remainder}");
+        log.AppendLine($"DV esperado: {DvExpected}");
+
+        // Final validation
+
+        result.IsValid = (DvExpected == DV);
+        result.StepByStepLog = log.ToString();
+        return result;
 
         }
 
