@@ -1,6 +1,8 @@
+using RutGeo.Core.Services;
+
 namespace RutGeo.Core.Interfaces;
 
 public interface IRutValidator
 {
-     bool IsValid(string rut);
+    RutValidatorResult Validate(string rawRut);
 }
