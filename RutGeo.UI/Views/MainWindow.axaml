@@ -19,7 +19,7 @@
         </Border>
 
         <Border Grid.Row="1" Background="#1E1E1E">
-            <TextBlock Text="test" 
+            <TextBlock Text="test 2" 
                        Foreground="Gray" 
                        VerticalAlignment="Center" 
                        HorizontalAlignment="Center"/>
