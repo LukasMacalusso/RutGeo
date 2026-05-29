@@ -29,10 +29,11 @@ public partial class Mode : UserControl
 
     private void UpdateButtons(bool isConic)
     {
-        BtnConics.Background = isConic ? new SolidColorBrush(Color.Parse("#007ACC")) : Brushes.Transparent;
+        var activeBrush = Brushes.MediumSlateBlue; 
+        var inactiveBrush = Brushes.Transparent; 
+        BtnConics.Background = isConic ? activeBrush : inactiveBrush;
         BtnConics.Foreground = isConic ? Brushes.White : Brushes.LightGray;
-
-        BtnLimits.Background = !isConic ? new SolidColorBrush(Color.Parse("#007ACC")) : Brushes.Transparent;
+        BtnLimits.Background = !isConic ? activeBrush : inactiveBrush;
         BtnLimits.Foreground = !isConic ? Brushes.White : Brushes.LightGray;
     }
 }

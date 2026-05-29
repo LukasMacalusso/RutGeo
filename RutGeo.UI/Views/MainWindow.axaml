@@ -31,6 +31,25 @@
                             <SolidColorBrush x:Key="TabItemHeaderPointerOverPipeFill" Color="MediumSlateBlue"/>
                         </TabControl.Resources>
 
+                        <TabControl.Styles>
+                            <Style Selector="TabItem">
+                                <Setter Property="Foreground" Value="#333333"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                            </Style>
+
+                            <Style Selector="TabItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                                <Setter Property="Foreground" Value="#777777"/>
+                            </Style>
+        
+                            <Style Selector="TabItem:selected">
+                                <Setter Property="Foreground" Value="MediumSlateBlue"/>
+                            </Style>
+
+                            <Style Selector="TabItem:selected:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                                <Setter Property="Foreground" Value="#8A77EE"/>
+                            </Style>
+                        </TabControl.Styles>
+
                         <TabItem Header="Análisis">
                             <v:Description x:Name="DescView" />
                         </TabItem>
