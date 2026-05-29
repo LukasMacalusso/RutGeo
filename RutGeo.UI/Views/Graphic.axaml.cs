@@ -14,12 +14,10 @@ public partial class Graphic : UserControl
     public void SwitchToConics()
     {
         _isConicMode = true;
-        // Cuando se conecte el Core, aquí se llamará a dibujar la cónica
     }
 
     public void SwitchToLimits()
     {
         _isConicMode = false;
-        // Cuando se conecte el Core, aquí se llamará a dibujar la función por tramos
     }
 }
