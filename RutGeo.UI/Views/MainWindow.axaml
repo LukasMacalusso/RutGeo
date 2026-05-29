@@ -9,75 +9,85 @@
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="RutGeo">
-
-    <Grid RowDefinitions="*, Auto">
+    
+    <Window.Background>
+        <SolidColorBrush Color="Black"/>
+    </Window.Background>
+    <Grid Background="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         
-        <Grid Grid.Row="0" ColumnDefinitions="300, *">
+        <Grid Grid.Row="0" ColumnDefinitions="Auto, *">
             
-            <Border Grid.Column="0" Background="#F5F5FB" BorderBrush="#D4D4E2" BorderThickness="0,0,1,0">
-                <Grid>
+            <Border x:Name="LeftPanel" Grid.Column="0" Width="300" Background="#FFFFFF" BorderBrush="#D4D4E2" BorderThickness="0,0,1,0">
+    
+                <Grid RowDefinitions="*, Auto">
+        
+                    <TabControl Grid.Row="0" Margin="0,5,0,0">
+                        <TabControl.Resources>
+                            <SolidColorBrush x:Key="TabItemHeaderSelectedPipeFill" Color="MediumSlateBlue"/> 
+                            <SolidColorBrush x:Key="TabItemHeaderPointerOverPipeFill" Color="MediumSlateBlue"/>
+                        </TabControl.Resources>
 
-                    <TabControl x:Name="ConicsTabs" Margin="0,5,0,0" IsVisible="True">
                         <TabItem Header="Análisis">
-                            <TextBlock Text="[Modo Canónica]" Foreground="LightGray" Margin="15" HorizontalAlignment="Center"/>
+                            <v:Description x:Name="DescView" />
                         </TabItem>
                         <TabItem Header="Defensa">
-                            <StackPanel Margin="15" Spacing="10">
-                                <TextBox Watermark="Test" />
-                                <ComboBox PlaceholderText="Test" HorizontalAlignment="Stretch">
-                                    <ComboBoxItem>a</ComboBoxItem>
-                                    <ComboBoxItem>aa</ComboBoxItem>
-                                    <ComboBoxItem>aaa</ComboBoxItem>
-                                </ComboBox>
-                            </StackPanel>
+                            <v:Defense x:Name="DefenseView" />
                         </TabItem>
                     </TabControl>
 
-                    <TabControl x:Name="LimitsTabs" Margin="0,5,0,0" IsVisible="False">
-                        <TabItem Header="Análisis">
-                            <TextBlock Text="[Modo Límite]" Foreground="LightGray" Margin="15" HorizontalAlignment="Center"/>
-                        </TabItem>
-                        <TabItem Header="Defensa">
-                            <StackPanel Margin="15" Spacing="10">
-                                <TextBox Watermark="Test" />
-                                <ComboBox PlaceholderText="Test" HorizontalAlignment="Stretch">
-                                    <ComboBoxItem>a</ComboBoxItem>
-                                    <ComboBoxItem>aa</ComboBoxItem>
-                                    <ComboBoxItem>aaa</ComboBoxItem>
-                                </ComboBox>
-                            </StackPanel>
-                        </TabItem>
-                    </TabControl>
-                    
+                    <Border Grid.Row="1" Padding="10" Background="#F8F8F8" BorderBrush="#E0E0E0" BorderThickness="0,1,0,0">
+                        <v:RutInputView />
+                    </Border>
+        
                 </Grid>
             </Border>
-
-            <Grid Grid.Column="1" RowDefinitions="*, Auto">
-                
-                <Border Grid.Row="0" Background="#F5F5FB">
-                    <TextBlock Text="[Área de Gráfico]" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </Border>
-                
-                <Border Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="15" 
-                        Background="#333333" CornerRadius="5" Padding="4">
-                    <StackPanel Orientation="Horizontal">
-
-                        <Button x:Name="BtnConics" Content="Cónicas" Click="ConicsButton_Click" 
-                                Background="#007ACC" Foreground="White" BorderThickness="0" CornerRadius="3" Margin="0,0,5,0"/>
+            
+            <Grid Grid.Column="1" RowDefinitions="Auto, *, Auto">
     
-                        <Button x:Name="BtnLimits" Content="Límites" Click="LimitsButton_Click" 
-                                Background="Transparent" Foreground="LightGray" BorderThickness="0"/>
-                    </StackPanel>
+                <Border Grid.Row="0" Background="#14122A" Padding="15,10">
+                    <Grid>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Spacing="15">
+                            
+                            <Button x:Name="TogglePanelBtn" 
+                                    Content="☰" 
+                                    Click="TogglePanelButton_Click" 
+                                    Background="Transparent" 
+                                    Foreground="White" 
+                                    FontSize="20" 
+                                    Padding="5,0,5,5"
+                                    Cursor="Hand"/>
+
+                            <TextBlock VerticalAlignment="Center" 
+                                       FontSize="26" 
+                                       LetterSpacing="1">
+                    
+                                <Run Text="Rut" FontWeight="Black" Foreground="#FFFFFF" />
+                                <Run Text="Geo" FontWeight="Light" Foreground="MediumSlateBlue" />
+
+                            </TextBlock>
+                        </StackPanel>
+            
+                        <StackPanel HorizontalAlignment="Right" 
+                                    VerticalAlignment="Center" 
+                                    Orientation="Horizontal"> 
+                            <v:Mode x:Name="ModeSelector" /> 
+                        </StackPanel>
+                    </Grid>
                 </Border>
                 
-                <v:ValuesTable x:Name="LimitsTable" Grid.Row="1" IsVisible="False" />
-                
+                <Border Grid.Row="1" Background="#C9C9C9">
+                    <v:Graphic x:Name="GraphicView" />
+                </Border>
+
+                <v:ValuesTable x:Name="LimitsTable" Grid.Row="2" IsVisible="False" />
+
             </Grid>
             
         </Grid>
-
-        
-        <v:RutInputView Grid.Row="1" />
-
     </Grid>
 </Window>

@@ -3,7 +3,12 @@
   <component name="AvaloniaProject">
     <option name="projectPerEditor">
       <map>
+        <entry key="RutGeo.UI/Views/Analysis.axaml" value="RutGeo.UI/RutGeo.UI.csproj" />
+        <entry key="RutGeo.UI/Views/Defense.axaml" value="RutGeo.UI/RutGeo.UI.csproj" />
+        <entry key="RutGeo.UI/Views/Description.axaml" value="RutGeo.UI/RutGeo.UI.csproj" />
+        <entry key="RutGeo.UI/Views/Graphic.axaml" value="RutGeo.UI/RutGeo.UI.csproj" />
         <entry key="RutGeo.UI/Views/MainWindow.axaml" value="RutGeo.UI/RutGeo.UI.csproj" />
+        <entry key="RutGeo.UI/Views/Mode.axaml" value="RutGeo.UI/RutGeo.UI.csproj" />
         <entry key="RutGeo.UI/Views/RutInputView.axaml" value="RutGeo.UI/RutGeo.UI.csproj" />
         <entry key="RutGeo.UI/Views/ValuesTable.axaml" value="RutGeo.UI/RutGeo.UI.csproj" />
       </map>

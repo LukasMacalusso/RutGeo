@@ -27,7 +27,19 @@ build_property.EnableGeneratedComInterfaceComImportInterop =
 [C:/uct/eid calculo/RutGeo/RutGeo.UI/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[C:/uct/eid calculo/RutGeo/RutGeo.UI/Views/Defense.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[C:/uct/eid calculo/RutGeo/RutGeo.UI/Views/Description.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[C:/uct/eid calculo/RutGeo/RutGeo.UI/Views/Graphic.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [C:/uct/eid calculo/RutGeo/RutGeo.UI/Views/MainWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[C:/uct/eid calculo/RutGeo/RutGeo.UI/Views/Mode.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [C:/uct/eid calculo/RutGeo/RutGeo.UI/Views/RutInputView.axaml]

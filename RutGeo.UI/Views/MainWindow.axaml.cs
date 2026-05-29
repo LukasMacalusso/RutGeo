@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Media;
+
 namespace RutGeo.UI.Views;
 
 public partial class MainWindow : Window
@@ -8,31 +8,30 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        
+        ModeSelector.OnConicModeRequested += (s, e) => SwitchToConics();
+        ModeSelector.OnLimitsRequested += (s, e) => SwitchToLimits();
     }
 
-    private void ConicsButton_Click(object? sender, RoutedEventArgs e)
+    private void SwitchToConics()
     {
-        ConicsTabs.IsVisible = true;
-        LimitsTabs.IsVisible = false;
-        LimitsTable.IsVisible = false; 
-        
-        BtnConics.Background = new SolidColorBrush(Color.Parse("#007ACC"));
-        BtnConics.Foreground = Brushes.White;
-
-        BtnLimits.Background = Brushes.Transparent;
-        BtnLimits.Foreground = Brushes.LightGray;
+        DescView.SwitchToConics();
+        DefenseView.SwitchToConics();
+        GraphicView.SwitchToConics();
+        LimitsTable.IsVisible = false;
     }
-    
-    private void LimitsButton_Click(object? sender, RoutedEventArgs e)
+
+    private void SwitchToLimits()
     {
-        ConicsTabs.IsVisible = false;
-        LimitsTabs.IsVisible = true;
-        LimitsTable.IsVisible = true; 
-        
-        BtnLimits.Background = new SolidColorBrush(Color.Parse("#007ACC"));
-        BtnLimits.Foreground = Brushes.White;
-        
-        BtnConics.Background = Brushes.Transparent;
-        BtnConics.Foreground = Brushes.LightGray;
+        DescView.SwitchToLimits();
+        DefenseView.SwitchToLimits();
+        GraphicView.SwitchToLimits();
+        LimitsTable.IsVisible = true;
+    }
+
+
+    private void TogglePanelButton_Click(object? sender, RoutedEventArgs e)
+    {
+        LeftPanel.IsVisible = !LeftPanel.IsVisible;
     }
 }
