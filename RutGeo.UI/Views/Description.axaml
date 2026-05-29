@@ -1,0 +1,81 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="RutGeo.UI.Views.Description">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="15" Spacing="10">
+
+            <StackPanel x:Name="ConicContent" IsVisible="True" Spacing="8">
+                <TextBlock Text="Análisis de Cónica" FontSize="16" FontWeight="Bold" Foreground="#333333"/>
+                <TextBlock Text="Ecuación General:" FontWeight="SemiBold" Foreground="#555555"/>
+                <Border Background="#E8E8F0" CornerRadius="4" Padding="10">
+                    <TextBlock Text="" FontSize="14" Foreground="#007ACC" FontWeight="Bold"/>
+                </Border>
+
+                <TextBlock Text="Ecuación Canónica:" FontWeight="SemiBold" Foreground="#555555"/>
+                <Border Background="#E8E8F0" CornerRadius="4" Padding="10">
+                    <TextBlock Text="" FontSize="14" Foreground="#007ACC" FontWeight="Bold"/>
+                </Border>
+
+                <TextBlock Text="Elementos Geométricos:" FontWeight="SemiBold" Foreground="#555555" Margin="0,5,0,0"/>
+
+                <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto, Auto, Auto, Auto, Auto" ColumnSpacing="10" RowSpacing="4">
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Centro:" FontWeight="SemiBold" Foreground="#333333"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="(h, k)" Foreground="#333333"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Vértices:" FontWeight="SemiBold" Foreground="#333333"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="[...]" Foreground="#333333"/>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Focos:" FontWeight="SemiBold" Foreground="#333333"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="[...]" Foreground="#333333"/>
+
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Eje Mayor / Menor:" FontWeight="SemiBold" Foreground="#333333"/>
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="[...]" Foreground="#333333"/>
+
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="Directriz:" FontWeight="SemiBold" Foreground="#333333"/>
+                    <TextBlock Grid.Row="4" Grid.Column="1" Text="[...]" Foreground="#333333"/>
+                </Grid>
+
+                <TextBlock Text="Tipo de Cónica:" FontWeight="SemiBold" Foreground="#555555" Margin="0,5,0,0"/>
+                <Border Background="#E8E8F0" CornerRadius="4" Padding="10">
+                    <TextBlock Text="" Foreground="#007ACC" FontWeight="Bold"/>
+                </Border>
+            </StackPanel>
+
+            <StackPanel x:Name="LimitContent" IsVisible="False" Spacing="8">
+                <TextBlock Text="Análisis de Límites" FontSize="16" FontWeight="Bold" Foreground="#333333"/>
+                <TextBlock Text="Caso generado desde RUT:" FontWeight="SemiBold" Foreground="#555555"/>
+                <Border Background="#E8E8F0" CornerRadius="4" Padding="10">
+                    <TextBlock Text="" FontSize="14" Foreground="#007ACC" FontWeight="Bold" TextWrapping="Wrap"/>
+                </Border>
+
+                <TextBlock Text="Función por tramos:" FontWeight="SemiBold" Foreground="#555555"/>
+                <Border Background="#E8E8F0" CornerRadius="4" Padding="10">
+                    <TextBlock Text="" FontSize="14" Foreground="#007ACC" FontWeight="Bold" TextWrapping="Wrap"/>
+                </Border>
+
+                <TextBlock Text="Punto de análisis a:" FontWeight="SemiBold" Foreground="#555555" Margin="0,5,0,0"/>
+
+                <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto, Auto, Auto, Auto" ColumnSpacing="10" RowSpacing="4">
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Límite izquierdo:" FontWeight="SemiBold" Foreground="#333333"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="[]" Foreground="#333333"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Límite derecho:" FontWeight="SemiBold" Foreground="#333333"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="[]" Foreground="#333333"/>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="¿Existe el límite?" FontWeight="SemiBold" Foreground="#333333"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="[Sí / No]" Foreground="#333333"/>
+
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Discontinuidad:" FontWeight="SemiBold" Foreground="#333333"/>
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="" Foreground="#333333"/>
+                </Grid>
+
+                <TextBlock Text="Regla de selección:" FontWeight="SemiBold" Foreground="#555555" Margin="0,5,0,0"/>
+                <Border Background="#E8E8F0" CornerRadius="4" Padding="10">
+                    <TextBlock Text="" FontSize="14" Foreground="#007ACC" FontWeight="Bold" TextWrapping="Wrap"/>
+                </Border>
+            </StackPanel>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

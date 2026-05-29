@@ -1,19 +1,112 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:RutGeo.UI.ViewModels"
+        xmlns:v="using:RutGeo.UI.Views"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
         x:Class="RutGeo.UI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="RutGeo.UI">
+        Title="RutGeo">
+    
+    <Window.Background>
+        <SolidColorBrush Color="Black"/>
+    </Window.Background>
+    <Grid Background="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="0" ColumnDefinitions="Auto, *">
+            
+            <Border x:Name="LeftPanel" Grid.Column="0" Width="300" Background="#FFFFFF" BorderBrush="#D4D4E2" BorderThickness="0,0,1,0">
+    
+                <Grid RowDefinitions="*, Auto">
+        
+                    <TabControl Grid.Row="0" Margin="0,5,0,0">
+                        <TabControl.Resources>
+                            <SolidColorBrush x:Key="TabItemHeaderSelectedPipeFill" Color="MediumSlateBlue"/> 
+                            <SolidColorBrush x:Key="TabItemHeaderPointerOverPipeFill" Color="MediumSlateBlue"/>
+                        </TabControl.Resources>
 
-    <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
+                        <TabControl.Styles>
+                            <Style Selector="TabItem">
+                                <Setter Property="Foreground" Value="#333333"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                            </Style>
 
+                            <Style Selector="TabItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                                <Setter Property="Foreground" Value="#777777"/>
+                            </Style>
+        
+                            <Style Selector="TabItem:selected">
+                                <Setter Property="Foreground" Value="MediumSlateBlue"/>
+                            </Style>
 
+                            <Style Selector="TabItem:selected:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                                <Setter Property="Foreground" Value="#8A77EE"/>
+                            </Style>
+                        </TabControl.Styles>
+
+                        <TabItem Header="Análisis">
+                            <v:Description x:Name="DescView" />
+                        </TabItem>
+                        <TabItem Header="Defensa">
+                            <v:Defense x:Name="DefenseView" />
+                        </TabItem>
+                    </TabControl>
+
+                    <Border Grid.Row="1" Padding="10" Background="#F8F8F8" BorderBrush="#E0E0E0" BorderThickness="0,1,0,0">
+                        <v:RutInputView />
+                    </Border>
+        
+                </Grid>
+            </Border>
+            
+            <Grid Grid.Column="1" RowDefinitions="Auto, *, Auto">
+    
+                <Border Grid.Row="0" Background="#14122A" Padding="15,10">
+                    <Grid>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Spacing="15">
+                            
+                            <Button x:Name="TogglePanelBtn" 
+                                    Content="☰" 
+                                    Click="TogglePanelButton_Click" 
+                                    Background="Transparent" 
+                                    Foreground="White" 
+                                    FontSize="20" 
+                                    Padding="5,0,5,5"
+                                    Cursor="Hand"/>
+
+                            <TextBlock VerticalAlignment="Center" 
+                                       FontSize="26" 
+                                       LetterSpacing="1">
+                    
+                                <Run Text="Rut" FontWeight="Black" Foreground="#FFFFFF" />
+                                <Run Text="Geo" FontWeight="Light" Foreground="MediumSlateBlue" />
+
+                            </TextBlock>
+                        </StackPanel>
+            
+                        <StackPanel HorizontalAlignment="Right" 
+                                    VerticalAlignment="Center" 
+                                    Orientation="Horizontal"> 
+                            <v:Mode x:Name="ModeSelector" /> 
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                
+                <Border Grid.Row="1" Background="#C9C9C9">
+                    <v:Graphic x:Name="GraphicView" />
+                </Border>
+
+                <v:ValuesTable x:Name="LimitsTable" Grid.Row="2" IsVisible="False" />
+
+            </Grid>
+            
+        </Grid>
+    </Grid>
 </Window>
