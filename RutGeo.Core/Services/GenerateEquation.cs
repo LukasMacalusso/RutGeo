@@ -57,8 +57,8 @@ namespace RutGeo.Core.Services
             for (int i = 0; i < body.Length; i++)
                 d[i] = body[i] - '0';
 
-            equation.A = (d[0] + d[1]) / v;
-            equation.B = (d[2] + d[3]) / v;
+            equation.A = (double)(d[0] + d[1]) / v;
+            equation.B = (double)(d[2] + d[3]) / v;
             equation.C = -(d[4] + d[5]);
             equation.D = -(d[6] + d[7]);
             equation.E = d[0] + d[2] + d[4] + d[6];
