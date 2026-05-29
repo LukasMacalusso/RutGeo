@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RutGeo.Core")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+02c39710450a89d8b7d4ab7b9f28ba9042b0d048")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d1cdfebbf0212040da0fd907b6f9a6582d2e6fb7")]
 [assembly: System.Reflection.AssemblyProductAttribute("RutGeo.Core")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RutGeo.Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

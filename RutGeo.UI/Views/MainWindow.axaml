@@ -16,12 +16,5 @@
     <StackPanel Margin="24" Spacing="12">
         <TextBlock Text="Validar RUT" FontSize="20" FontWeight="SemiBold" />
 
-        <TextBox Text="{Binding RutInput, Mode=TwoWay}"
-                 PlaceholderText="Ejemplo: 22167206-2" />
-
-        <Button Content="Validar"
-                Command="{Binding ValidateRutCommand}" />
-
-        <TextBlock Text="{Binding ValidationMessage}" />
     </StackPanel>
 </Window>
