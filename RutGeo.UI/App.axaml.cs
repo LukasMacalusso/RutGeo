@@ -51,7 +51,6 @@ public partial class App : Application
 
     private void RegisterCoreServices(ServiceCollection serviceCollection)
     {
-        serviceCollection.AddSingleton<IRutValidator, DiTestRutValidator>();
     }
     
     private void RegisterViewModels(ServiceCollection serviceCollection)
