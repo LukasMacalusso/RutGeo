@@ -1,0 +1,22 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:RutGeo.UI.ViewModels" 
+             x:DataType="vm:MainWindowViewModel"
+             x:CompileBindings="False"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="RutGeo.UI.Views.RutLog">
+
+    <StackPanel x:Name="LimitContent" IsVisible="True" Spacing="8" Margin="15">
+        <TextBlock Text="Validación de RUT" FontSize="16" FontWeight="Bold" Foreground="#333333"/>
+        <Border Background="#E8E8F0" CornerRadius="4" Padding="10">
+            <TextBlock Text="{Binding ValidationMessage}" 
+                       FontSize="14" 
+                       Foreground="#333333" 
+                       FontWeight="Medium" 
+                       TextWrapping="Wrap"/>
+        </Border>
+    </StackPanel>
+
+</UserControl>

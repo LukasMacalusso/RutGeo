@@ -1,14 +1,43 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:RutGeo.UI.ViewModels" 
+             x:DataType="vm:MainWindowViewModel"
+             x:CompileBindings="False"
              x:Class="RutGeo.UI.Views.RutInputView">
-
+    
     <Border Background="#F5F5FB" BorderBrush="#D4D4E2" BorderThickness="0,1,0,0" Padding="15">
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Spacing="5">
-            <TextBlock Text="RUT" Foreground="#333333" VerticalAlignment="Center" FontWeight="SemiBold"/>
-            <TextBox Width="200" PlaceholderText="12345678-9" VerticalAlignment="Center"/>
-            <Button x:Name="BtnConics" Content="Calcular"
-                    Background="MediumSlateBlue" Foreground="White" BorderThickness="0" CornerRadius="3" Margin="0,0,5,0"/>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Spacing="15">
+            
+            <StackPanel Orientation="Vertical" Spacing="15">
+                <TextBlock Text="RUT" Foreground="#333333" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                
+                <TextBox Width="200" 
+                         PlaceholderText="12345678-9" 
+                         VerticalAlignment="Center"
+                         Text="{Binding RutText}" />
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Spacing="15">
+    
+                    <Button Content="Calcular" 
+                            Command="{Binding AnalyzeRutCommand}"
+                            Background="MediumSlateBlue" 
+                            Foreground="White" 
+                            BorderThickness="0" 
+                            CornerRadius="3" 
+                            VerticalAlignment="Center"/>
+    
+                    <Button Click="ToggleLogButton_Click"
+                            Background="MediumSlateBlue" 
+                            Foreground="White" 
+                            BorderThickness="0"
+                            Cursor="Hand"
+                            VerticalAlignment="Center"> 
+                        <Image Source="/Assets/eye-symbol.png" Width="24" Height="17" />
+                    </Button>
+    
+                </StackPanel>
+            </StackPanel>
+                       
         </StackPanel>
     </Border>
-
 </UserControl>

@@ -1,6 +1,5 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-
 namespace RutGeo.UI.Views;
 
 public partial class MainWindow : Window
@@ -11,8 +10,13 @@ public partial class MainWindow : Window
         
         ModeSelector.OnConicModeRequested += (s, e) => SwitchToConics();
         ModeSelector.OnLimitsRequested += (s, e) => SwitchToLimits();
+        InputView.OnToggleLogVisibilityRequested  += (s, e) => ToggledRutLog();
     }
 
+    public void ToggledRutLog()
+    {
+        LogView.IsVisible = !LogView.IsVisible;
+    }
     private void SwitchToConics()
     {
         DescView.SwitchToConics();

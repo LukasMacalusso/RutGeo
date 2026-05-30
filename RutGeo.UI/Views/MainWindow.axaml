@@ -59,7 +59,10 @@
                     </TabControl>
 
                     <Border Grid.Row="1" Padding="10" Background="#F8F8F8" BorderBrush="#E0E0E0" BorderThickness="0,1,0,0">
-                        <v:RutInputView />
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <v:RutInputView x:Name="InputView" />
+                            <v:RutLog x:Name="LogView" IsVisible="False" />
+                        </StackPanel>
                     </Border>
         
                 </Grid>
