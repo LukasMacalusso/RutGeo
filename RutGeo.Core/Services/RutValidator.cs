@@ -1,4 +1,3 @@
-using System.Text;
 using RutGeo.Core.Interfaces;
 
 namespace RutGeo.Core.Services;
@@ -8,57 +7,55 @@ public class RutValidatorResult
     public bool IsValid { get; init; }
     public string RutBody { get; init; } = string.Empty;
     public char Dv { get; init; }
-    public string StepByStepLog { get; init; } = string.Empty;
 }
 
-public sealed class RutValidator : IRutValidator
+public class RutValidator : IRutValidator
 {
     private const int MinimumLength = 7;
     private const int BaseMultiplier = 2;
     private const int MaxMultiplier = 7;
 
-    public RutValidatorResult Validate(string rawRut)
+    public RutValidatorResult Validate(string rawRut, IExplanationLog log)
     {
-        var log = new StringBuilder();
+        log.StartProcess("Validación de RUT");
 
         if (string.IsNullOrWhiteSpace(rawRut))
         {
-            log.AppendLine("El RUT está vacío.");
-            return CreateFailureResult(log);
+            log.AppendStep("El RUT está vacío.");
+            return CreateFailureResult();
         }
 
         string cleanRut = NormalizeRut(rawRut);
-        log.AppendLine($"RUT limpio: {cleanRut}");
+        log.AppendStep($"RUT limpio: {cleanRut}");
 
         if (cleanRut.Length < MinimumLength)
         {
-            log.AppendLine("El RUT debe tener al menos 7 caracteres.");
-            return CreateFailureResult(log);
+            log.AppendStep("El RUT debe tener al menos 7 caracteres.");
+            return CreateFailureResult();
         }
 
         string body = cleanRut[..^1];
         char dv = cleanRut[^1];
         
-        log.AppendLine($"Cuerpo del RUT: {body}");
-        log.AppendLine($"DV extraído: {dv}");
+        log.AppendStep($"Cuerpo del RUT: {body}");
+        log.AppendStep($"DV extraído: {dv}");
 
         if (!HasOnlyDigits(body, log))
         {
-            return CreateFailureResult(log);
+            return CreateFailureResult();
         }
 
         int sum = CalculateModulo11Sum(body, log);
         char expectedDv = CalculateExpectedDv(sum);
 
-        log.AppendLine($"Suma total: {sum}");
-        log.AppendLine($"DV esperado: {expectedDv}");
+        log.AppendStep($"Suma total: {sum}");
+        log.AppendStep($"DV esperado: {expectedDv}");
 
         return new RutValidatorResult
         {
             IsValid = expectedDv == dv,
             RutBody = body,
-            Dv = dv,
-            StepByStepLog = log.ToString()
+            Dv = dv
         };
     }
 
@@ -67,13 +64,13 @@ public sealed class RutValidator : IRutValidator
                  .Replace("-", string.Empty)
                  .ToUpperInvariant();
 
-    private static bool HasOnlyDigits(string body, StringBuilder log)
+    private static bool HasOnlyDigits(string body, IExplanationLog log)
     {
         foreach (char character in body)
         {
             if (!char.IsDigit(character))
             {
-                log.AppendLine($"Carácter inválido en el cuerpo del RUT: '{character}'.");
+                log.AppendStep($"Carácter inválido en el cuerpo del RUT: '{character}'.");
                 return false;
             }
         }
@@ -81,7 +78,7 @@ public sealed class RutValidator : IRutValidator
         return true;
     }
 
-    private static int CalculateModulo11Sum(string body, StringBuilder log)
+    private static int CalculateModulo11Sum(string body, IExplanationLog log)
     {
         int sum = 0;
         int multiplier = BaseMultiplier;
@@ -91,7 +88,7 @@ public sealed class RutValidator : IRutValidator
             int digit = body[index] - '0';
             int product = digit * multiplier;
             sum += product;
-            log.AppendLine($"Digito {digit} * multiplicador {multiplier} = {product}");
+            log.AppendStep($"Digito {digit} * multiplicador {multiplier} = {product}");
 
             multiplier = multiplier == MaxMultiplier ? BaseMultiplier : multiplier + 1;
         }
@@ -112,12 +109,11 @@ public sealed class RutValidator : IRutValidator
         };
     }
 
-    private static RutValidatorResult CreateFailureResult(StringBuilder log)
+    private static RutValidatorResult CreateFailureResult()
     {
         return new RutValidatorResult
         {
-            IsValid = false,
-            StepByStepLog = log.ToString()
+            IsValid = false
         };
     }
 }
