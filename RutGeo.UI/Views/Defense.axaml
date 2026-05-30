@@ -1,0 +1,73 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="RutGeo.UI.Views.Defense">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="15" Spacing="10">
+
+            <StackPanel x:Name="ConicDefense" IsVisible="True" Spacing="8">
+                <TextBlock Text="Defensa - Cónicas" FontSize="16" FontWeight="Bold" Foreground="#333333"/>
+
+                <TextBlock Text="Centro (h, k):" FontWeight="SemiBold" Foreground="#555555"/>
+                <TextBox Margin="0,0,0,5"/>
+
+                <TextBlock Text="Vértices:" FontWeight="SemiBold" Foreground="#555555"/>
+                <TextBox Margin="0,0,0,5"/>
+
+                <TextBlock Text="Focos:" FontWeight="SemiBold" Foreground="#555555"/>
+                <TextBox Margin="0,0,0,5"/>
+
+                <TextBlock Text="Eje mayor / Eje menor:" FontWeight="SemiBold" Foreground="#555555"/>
+                <TextBox Margin="0,0,0,5"/>
+
+                <TextBlock Text="Directriz:" FontWeight="SemiBold" Foreground="#555555"/>
+                <TextBox Margin="0,0,0,5"/>
+
+                <TextBlock Text="Justificación del tipo de cónica:" FontWeight="SemiBold" Foreground="#555555"/>
+                <TextBox AcceptsReturn="True" Height="60" TextWrapping="Wrap" Margin="0,0,0,5"/>
+            </StackPanel>
+
+            <StackPanel x:Name="LimitDefense" IsVisible="False" Spacing="8">
+                <TextBlock Text="Defensa - Límites" FontSize="16" FontWeight="Bold" Foreground="#333333"/>
+
+                <TextBlock Text="Límite por la izquierda (x → a⁻):" FontWeight="SemiBold" Foreground="#555555"/>
+                <TextBox Margin="0,0,0,5"/>
+
+                <TextBlock Text="Límite por la derecha (x → a⁺):" FontWeight="SemiBold" Foreground="#555555"/>
+                <TextBox Margin="0,0,0,5"/>
+
+                <TextBlock Text="¿Existe el límite?" FontWeight="SemiBold" Foreground="#555555"/>
+                <ComboBox HorizontalAlignment="Stretch">
+                    <ComboBoxItem Content="Sí"/>
+                    <ComboBoxItem Content="No"/>
+                </ComboBox>
+
+                <TextBlock Text="Valor de f(a):" FontWeight="SemiBold" Foreground="#555555"/>
+                <TextBox Margin="0,0,0,5"/>
+
+                <TextBlock Text="¿Es continua?" FontWeight="SemiBold" Foreground="#555555"/>
+                <ComboBox HorizontalAlignment="Stretch">
+                    <ComboBoxItem Content="Sí"/>
+                    <ComboBoxItem Content="No"/>
+                </ComboBox>
+
+                <TextBlock Text="Tipo de discontinuidad:" FontWeight="SemiBold" Foreground="#555555"/>
+                <ComboBox HorizontalAlignment="Stretch">
+                    <ComboBoxItem Content="Removible"/>
+                    <ComboBoxItem Content="De Salto"/>
+                    <ComboBoxItem Content="Infinita"/>
+                    <ComboBoxItem Content="Ninguna"/>
+                </ComboBox>
+
+                <TextBlock Text="Justificación:" FontWeight="SemiBold" Foreground="#555555"/>
+                <TextBox AcceptsReturn="True" Height="60" TextWrapping="Wrap" />
+            </StackPanel>
+
+            <Button x:Name="BtnCorroborate" Content="Corroborar" 
+                    Background="MediumSlateBlue" Foreground="White" BorderThickness="0" 
+                    CornerRadius="3" Padding="10" Margin="0,10,0,0"
+                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" />
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
