@@ -2,7 +2,7 @@ using RutGeo.Core.Interfaces;
 
 namespace RutGeo.Core.Services
 {
-    public class RutRutEquationGenerator : IRutEquationGenerator
+    public class RutEquationGenerator : IRutEquationGenerator
     {
         public GeneralEquation GenerateGeneralEquation(RutValidatorResult rut)
         {

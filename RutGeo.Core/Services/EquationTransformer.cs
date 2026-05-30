@@ -33,7 +33,7 @@ public class EquationTransformer : IEquationTransformer
 
         return new CanonicalEquation
         {
-            ConicType = conic.Type.ToString(),
+            ConicType = conic.Type,
             FormattedString = canonicalEquationString
         };
     }
