@@ -10,6 +10,7 @@
         <entry key="RutGeo.UI/Views/MainWindow.axaml" value="RutGeo.UI/RutGeo.UI.csproj" />
         <entry key="RutGeo.UI/Views/Mode.axaml" value="RutGeo.UI/RutGeo.UI.csproj" />
         <entry key="RutGeo.UI/Views/RutInputView.axaml" value="RutGeo.UI/RutGeo.UI.csproj" />
+        <entry key="RutGeo.UI/Views/RutLog.axaml" value="RutGeo.UI/RutGeo.UI.csproj" />
         <entry key="RutGeo.UI/Views/ValuesTable.axaml" value="RutGeo.UI/RutGeo.UI.csproj" />
       </map>
     </option>
