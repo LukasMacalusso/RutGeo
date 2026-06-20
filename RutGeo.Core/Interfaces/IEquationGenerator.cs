@@ -4,5 +4,5 @@ namespace RutGeo.Core.Interfaces;
 
 public interface IEquationGenerator
 {
-    Equation Generate(RutValidatorResult rut);
+    GeneralEquation Generate(RutValidatorResult rut);
 }

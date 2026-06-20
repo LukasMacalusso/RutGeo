@@ -1,54 +1,13 @@
 using System;
 using System.Collections.Generic;
 using RutGeo.Core.Interfaces;
+using RutGeo.Core.Models;
 
 namespace RutGeo.Core.Services;
 
-public class Equation
-{
-    public double A { get; init; }
-    public double B { get; init; }
-    public double C { get; init; }
-    public double D { get; init; }
-    public double E { get; init; }
-
-    public string EquationString
-    {
-        get
-        {
-            var terms = new List<string>();
-            
-            AddTerm(terms, A, "x²");
-            AddTerm(terms, B, "y²");
-            AddTerm(terms, C, "x");
-            AddTerm(terms, D, "y");
-            AddTerm(terms, E, null);
-
-            string result = terms.Count == 0 ? "0" : string.Concat(terms);
-            
-            if (result.StartsWith(" + "))
-                result = result[3..];
-                
-            return result + " = 0";
-        }
-    }
-
-    private static void AddTerm(List<string> terms, double coefficient, string? variable)
-    {
-        if (coefficient == 0) return;
-        
-        string sign = coefficient < 0 ? " - " : " + ";
-        double abs = Math.Abs(coefficient);
-        string value = abs == (int)abs ? ((int)abs).ToString() : abs.ToString();
-        string term = variable is null ? value : (value == "1" ? variable : value + variable);
-        
-        terms.Add(sign + term);
-    }
-}
-
 public class EquationGenerator : IEquationGenerator
 {
-    public Equation Generate(RutValidatorResult rut)
+    public GeneralEquation Generate(RutValidatorResult rut)
     {
         int validationModulo = GetValidationModulo(rut.Dv);
         int[] digits = GetPaddedDigits(rut.RutBody);
@@ -61,10 +20,10 @@ public class EquationGenerator : IEquationGenerator
 
         b = AdjustBForOddEighthDigit(b, digits[7]);
         b = AdjustBForEqualFirstDigits(a, b, digits[0], digits[1]);
-        
+
         (a, b) = AdjustForDivisibleByThreeSum(a, b, digits[4], digits[5], digits[6]);
 
-        return new Equation
+        return new GeneralEquation
         {
             A = a,
             B = b,
@@ -88,7 +47,7 @@ public class EquationGenerator : IEquationGenerator
     {
         string paddedBody = body.PadLeft(8, '0');
         int[] digits = new int[paddedBody.Length];
-        
+
         for (int i = 0; i < paddedBody.Length; i++)
         {
             digits[i] = paddedBody[i] - '0';
@@ -118,7 +77,7 @@ public class EquationGenerator : IEquationGenerator
         {
             if (seventhDigit % 2 != 0)
                 return (0, b);
-            
+
             return (a, 0);
         }
 
