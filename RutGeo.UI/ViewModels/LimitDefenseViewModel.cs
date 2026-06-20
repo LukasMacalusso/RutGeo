@@ -8,6 +8,7 @@ public partial class LimitDefenseViewModel : ObservableObject
     [ObservableProperty] private string _leftLimitStatus = string.Empty;
     [ObservableProperty] private string _rightLimitStatus = string.Empty;
     [ObservableProperty] private string _limitExistsStatus = string.Empty;
+    [ObservableProperty] private string _valueFAStatus = string.Empty;
     [ObservableProperty] private string _continuousStatus = string.Empty;
     [ObservableProperty] private string _discontinuityStatus = string.Empty;
     [ObservableProperty] private string _limitJustificationStatus = string.Empty;
