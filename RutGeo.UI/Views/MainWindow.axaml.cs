@@ -15,12 +15,11 @@ public partial class MainWindow : Window
         ModeSelector.OnConicModeRequested += (s, e) => SwitchToConics();
         ModeSelector.OnLimitsRequested += (s, e) => SwitchToLimits();
         InputView.OnToggleLogVisibilityRequested  += (s, e) => ToggledRutLog();
-        Closed += (sender, e) => Environment.Exit(0);
-
         DataContextChanged += (s, e) =>
         {
             if (DataContext is MainWindowViewModel vm) vm.PropertyChanged += OnViewModelPropertyChanged;
         };
+        Closed += (sender, e) => Environment.Exit(0);
     }
 
     private void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
