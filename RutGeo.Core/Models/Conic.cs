@@ -1,16 +1,7 @@
-using RutGeo.Core.Models;
-using RutGeo.Core.Services;
+using RutGeo.Core.Models.Types;
+using RutGeo.Core.Models.Equations;
 
 namespace RutGeo.Core.Models;
-
-public enum ConicType
-{
-    Parabola,
-    Hyperbola,
-    Circunferencia,
-    Elipse,
-    Desconocida
-}
 
 public class Conic 
 {

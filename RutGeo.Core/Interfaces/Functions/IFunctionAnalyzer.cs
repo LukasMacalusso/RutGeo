@@ -1,7 +1,7 @@
 using RutGeo.Core.Models;
-using RutGeo.Core.Services;
+using RutGeo.Core.Models.Results;
 
-namespace RutGeo.Core.Interfaces
+namespace RutGeo.Core.Interfaces.Functions
 {
     public interface IFunctionAnalyzer
     {
