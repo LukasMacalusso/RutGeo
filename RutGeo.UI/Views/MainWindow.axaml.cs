@@ -1,8 +1,7 @@
 using System;
+using System.ComponentModel;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using ScottPlot.Avalonia;
-using System.ComponentModel;
 using RutGeo.UI.ViewModels;
 
 namespace RutGeo.UI.Views;
@@ -16,8 +15,9 @@ public partial class MainWindow : Window
         ModeSelector.OnConicModeRequested += (s, e) => SwitchToConics();
         ModeSelector.OnLimitsRequested += (s, e) => SwitchToLimits();
         InputView.OnToggleLogVisibilityRequested  += (s, e) => ToggledRutLog();
+        Closed += (sender, e) => Environment.Exit(0);
     }
-
+    
     public void ToggledRutLog()
     {
         LogView.IsVisible = !LogView.IsVisible;

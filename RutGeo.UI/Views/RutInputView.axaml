@@ -1,4 +1,4 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
+<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:RutGeo.UI.ViewModels" 
              x:DataType="vm:MainWindowViewModel"
@@ -20,6 +20,14 @@
                     <Button Content="Calcular" 
                             Command="{Binding AnalyzeCommand}"
                             Background="MediumSlateBlue" 
+                            Foreground="White" 
+                            BorderThickness="0" 
+                            CornerRadius="3" 
+                            VerticalAlignment="Center"/>
+
+                    <Button Content="Mock" 
+                            Command="{Binding LoadMockConicCommand}"
+                            Background="Gray" 
                             Foreground="White" 
                             BorderThickness="0" 
                             CornerRadius="3" 

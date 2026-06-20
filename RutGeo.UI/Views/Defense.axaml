@@ -1,5 +1,7 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:RutGeo.UI.ViewModels"
+             x:DataType="vm:MainWindowViewModel"
              x:Class="RutGeo.UI.Views.Defense">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -7,19 +9,34 @@
 
             <StackPanel x:Name="ConicDefense" IsVisible="True" Spacing="8">
                 <TextBlock Text="Centro (h, k):" FontWeight="SemiBold" Foreground="#555555"/>
-                <TextBox Margin="0,0,0,5"/>
+                <Grid ColumnDefinitions="*, Auto">
+                    <TextBox Grid.Column="0" Margin="0,0,5,5"/>
+                    <TextBlock Grid.Column="1" Text="{Binding ConicVM.CenterStatus}" VerticalAlignment="Center" Foreground="Green" Margin="0,0,0,5"/>
+                </Grid>
 
                 <TextBlock Text="Vértices:" FontWeight="SemiBold" Foreground="#555555"/>
-                <TextBox Margin="0,0,0,5"/>
+                <Grid ColumnDefinitions="*, Auto">
+                    <TextBox Grid.Column="0" Margin="0,0,5,5"/>
+                    <TextBlock Grid.Column="1" Text="{Binding ConicVM.VerticesStatus}" VerticalAlignment="Center" Foreground="Green" Margin="0,0,0,5"/>
+                </Grid>
 
                 <TextBlock Text="Focos:" FontWeight="SemiBold" Foreground="#555555"/>
-                <TextBox Margin="0,0,0,5"/>
+                <Grid ColumnDefinitions="*, Auto">
+                    <TextBox Grid.Column="0" Margin="0,0,5,5"/>
+                    <TextBlock Grid.Column="1" Text="{Binding ConicVM.FocalsStatus}" VerticalAlignment="Center" Foreground="Green" Margin="0,0,0,5"/>
+                </Grid>
 
                 <TextBlock Text="Eje mayor / Eje menor:" FontWeight="SemiBold" Foreground="#555555"/>
-                <TextBox Margin="0,0,0,5"/>
+                <Grid ColumnDefinitions="*, Auto">
+                    <TextBox Grid.Column="0" Margin="0,0,5,5"/>
+                    <TextBlock Grid.Column="1" Text="{Binding ConicVM.AxisStatus}" VerticalAlignment="Center" Foreground="Green" Margin="0,0,0,5"/>
+                </Grid>
 
                 <TextBlock Text="Directriz:" FontWeight="SemiBold" Foreground="#555555"/>
-                <TextBox Margin="0,0,0,5"/>
+                <Grid ColumnDefinitions="*, Auto">
+                    <TextBox Grid.Column="0" Margin="0,0,5,5"/>
+                    <TextBlock Grid.Column="1" Text="{Binding ConicVM.DirectiveStatus}" VerticalAlignment="Center" Foreground="Green" Margin="0,0,0,5"/>
+                </Grid>
 
                 <TextBlock Text="Justificación del tipo de cónica:" FontWeight="SemiBold" Foreground="#555555"/>
                 <TextBox AcceptsReturn="True" Height="60" TextWrapping="Wrap" Margin="0,0,0,5"/>
@@ -27,39 +44,58 @@
 
             <StackPanel x:Name="LimitDefense" IsVisible="False" Spacing="8">
                 <TextBlock Text="Límite por la izquierda (x → a⁻):" FontWeight="SemiBold" Foreground="#555555"/>
-                <TextBox Margin="0,0,0,5"/>
+                <Grid ColumnDefinitions="*, Auto">
+                    <TextBox Grid.Column="0" Margin="0,0,5,5"/>
+                    <TextBlock Grid.Column="1" Text="{Binding LimitVM.LeftLimitStatus}" VerticalAlignment="Center" Foreground="Green" Margin="0,0,0,5"/>
+                </Grid>
 
                 <TextBlock Text="Límite por la derecha (x → a⁺):" FontWeight="SemiBold" Foreground="#555555"/>
-                <TextBox Margin="0,0,0,5"/>
+                <Grid ColumnDefinitions="*, Auto">
+                    <TextBox Grid.Column="0" Margin="0,0,5,5"/>
+                    <TextBlock Grid.Column="1" Text="{Binding LimitVM.RightLimitStatus}" VerticalAlignment="Center" Foreground="Green" Margin="0,0,0,5"/>
+                </Grid>
 
                 <TextBlock Text="¿Existe el límite?" FontWeight="SemiBold" Foreground="#555555"/>
-                <ComboBox HorizontalAlignment="Stretch">
-                    <ComboBoxItem Content="Sí"/>
-                    <ComboBoxItem Content="No"/>
-                </ComboBox>
+                <Grid ColumnDefinitions="*, Auto">
+                    <ComboBox Grid.Column="0" HorizontalAlignment="Stretch">
+                        <ComboBoxItem Content="Sí"/>
+                        <ComboBoxItem Content="No"/>
+                    </ComboBox>
+                    <TextBlock Grid.Column="1" Text="{Binding LimitVM.LimitExistsStatus}" VerticalAlignment="Center" Foreground="Green" Margin="5,0,0,0"/>
+                </Grid>
 
                 <TextBlock Text="Valor de f(a):" FontWeight="SemiBold" Foreground="#555555"/>
-                <TextBox Margin="0,0,0,5"/>
+                <Grid ColumnDefinitions="*, Auto">
+                    <TextBox Grid.Column="0" Margin="0,0,5,5"/>
+                    <TextBlock Grid.Column="1" Text="{Binding LimitVM.ValueFAStatus}" VerticalAlignment="Center" Foreground="Green" Margin="0,0,0,5"/>
+                </Grid>
 
                 <TextBlock Text="¿Es continua?" FontWeight="SemiBold" Foreground="#555555"/>
-                <ComboBox HorizontalAlignment="Stretch">
-                    <ComboBoxItem Content="Sí"/>
-                    <ComboBoxItem Content="No"/>
-                </ComboBox>
+                <Grid ColumnDefinitions="*, Auto">
+                    <ComboBox Grid.Column="0" HorizontalAlignment="Stretch">
+                        <ComboBoxItem Content="Sí"/>
+                        <ComboBoxItem Content="No"/>
+                    </ComboBox>
+                    <TextBlock Grid.Column="1" Text="{Binding LimitVM.ContinuousStatus}" VerticalAlignment="Center" Foreground="Green" Margin="5,0,0,0"/>
+                </Grid>
 
                 <TextBlock Text="Tipo de discontinuidad:" FontWeight="SemiBold" Foreground="#555555"/>
-                <ComboBox HorizontalAlignment="Stretch">
-                    <ComboBoxItem Content="Removible"/>
-                    <ComboBoxItem Content="De Salto"/>
-                    <ComboBoxItem Content="Infinita"/>
-                    <ComboBoxItem Content="Ninguna"/>
-                </ComboBox>
+                <Grid ColumnDefinitions="*, Auto">
+                    <ComboBox Grid.Column="0" HorizontalAlignment="Stretch">
+                        <ComboBoxItem Content="Removible"/>
+                        <ComboBoxItem Content="De Salto"/>
+                        <ComboBoxItem Content="Infinita"/>
+                        <ComboBoxItem Content="Ninguna"/>
+                    </ComboBox>
+                    <TextBlock Grid.Column="1" Text="{Binding LimitVM.DiscontinuityStatus}" VerticalAlignment="Center" Foreground="Green" Margin="5,0,0,0"/>
+                </Grid>
 
                 <TextBlock Text="Justificación:" FontWeight="SemiBold" Foreground="#555555"/>
                 <TextBox AcceptsReturn="True" Height="60" TextWrapping="Wrap" />
             </StackPanel>
 
             <Button x:Name="BtnCorroborate" Content="Corroborar" 
+                    Command="{Binding CorroborateAllCommand}"
                     Background="MediumSlateBlue" Foreground="White" BorderThickness="0" 
                     CornerRadius="3" Padding="10" Margin="0,10,0,0"
                     HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" />

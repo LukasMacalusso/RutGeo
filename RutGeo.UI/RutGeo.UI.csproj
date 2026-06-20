@@ -7,6 +7,11 @@
         <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
     </PropertyGroup>
 
+    <!-- Automatically kills previous running instances of the app before building to avoid locked files (Issue Resolved) -->
+    <Target Name="KillRunningApp" BeforeTargets="BeforeBuild" Condition="'$(OS)' == 'Windows_NT'">
+        <Exec Command="powershell -Command &quot;Stop-Process -Name RutGeo.UI -ErrorAction SilentlyContinue&quot;" IgnoreExitCode="true" />
+    </Target>
+
     <ItemGroup>
         <Folder Include="Models\"/>
         <AvaloniaResource Include="Assets\**"/>
