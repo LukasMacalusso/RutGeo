@@ -5,21 +5,20 @@
              x:CompileBindings="False"
              x:Class="RutGeo.UI.Views.RutInputView">
     
-    <Border Background="#F5F5FB" BorderBrush="#D4D4E2" BorderThickness="0,1,0,0" Padding="15">
+    <Border Background="#DCDCE6" BorderBrush="#D4D4E2" BorderThickness="0,1,0,0" Padding="15">
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Spacing="15">
             
             <StackPanel Orientation="Vertical" Spacing="15">
                 <TextBlock Text="RUT" Foreground="#333333" VerticalAlignment="Center" FontWeight="SemiBold"/>
                 
                 <TextBox Width="200" 
-                         PlaceholderText="12345678-9" 
                          VerticalAlignment="Center"
                          Text="{Binding RutText}" />
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Spacing="15">
     
                     <Button Content="Calcular" 
-                            Command="{Binding AnalyzeRutCommand}"
+                            Command="{Binding AnalyzeCommand}"
                             Background="MediumSlateBlue" 
                             Foreground="White" 
                             BorderThickness="0" 

@@ -1,5 +1,10 @@
+using System;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using ScottPlot.Avalonia;
+using System.ComponentModel;
+using RutGeo.UI.ViewModels;
+
 namespace RutGeo.UI.Views;
 
 public partial class MainWindow : Window
@@ -21,7 +26,7 @@ public partial class MainWindow : Window
     {
         DescView.SwitchToConics();
         DefenseView.SwitchToConics();
-        GraphicView.SwitchToConics();
+        ModeHeader.Text = "CÓNICAS";
         LimitsTable.IsVisible = false;
     }
 
@@ -29,10 +34,9 @@ public partial class MainWindow : Window
     {
         DescView.SwitchToLimits();
         DefenseView.SwitchToLimits();
-        GraphicView.SwitchToLimits();
+        ModeHeader.Text = "LÍMITES";
         LimitsTable.IsVisible = true;
     }
-
 
     private void TogglePanelButton_Click(object? sender, RoutedEventArgs e)
     {

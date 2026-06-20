@@ -6,8 +6,6 @@
         <StackPanel Margin="15" Spacing="10">
 
             <StackPanel x:Name="ConicDefense" IsVisible="True" Spacing="8">
-                <TextBlock Text="Defensa - Cónicas" FontSize="16" FontWeight="Bold" Foreground="#333333"/>
-
                 <TextBlock Text="Centro (h, k):" FontWeight="SemiBold" Foreground="#555555"/>
                 <TextBox Margin="0,0,0,5"/>
 
@@ -28,8 +26,6 @@
             </StackPanel>
 
             <StackPanel x:Name="LimitDefense" IsVisible="False" Spacing="8">
-                <TextBlock Text="Defensa - Límites" FontSize="16" FontWeight="Bold" Foreground="#333333"/>
-
                 <TextBlock Text="Límite por la izquierda (x → a⁻):" FontWeight="SemiBold" Foreground="#555555"/>
                 <TextBox Margin="0,0,0,5"/>
 
