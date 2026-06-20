@@ -1,5 +1,7 @@
-using RutGeo.Core.Interfaces;
+using RutGeo.Core.Interfaces.Functions;
 using RutGeo.Core.Models;
+using RutGeo.Core.Models.Results;
+using RutGeo.Core.Models.Types;
 using System;
 
 namespace RutGeo.Core.Services.Functions

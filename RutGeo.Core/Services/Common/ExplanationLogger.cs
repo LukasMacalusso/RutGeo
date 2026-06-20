@@ -1,9 +1,9 @@
 using System.Text;
-using RutGeo.Core.Interfaces;
+using RutGeo.Core.Interfaces.Common;
 
-namespace RutGeo.Core.Services;
+namespace RutGeo.Core.Services.Common;
 
-public class ExplanationLog : IExplanationLog
+public class ExplanationLogger : IExplanationLogger
 {
     private readonly StringBuilder _logBuilder = new StringBuilder();
 

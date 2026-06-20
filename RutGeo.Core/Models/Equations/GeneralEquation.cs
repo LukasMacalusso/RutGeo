@@ -1,4 +1,8 @@
-namespace RutGeo.Core.Services;
+using System;
+using System.Collections.Generic;
+
+namespace RutGeo.Core.Models.Equations;
+
 public class GeneralEquation
 {
     public double A { get; set; }
