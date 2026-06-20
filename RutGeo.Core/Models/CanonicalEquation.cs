@@ -4,8 +4,7 @@ namespace RutGeo.Core.Services;
 
 public class CanonicalEquation
 {
-    
     public ConicType ConicType { get; init; }
     public string FormattedString { get; init; } = string.Empty;
-    
+    public ConicsElements? Elements { get; init; }
 }
