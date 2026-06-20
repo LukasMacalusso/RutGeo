@@ -16,8 +16,27 @@ public partial class MainWindow : Window
         ModeSelector.OnLimitsRequested += (s, e) => SwitchToLimits();
         InputView.OnToggleLogVisibilityRequested  += (s, e) => ToggledRutLog();
         Closed += (sender, e) => Environment.Exit(0);
+
+        DataContextChanged += (s, e) =>
+        {
+            if (DataContext is MainWindowViewModel vm) vm.PropertyChanged += OnViewModelPropertyChanged;
+        };
     }
-    
+
+    private void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (sender is MainWindowViewModel vm &&
+            (e.PropertyName == nameof(vm.GeneralEquation) || 
+             e.PropertyName == nameof(vm.Conic) || 
+             e.PropertyName == nameof(vm.CanonicalEquation)))
+        {
+            if (vm.GeneralEquation != null && vm.Conic != null && vm.CanonicalEquation != null)
+            {
+                GraphicView.UpdatePlot(vm.GeneralEquation, vm.Conic, vm.CanonicalEquation);
+            }
+        }
+    }
+
     public void ToggledRutLog()
     {
         LogView.IsVisible = !LogView.IsVisible;
