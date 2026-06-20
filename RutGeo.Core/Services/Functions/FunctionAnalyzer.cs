@@ -32,7 +32,7 @@ namespace RutGeo.Core.Services.Functions
 
             if (condition == 0) // Discontinuidad removible
             {
-                // f(x) = (x - a)(x + d1) / (x - a)
+                
                 result.FunctionExpression = $"f(x) = ((x - {a})(x + {d1})) / (x - {a})";
                 result.LeftLimit = (a + d1).ToString();
                 result.RightLimit = (a + d1).ToString();
@@ -45,7 +45,7 @@ namespace RutGeo.Core.Services.Functions
             }
             else if (condition == 1) // Discontinuidad de salto
             {
-                // f(x) = x + d2 if x < a, x + d4 if x >= a
+               
                 result.FunctionExpression = $"f(x) = {{ x + {d2}, si x < {a} ; x + {d4}, si x >= {a} }}";
                 result.LeftLimit = (a + d2).ToString();
                 result.RightLimit = (a + d4).ToString();
@@ -70,7 +70,7 @@ namespace RutGeo.Core.Services.Functions
             }
             else // condition == 2 // Discontinuidad infinita
             {
-                // f(x) = (d5 + 1) / (x - a)
+                
                 result.FunctionExpression = $"f(x) = {d5 + 1} / (x - {a})";
                 result.LeftLimit = "-∞";
                 result.RightLimit = "+∞";
