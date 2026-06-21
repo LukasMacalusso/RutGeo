@@ -6,8 +6,14 @@ using Avalonia.Data.Core.Plugins;
 using System.Linq;
 using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
-using RutGeo.Core.Interfaces;
-using RutGeo.Core.Services;
+using RutGeo.Core.Interfaces.Validation;
+using RutGeo.Core.Interfaces.Common;
+using RutGeo.Core.Interfaces.Conics;
+using RutGeo.Core.Interfaces.Generators;
+using RutGeo.Core.Services.Validation;
+using RutGeo.Core.Services.Common;
+using RutGeo.Core.Services.Conics;
+using RutGeo.Core.Services.Generators;
 using RutGeo.UI.ViewModels;
 using RutGeo.UI.Views;
 
@@ -28,12 +34,12 @@ public partial class App : Application
         Console.WriteLine("App: OnFrameworkInitializationCompleted started...");
         var serviceCollection = CreateServiceCollection();
         Services = serviceCollection.BuildServiceProvider();
-        
+
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             Console.WriteLine("App: Setting up MainWindow...");
             var mainWindowViewModel = Services.GetRequiredService<MainWindowViewModel>();
-            
+
             desktop.MainWindow = new MainWindow
             {
                 DataContext = mainWindowViewModel
@@ -48,7 +54,7 @@ public partial class App : Application
     private ServiceCollection CreateServiceCollection()
     {
         var serviceCollection = new ServiceCollection();
-        
+
         RegisterCoreServices(serviceCollection);
         RegisterViewModels(serviceCollection);
 
@@ -58,11 +64,16 @@ public partial class App : Application
     private void RegisterCoreServices(ServiceCollection serviceCollection)
     {
         serviceCollection.AddSingleton<IRutValidator, RutValidator>();
-        serviceCollection.AddTransient<IExplanationLog, ExplanationLog>();
+        
+        // El nuevo logger actualizado de main:
+        serviceCollection.AddSingleton<IExplanationLogger, ExplanationLogger>();
+        serviceCollection.AddTransient<IConicElementsFactory, ConicElementsFactory>();
+        
+        // Tus servicios de la rama conic_view_model:
         serviceCollection.AddTransient<IRutEquationGenerator, RutEquationGenerator>();
         serviceCollection.AddTransient<IEquationTransformer, EquationTransformer>();
     }
-    
+
     private void RegisterViewModels(ServiceCollection serviceCollection)
     {
         serviceCollection.AddTransient<MainWindowViewModel>();

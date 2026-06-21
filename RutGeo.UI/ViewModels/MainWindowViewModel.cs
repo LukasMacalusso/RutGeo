@@ -2,7 +2,13 @@ using System;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using RutGeo.Core.Interfaces;
+using RutGeo.Core.Interfaces.Validation;
+using RutGeo.Core.Interfaces.Common;
+using RutGeo.Core.Interfaces.Conics;
+using RutGeo.Core.Interfaces.Generators;
 using RutGeo.Core.Models;
+using RutGeo.Core.Models.Equations;
+using RutGeo.Core.Models.Results;
 using RutGeo.Core.Services;
 
 namespace RutGeo.UI.ViewModels;
@@ -28,13 +34,13 @@ public partial class MainWindowViewModel : ViewModelBase
     
     private readonly IRutEquationGenerator _rutEquationGenerator;
     private readonly IEquationTransformer _equationTransformer;
-    private readonly IExplanationLog _explanationLog;
+    private readonly IExplanationLogger _explanationLog; // Actualizado al logger de main
     private readonly IRutValidator _rutValidator;
     
     public MainWindowViewModel(   
         IRutEquationGenerator rutEquationGenerator,
         IEquationTransformer equationTransformer,
-        IExplanationLog explanationLog,
+        IExplanationLogger explanationLog, // Actualizado al logger de main
         IRutValidator rutValidator)
     {
         _rutEquationGenerator = rutEquationGenerator;
@@ -76,8 +82,8 @@ public partial class MainWindowViewModel : ViewModelBase
             ValidationMessage = "No se ingresó ningún RUT";
             return; 
         }
-        
-        ValidatorResult = _rutValidator.Validate(RutText, _explanationLog);
+
+        ValidatorResult = _rutValidator.Validate(RutText);
         
         if (ValidatorResult == null || !ValidatorResult.IsValid) 
         {

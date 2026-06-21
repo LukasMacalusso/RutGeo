@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Avalonia.Controls;
 using ScottPlot.Avalonia;
 using RutGeo.Core.Models;
+using RutGeo.Core.Models.Equations;
+using RutGeo.Core.Models.Types;
 using RutGeo.Core.Services;
 
 namespace RutGeo.UI.Views;

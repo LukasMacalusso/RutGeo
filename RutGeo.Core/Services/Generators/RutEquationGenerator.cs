@@ -1,6 +1,8 @@
-using RutGeo.Core.Interfaces;
+using RutGeo.Core.Interfaces.Generators;
+using RutGeo.Core.Models.Equations;
+using RutGeo.Core.Models.Results;
 
-namespace RutGeo.Core.Services
+namespace RutGeo.Core.Services.Generators
 {
     public class RutEquationGenerator : IRutEquationGenerator
     {
