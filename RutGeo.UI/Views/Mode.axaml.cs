@@ -29,8 +29,8 @@ public partial class Mode : UserControl
 
     private void UpdateButtons(bool isConic)
     {
-        var activeBrush = Brushes.MediumSlateBlue; 
-        var inactiveBrush = Brushes.Transparent; 
+        var activeBrush = Brushes.MediumSlateBlue;
+        var inactiveBrush = new SolidColorBrush(Color.Parse("#3A205E"));
         BtnConics.Background = isConic ? activeBrush : inactiveBrush;
         BtnConics.Foreground = isConic ? Brushes.White : Brushes.LightGray;
         BtnLimits.Background = !isConic ? activeBrush : inactiveBrush;

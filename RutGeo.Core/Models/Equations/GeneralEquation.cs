@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace RutGeo.Core.Models.Equations;
@@ -32,8 +31,8 @@ public class GeneralEquation
     {
         if (coefficient == 0) return;
         string sign = coefficient < 0 ? " - " : " + ";
-        double abs = Math.Abs(coefficient);
-        string value = abs == (int)abs ? ((int)abs).ToString() : abs.ToString();
+        double abs = coefficient < 0 ? -coefficient : coefficient;
+        string value = abs == (int)abs ? ((int)abs).ToString() : abs.ToString("0.##");
         string term = variable is null ? value : (value == "1" ? variable : value + variable);
         terms.Add(sign + term);
     }

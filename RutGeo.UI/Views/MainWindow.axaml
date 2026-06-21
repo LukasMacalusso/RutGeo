@@ -38,6 +38,8 @@
                             
                             <TextBlock Text="DEFENSA" FontSize="18" FontWeight="Bold" Foreground="MediumSlateBlue" Margin="5,5,0,0" HorizontalAlignment="Left"/>
                             <v:Defense x:Name="DefenseView" />
+
+                            <v:Solutions x:Name="SolutionsView" IsVisible="{Binding IsSolutionsVisible}" />
                         </StackPanel>
                     </ScrollViewer>
 
@@ -66,13 +68,8 @@
                                     Padding="5,0,5,5"
                                     Cursor="Hand"/>
  
-                            <TextBlock VerticalAlignment="Center" 
-                                        FontSize="26" 
-                                        LetterSpacing="1">
-                    
-                                <Run Text="Rut" FontWeight="Black" Foreground="#FFFFFF" />
-                                <Run Text="Geo" FontWeight="Light" Foreground="MediumSlateBlue" />
- 
+                            <TextBlock VerticalAlignment="Center" FontSize="26">
+                                <Run Text="Rut" FontWeight="Black" Foreground="#FFFFFF"/><Run Text="Geo" FontWeight="Light" Foreground="MediumSlateBlue"/>
                             </TextBlock>
                         </StackPanel>
             

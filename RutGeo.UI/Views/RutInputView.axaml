@@ -25,14 +25,6 @@
                             CornerRadius="3" 
                             VerticalAlignment="Center"/>
 
-                    <Button Content="Mock" 
-                            Command="{Binding LoadMockConicCommand}"
-                            Background="Gray" 
-                            Foreground="White" 
-                            BorderThickness="0" 
-                            CornerRadius="3" 
-                            VerticalAlignment="Center"/>
-    
                     <Button Click="ToggleLogButton_Click"
                             Background="MediumSlateBlue" 
                             Foreground="White" 

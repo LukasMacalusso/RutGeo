@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using RutGeo.Core.Helpers;
 using RutGeo.Core.Interfaces.Conics;
 using RutGeo.Core.Interfaces.Common;
 using RutGeo.Core.Models;
@@ -57,7 +57,178 @@ public class EquationTransformer : IEquationTransformer
 
     public GeneralEquation TransformToGeneral(CanonicalEquation canonicalEquation, Conic conic)
     {
-        throw new NotImplementedException();
+        _log.StartProcess($"Procedimiento inverso: {conic.Type}");
+
+        return conic.Type switch
+        {
+            ConicType.Circunferencia => InverseCircle(canonicalEquation),
+            ConicType.Elipse => InverseEllipse(canonicalEquation),
+            ConicType.Hyperbola => InverseHyperbola(canonicalEquation),
+            ConicType.Parabola => InverseParabola(canonicalEquation),
+            _ => throw new NotImplementedException()
+        };
+    }
+
+    private GeneralEquation InverseCircle(CanonicalEquation canon)
+    {
+        var c = (CircleElements)canon.Elements!;
+        double h = c.Center!.X;
+        double k = c.Center.Y;
+        double r = c.Radius;
+        double h2 = h * h;
+        double k2 = k * k;
+        double r2 = r * r;
+
+        double A = 1;
+        double B = 1;
+        double Cc = -2 * h;
+        double Dc = -2 * k;
+        double Ec = h2 + k2 - r2;
+
+        _log.AppendStep("Partir de la forma canónica:");
+        _log.AppendEquation($"(x - {FormatNumber(h)})² + (y - {FormatNumber(k)})² = {FormatNumber(r2)}");
+        _log.AppendStep("Expandir los cuadrados:");
+        _log.AppendEquation($"x² - {FormatNumber(2 * h)}x + {FormatNumber(h2)} + y² - {FormatNumber(2 * k)}y + {FormatNumber(k2)} = {FormatNumber(r2)}");
+        _log.AppendStep("Agrupar términos e igualar a cero:");
+        _log.AppendEquation($"x² + y² + {FormatNumber(Cc)}x + {FormatNumber(Dc)}y + {FormatNumber(Ec)} = 0");
+
+        return new GeneralEquation { A = A, B = B, C = Cc, D = Dc, E = Ec };
+    }
+
+    private GeneralEquation InverseEllipse(CanonicalEquation canon)
+    {
+        var e = (EllipseElements)canon.Elements!;
+        double h = e.Center!.X;
+        double k = e.Center.Y;
+        double a = e.MajorAxisLength / 2;
+        double b = e.MinorAxisLength / 2;
+        double a2 = a * a;
+        double b2 = b * b;
+
+        bool isHorizontal = e.MajorVertices[0].Y == k;
+
+        _log.AppendStep("Partir de la forma canónica:");
+        if (isHorizontal)
+            _log.AppendEquation($"(x - {FormatNumber(h)})² / {FormatNumber(a2)} + (y - {FormatNumber(k)})² / {FormatNumber(b2)} = 1");
+        else
+            _log.AppendEquation($"(x - {FormatNumber(h)})² / {FormatNumber(b2)} + (y - {FormatNumber(k)})² / {FormatNumber(a2)} = 1");
+
+        double A, B, Cc, Dc, Ec;
+        if (isHorizontal)
+        {
+            _log.AppendStep("Multiplicar por el producto a²·b²:");
+            _log.AppendEquation($"{FormatNumber(b2)}(x - {FormatNumber(h)})² + {FormatNumber(a2)}(y - {FormatNumber(k)})² = {FormatNumber(a2 * b2)}");
+            _log.AppendStep("Expandir los cuadrados:");
+            _log.AppendEquation($"{FormatNumber(b2)}x² - {FormatNumber(2 * b2 * h)}x + {FormatNumber(b2 * h * h)} + {FormatNumber(a2)}y² - {FormatNumber(2 * a2 * k)}y + {FormatNumber(a2 * k * k)} = {FormatNumber(a2 * b2)}");
+            _log.AppendStep("Agrupar e igualar a cero:");
+            A = b2; B = a2;
+            Cc = -2 * b2 * h;
+            Dc = -2 * a2 * k;
+            Ec = b2 * h * h + a2 * k * k - a2 * b2;
+        }
+        else
+        {
+            _log.AppendStep("Multiplicar por el producto a²·b²:");
+            _log.AppendEquation($"{FormatNumber(a2)}(x - {FormatNumber(h)})² + {FormatNumber(b2)}(y - {FormatNumber(k)})² = {FormatNumber(a2 * b2)}");
+            _log.AppendStep("Expandir los cuadrados:");
+            _log.AppendEquation($"{FormatNumber(a2)}x² - {FormatNumber(2 * a2 * h)}x + {FormatNumber(a2 * h * h)} + {FormatNumber(b2)}y² - {FormatNumber(2 * b2 * k)}y + {FormatNumber(b2 * k * k)} = {FormatNumber(a2 * b2)}");
+            _log.AppendStep("Agrupar e igualar a cero:");
+            A = a2; B = b2;
+            Cc = -2 * a2 * h;
+            Dc = -2 * b2 * k;
+            Ec = a2 * h * h + b2 * k * k - a2 * b2;
+        }
+
+        _log.AppendEquation($"{FormatNumber(A)}x² + {FormatNumber(B)}y² + {FormatNumber(Cc)}x + {FormatNumber(Dc)}y + {FormatNumber(Ec)} = 0");
+        return new GeneralEquation { A = A, B = B, C = Cc, D = Dc, E = Ec };
+    }
+
+    private GeneralEquation InverseHyperbola(CanonicalEquation canon)
+    {
+        var h = (HyperbolaElements)canon.Elements!;
+        double hc = h.Center!.X;
+        double k = h.Center.Y;
+        double a = h.TransverseAxisLength / 2;
+        double b = h.ConjugateAxisLength / 2;
+        double a2 = a * a;
+        double b2 = b * b;
+
+        bool isHorizontal = h.Vertices[0].Y == k;
+
+        _log.AppendStep("Partir de la forma canónica:");
+        if (isHorizontal)
+            _log.AppendEquation($"(x - {FormatNumber(hc)})² / {FormatNumber(a2)} - (y - {FormatNumber(k)})² / {FormatNumber(b2)} = 1");
+        else
+            _log.AppendEquation($"(y - {FormatNumber(k)})² / {FormatNumber(a2)} - (x - {FormatNumber(hc)})² / {FormatNumber(b2)} = 1");
+
+        double A, B, Cc, Dc, Ec;
+        if (isHorizontal)
+        {
+            _log.AppendStep("Multiplicar por a²·b²:");
+            _log.AppendEquation($"{FormatNumber(b2)}(x - {FormatNumber(hc)})² - {FormatNumber(a2)}(y - {FormatNumber(k)})² = {FormatNumber(a2 * b2)}");
+            _log.AppendStep("Expandir:");
+            _log.AppendEquation($"{FormatNumber(b2)}x² - {FormatNumber(2 * b2 * hc)}x + {FormatNumber(b2 * hc * hc)} - {FormatNumber(a2)}y² + {FormatNumber(2 * a2 * k)}y - {FormatNumber(a2 * k * k)} = {FormatNumber(a2 * b2)}");
+            _log.AppendStep("Agrupar:");
+            A = b2; B = -a2;
+            Cc = -2 * b2 * hc;
+            Dc = 2 * a2 * k;
+            Ec = b2 * hc * hc - a2 * k * k - a2 * b2;
+        }
+        else
+        {
+            _log.AppendStep("Multiplicar por a²·b²:");
+            _log.AppendEquation($"{FormatNumber(b2)}(y - {FormatNumber(k)})² - {FormatNumber(a2)}(x - {FormatNumber(hc)})² = {FormatNumber(a2 * b2)}");
+            _log.AppendStep("Expandir:");
+            _log.AppendEquation($"{FormatNumber(b2)}y² - {FormatNumber(2 * b2 * k)}y + {FormatNumber(b2 * k * k)} - {FormatNumber(a2)}x² + {FormatNumber(2 * a2 * hc)}x - {FormatNumber(a2 * hc * hc)} = {FormatNumber(a2 * b2)}");
+            _log.AppendStep("Agrupar:");
+            A = -a2; B = b2;
+            Cc = 2 * a2 * hc;
+            Dc = -2 * b2 * k;
+            Ec = b2 * k * k - a2 * hc * hc - a2 * b2;
+        }
+
+        _log.AppendEquation($"{FormatNumber(A)}x² + {FormatNumber(B)}y² + {FormatNumber(Cc)}x + {FormatNumber(Dc)}y + {FormatNumber(Ec)} = 0");
+        return new GeneralEquation { A = A, B = B, C = Cc, D = Dc, E = Ec };
+    }
+
+    private GeneralEquation InverseParabola(CanonicalEquation canon)
+    {
+        var p = (ParabolaElements)canon.Elements!;
+        double h = p.Vertex.X;
+        double k = p.Vertex.Y;
+        double focal = p.FocalDistance;
+        bool isVertical = p.AxisOfSymmetry.A == 1 && p.AxisOfSymmetry.B == 0;
+
+        _log.AppendStep("Partir de la forma canónica:");
+        if (isVertical)
+            _log.AppendEquation($"(x - {FormatNumber(h)})² = {FormatNumber(4 * focal)}(y - {FormatNumber(k)})");
+        else
+            _log.AppendEquation($"(y - {FormatNumber(k)})² = {FormatNumber(4 * focal)}(x - {FormatNumber(h)})");
+
+        double A, B, Cc, Dc, Ec;
+        if (isVertical)
+        {
+            _log.AppendStep("Expandir el cuadrado y distribuir:");
+            _log.AppendEquation($"x² - {FormatNumber(2 * h)}x + {FormatNumber(h * h)} = {FormatNumber(4 * focal)}y - {FormatNumber(4 * focal * k)}");
+            _log.AppendStep("Agrupar todo a un lado:");
+            A = 1; B = 0;
+            Cc = -2 * h;
+            Dc = -4 * focal;
+            Ec = h * h + 4 * focal * k;
+        }
+        else
+        {
+            _log.AppendStep("Expandir el cuadrado y distribuir:");
+            _log.AppendEquation($"y² - {FormatNumber(2 * k)}y + {FormatNumber(k * k)} = {FormatNumber(4 * focal)}x - {FormatNumber(4 * focal * h)}");
+            _log.AppendStep("Agrupar todo a un lado:");
+            A = 0; B = 1;
+            Cc = -4 * focal;
+            Dc = -2 * k;
+            Ec = k * k + 4 * focal * h;
+        }
+
+        _log.AppendEquation($"{FormatNumber(A)}x² + {FormatNumber(B)}y² + {FormatNumber(Cc)}x + {FormatNumber(Dc)}y + {FormatNumber(Ec)} = 0");
+        return new GeneralEquation { A = A, B = B, C = Cc, D = Dc, E = Ec };
     }
 
 
@@ -72,7 +243,7 @@ public class EquationTransformer : IEquationTransformer
 
         var elements = _elementsFactory.CreateCircleElements(h, k, r2);
 
-        return ($"(x - {FormatNumber(h)})² + (y - {FormatNumber(k)})² = {FormatNumber(r2)}", elements);
+        return ($"{FormatBracket('x', h)}² + {FormatBracket('y', k)}² = {FormatNumber(r2)}", elements);
     }
     private void LogTransformCircleSteps(GeneralEquation eq, double h, double k, double r2)
     {
@@ -84,7 +255,7 @@ public class EquationTransformer : IEquationTransformer
 
         _log.AppendStep("Identificar centro (h, k) y radio al cuadrado (r²).");
         _log.AppendStep($"Centro: ({FormatNumber(h)}, {FormatNumber(k)})");
-        _log.AppendStep($"Radio: {FormatNumber(Math.Sqrt(r2))}");
+        _log.AppendStep($"Radio: {FormatNumber(RutGeoMath.Sqrt(r2))}");
     }
 
 
@@ -100,7 +271,7 @@ public class EquationTransformer : IEquationTransformer
 
         var elements = _elementsFactory.CreateEllipseElements(h, k, a2, b2);
 
-        return ($"(x - {FormatNumber(h)})² / {FormatNumber(a2)} + (y - {FormatNumber(k)})² / {FormatNumber(b2)} = 1", elements);
+        return ($"{FormatBracket('x', h)}² / {FormatNumber(a2)} + {FormatBracket('y', k)}² / {FormatNumber(b2)} = 1", elements);
     }
     private void LogTransformEllipseSteps(GeneralEquation equation, double h, double k, double rhs)
     {
@@ -121,7 +292,7 @@ public class EquationTransformer : IEquationTransformer
         double k = -eq.D / (2 * eq.B);
         double rhs = -eq.E + eq.A * h * h + eq.B * k * k;
 
-        if (Math.Abs(rhs) < 1e-12)
+        if (RutGeoMath.Abs(rhs) < RutGeoMath.NearZeroThreshold)
         {
             _log.AppendStep("El resultado es una hipérbola degenerada (asíntotas).");
             return ("0 = 0 (Degenerada)", null);
@@ -137,10 +308,10 @@ public class EquationTransformer : IEquationTransformer
 
         if (isHorizontal)
         {
-            return ($"(x - {FormatNumber(h)})² / {FormatNumber(a2)} - (y - {FormatNumber(k)})² / {FormatNumber(b2)} = 1", elements);
+            return ($"{FormatBracket('x', h)}² / {FormatNumber(a2)} - {FormatBracket('y', k)}² / {FormatNumber(b2)} = 1", elements);
         }
 
-        return ($"(y - {FormatNumber(k)})² / {FormatNumber(a2)} - (x - {FormatNumber(h)})² / {FormatNumber(b2)} = 1", elements);
+        return ($"{FormatBracket('y', k)}² / {FormatNumber(a2)} - {FormatBracket('x', h)}² / {FormatNumber(b2)} = 1", elements);
     }
 
     private void LogTransformHyperbolaSteps(GeneralEquation eq, double h, double k, double rhs)
@@ -160,26 +331,26 @@ public class EquationTransformer : IEquationTransformer
         if (eq.B == 0)
         {
             double h = -eq.C / (2 * eq.A);
-            double k = (-eq.E + eq.A * h * h) / -eq.D;
+            double k = (-eq.E + eq.A * h * h) / eq.D;
             double p = -eq.D / (4 * eq.A);
 
             LogTransformParabolaSteps(eq, h, k, true);
 
             var elements = _elementsFactory.CreateParabolaElements(h, k, p, true);
 
-            return ($"(x - {FormatNumber(h)})² = {FormatNumber(4 * p)}(y - {FormatNumber(k)})", elements);
+            return ($"{FormatBracket('x', h)}² = {FormatNumber(4 * p)}{FormatBracket('y', k)}", elements);
         }
         else
         {
             double kAlt = -eq.D / (2 * eq.B);
-            double hAlt = (-eq.E + eq.B * kAlt * kAlt) / -eq.C;
+            double hAlt = (-eq.E + eq.B * kAlt * kAlt) / eq.C;
             double pAlt = -eq.C / (4 * eq.B);
 
             LogTransformParabolaSteps(eq, hAlt, kAlt, false);
 
             var elements = _elementsFactory.CreateParabolaElements(hAlt, kAlt, pAlt, false);
 
-            return ($"(y - {FormatNumber(kAlt)})² = {FormatNumber(4 * pAlt)}(x - {FormatNumber(hAlt)})", elements);
+            return ($"{FormatBracket('y', kAlt)}² = {FormatNumber(4 * pAlt)}{FormatBracket('x', hAlt)}", elements);
         }
     }
 
@@ -207,5 +378,12 @@ public class EquationTransformer : IEquationTransformer
     private static string FormatNumber(double value)
     {
         return value.ToString("0.##");
+    }
+
+    private static string FormatBracket(char variable, double value)
+    {
+        if (value >= 0)
+            return $"({variable} - {FormatNumber(value)})";
+        return $"({variable} + {FormatNumber(-value)})";
     }
 }

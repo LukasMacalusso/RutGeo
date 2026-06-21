@@ -1,59 +1,61 @@
-using System;
+using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using RutGeo.Core.Interfaces;
-using RutGeo.Core.Interfaces.Validation;
 using RutGeo.Core.Interfaces.Common;
 using RutGeo.Core.Interfaces.Conics;
-using RutGeo.Core.Interfaces.Generators;
+using RutGeo.Core.Interfaces.Functions;
+using RutGeo.Core.Interfaces.Validation;
 using RutGeo.Core.Models;
 using RutGeo.Core.Models.Equations;
 using RutGeo.Core.Models.Results;
-using RutGeo.Core.Services;
 
 namespace RutGeo.UI.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    [ObservableProperty] private RutValidatorResult? _validatorResult; 
+    [ObservableProperty] private RutValidatorResult? _validatorResult;
     [ObservableProperty] private GeneralEquation? _generalEquation;
     [ObservableProperty] private Conic? _conic;
     [ObservableProperty] private CanonicalEquation? _canonicalEquation;
-    
+
     [ObservableProperty] private string _rutText = string.Empty;
     [ObservableProperty] private string _validationMessage = string.Empty;
-    
-    [ObservableProperty] private string _calculatedCenter = "-";
-    [ObservableProperty] private string _calculatedVertices = "-";
-    [ObservableProperty] private string _calculatedFocals = "-";
-    [ObservableProperty] private string _calculatedAxis = "-";
-    [ObservableProperty] private string _calculatedDirective = "-";
 
     [ObservableProperty] private ConicDefenseViewModel _conicVM;
     [ObservableProperty] private LimitDefenseViewModel _limitVM;
-    
-    private readonly IRutEquationGenerator _rutEquationGenerator;
-    private readonly IEquationTransformer _equationTransformer;
-    private readonly IExplanationLogger _explanationLog; // Actualizado al logger de main
+
+    [ObservableProperty] private bool _isSolutionsVisible;
+
+    [ObservableProperty] private string _conicTransformationSteps = string.Empty;
+
+    [ObservableProperty] private LimitAnalysisResult? _limitResult;
+    [ObservableProperty] private string _limitCaseDescription = string.Empty;
+    [ObservableProperty] private string _limitFunctionExpression = string.Empty;
+    [ObservableProperty] private string _limitSelectionRule = string.Empty;
+
+    public ObservableCollection<ValuePoint> LeftValues { get; } = new();
+    public ObservableCollection<ValuePoint> RightValues { get; } = new();
+
     private readonly IRutValidator _rutValidator;
-    
-    public MainWindowViewModel(   
-        IRutEquationGenerator rutEquationGenerator,
-        IEquationTransformer equationTransformer,
-        IExplanationLogger explanationLog, // Actualizado al logger de main
-        IRutValidator rutValidator)
+    private readonly IExplanationLogger _explanationLog;
+    private readonly IConicOrchestrator _conicOrchestrator;
+    private readonly ILimitOrchestrator _limitOrchestrator;
+
+    public MainWindowViewModel(
+        IRutValidator rutValidator,
+        IExplanationLogger explanationLog,
+        IConicOrchestrator conicOrchestrator,
+        ILimitOrchestrator limitOrchestrator)
     {
-        _rutEquationGenerator = rutEquationGenerator;
-        _equationTransformer = equationTransformer;
-        _explanationLog = explanationLog;
         _rutValidator = rutValidator;
+        _explanationLog = explanationLog;
+        _conicOrchestrator = conicOrchestrator;
+        _limitOrchestrator = limitOrchestrator;
 
         _conicVM = new ConicDefenseViewModel();
         _limitVM = new LimitDefenseViewModel();
-
-        LoadMockConic();
     }
-    
+
     private void CleanResults()
     {
         _explanationLog.Clear();
@@ -61,82 +63,83 @@ public partial class MainWindowViewModel : ViewModelBase
         GeneralEquation = null;
         CanonicalEquation = null;
         Conic = null;
-        
-        CalculatedCenter = "-";
-        CalculatedVertices = "-";
-        CalculatedFocals = "-";
-        CalculatedAxis = "-";
-        CalculatedDirective = "-";
+        LimitResult = null;
+        LimitCaseDescription = string.Empty;
+        LimitFunctionExpression = string.Empty;
+        LimitSelectionRule = string.Empty;
+        LeftValues.Clear();
+        RightValues.Clear();
 
         ConicVM = new ConicDefenseViewModel();
         LimitVM = new LimitDefenseViewModel();
+        ConicTransformationSteps = string.Empty;
     }
-    
+
     [RelayCommand]
     private void Analyze()
     {
         CleanResults();
-        
+
         if (string.IsNullOrWhiteSpace(RutText))
         {
             ValidationMessage = "No se ingresó ningún RUT";
-            return; 
+            return;
         }
 
         ValidatorResult = _rutValidator.Validate(RutText);
-        
-        if (ValidatorResult == null || !ValidatorResult.IsValid) 
+
+        if (ValidatorResult == null || !ValidatorResult.IsValid)
         {
             ValidationMessage = $"RUT inválido\n\n{_explanationLog.GetFullLog()}";
-            return; 
+            return;
         }
-        
+
         ValidationMessage = $"RUT correcto: {ValidatorResult.RutBody}-{ValidatorResult.Dv}\n\n{_explanationLog.GetFullLog()}";
-        GeneralEquation = _rutEquationGenerator.GenerateGeneralEquation(ValidatorResult);
-        if (GeneralEquation != null)
-        {
-            Conic = new Conic(GeneralEquation);
-            CanonicalEquation = _equationTransformer.TransformToCanonical(GeneralEquation, Conic, _explanationLog);
-        }
-    }
 
-    [RelayCommand]
-    private void LoadMockConic()
-    {
-        CleanResults();
-        Random rand = new Random();
-        int type = rand.Next(0, 4);
+        ConicOrchestrationResult conicResult = _conicOrchestrator.Execute(ValidatorResult);
+        GeneralEquation = conicResult.GeneralEquation;
+        Conic = conicResult.Conic;
+        CanonicalEquation = conicResult.CanonicalEquation;
+        ConicTransformationSteps = conicResult.TransformationSteps;
 
-        switch (type)
-        {
-            case 0: 
-                GeneralEquation = new GeneralEquation { A = 1, B = 1, C = 0, D = 0, E = -4 };
-                break;
-            case 1: 
-                GeneralEquation = new GeneralEquation { A = 9, B = 4, C = 0, D = 0, E = -36 };
-                break;
-            case 2: 
-                GeneralEquation = new GeneralEquation { A = 9, B = -4, C = 0, D = 0, E = -36 };
-                break;
-            case 3: 
-                GeneralEquation = new GeneralEquation { A = 1, B = 0, C = 0, D = -1, E = 0 };
-                break;
-        }
+        LimitOrchestrationResult limitResult = _limitOrchestrator.Execute(ValidatorResult);
+        LimitResult = limitResult.AnalysisResult;
+        LimitCaseDescription = limitResult.CaseDescription;
+        LimitFunctionExpression = limitResult.FunctionExpression;
+        LimitSelectionRule = limitResult.SelectionRule;
 
-        if (GeneralEquation != null)
-        {
-            Conic = new Conic(GeneralEquation);
-            CanonicalEquation = new CanonicalEquation { 
-                ConicType = Conic.Type, 
-                FormattedString = "Mock Form" 
-            };
-        }
+        LeftValues.Clear();
+        RightValues.Clear();
+        for (int i = 0; i < limitResult.LeftXValues.Length; i++)
+            LeftValues.Add(new ValuePoint(limitResult.LeftXValues[i], limitResult.LeftYFormatted[i]));
+        for (int i = 0; i < limitResult.RightXValues.Length; i++)
+            RightValues.Add(new ValuePoint(limitResult.RightXValues[i], limitResult.RightYFormatted[i]));
+
+        ConicVM.SetExpectedValues(CanonicalEquation?.Elements);
+        LimitVM.SetExpectedValues(LimitResult);
     }
 
     [RelayCommand]
     private void CorroborateAll()
     {
+        ConicVM.SetExpectedValues(CanonicalEquation?.Elements);
         ConicVM.Corroborate();
+
+        LimitVM.SetExpectedValues(LimitResult);
         LimitVM.Corroborate();
+    }
+
+    [RelayCommand]
+    private void ClearAll()
+    {
+        CleanResults();
+        RutText = string.Empty;
+        ValidationMessage = string.Empty;
+    }
+
+    [RelayCommand]
+    private void ToggleSolutions()
+    {
+        IsSolutionsVisible = !IsSolutionsVisible;
     }
 }

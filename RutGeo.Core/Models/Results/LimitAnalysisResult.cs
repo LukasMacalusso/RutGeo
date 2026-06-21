@@ -4,6 +4,8 @@ namespace RutGeo.Core.Models.Results;
 
 public class LimitAnalysisResult
 {
+    public int[] Digits { get; set; } = [];
+    public int Condition { get; set; }
     public int CriticalPoint { get; set; }
     public string FunctionExpression { get; set; } = string.Empty;
     public string LeftLimit { get; set; } = string.Empty;

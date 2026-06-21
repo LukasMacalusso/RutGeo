@@ -1,0 +1,68 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:RutGeo.UI.ViewModels"
+             x:DataType="vm:MainWindowViewModel"
+             x:Class="RutGeo.UI.Views.Solutions">
+
+    <StackPanel Spacing="8">
+
+        <StackPanel x:Name="ConicSolutions" IsVisible="True" Spacing="6">
+            <Border Background="#E8E8F0" CornerRadius="4" Padding="10">
+                <StackPanel Spacing="6">
+                    <TextBlock Text="Centro:" FontWeight="SemiBold" Foreground="#555555"/>
+                    <TextBlock Text="{Binding ConicVM.ExpectedCenter}" Foreground="#7B68EE" FontWeight="Bold"/>
+                    <Separator Background="#D4D4E2" Height="1"/>
+
+                    <TextBlock Text="Vértices:" FontWeight="SemiBold" Foreground="#555555"/>
+                    <TextBlock Text="{Binding ConicVM.ExpectedVertices}" Foreground="#7B68EE" FontWeight="Bold" TextWrapping="Wrap"/>
+                    <Separator Background="#D4D4E2" Height="1"/>
+
+                    <TextBlock Text="Focos:" FontWeight="SemiBold" Foreground="#555555"/>
+                    <TextBlock Text="{Binding ConicVM.ExpectedFocals}" Foreground="#7B68EE" FontWeight="Bold" TextWrapping="Wrap"/>
+                    <Separator Background="#D4D4E2" Height="1"/>
+
+                    <TextBlock Text="Eje mayor / Eje menor:" FontWeight="SemiBold" Foreground="#555555"/>
+                    <TextBlock Text="{Binding ConicVM.ExpectedAxis}" Foreground="#7B68EE" FontWeight="Bold" TextWrapping="Wrap"/>
+                    <Separator Background="#D4D4E2" Height="1"/>
+
+                    <TextBlock Text="Directriz:" FontWeight="SemiBold" Foreground="#555555"/>
+                    <TextBlock Text="{Binding ConicVM.ExpectedDirective}" Foreground="#7B68EE" FontWeight="Bold" TextWrapping="Wrap"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+        <StackPanel x:Name="LimitSolutions" IsVisible="False" Spacing="6">
+            <Border Background="#E8E8F0" CornerRadius="4" Padding="10">
+                <StackPanel Spacing="6">
+                    <TextBlock Text="Límite por la izquierda:" FontWeight="SemiBold" Foreground="#555555"/>
+                    <TextBlock Text="{Binding LimitVM.ExpectedLeftLimit}" Foreground="#7B68EE" FontWeight="Bold"/>
+                    <Separator Background="#D4D4E2" Height="1"/>
+
+                    <TextBlock Text="Límite por la derecha:" FontWeight="SemiBold" Foreground="#555555"/>
+                    <TextBlock Text="{Binding LimitVM.ExpectedRightLimit}" Foreground="#7B68EE" FontWeight="Bold"/>
+                    <Separator Background="#D4D4E2" Height="1"/>
+
+                    <TextBlock Text="¿Existe el límite?:" FontWeight="SemiBold" Foreground="#555555"/>
+                    <TextBlock Text="{Binding LimitVM.ExpectedLimitExists}" Foreground="#7B68EE" FontWeight="Bold"/>
+                    <Separator Background="#D4D4E2" Height="1"/>
+
+                    <TextBlock Text="Valor de f(a):" FontWeight="SemiBold" Foreground="#555555"/>
+                    <TextBlock Text="{Binding LimitVM.ExpectedValueFA}" Foreground="#7B68EE" FontWeight="Bold"/>
+                    <Separator Background="#D4D4E2" Height="1"/>
+
+                    <TextBlock Text="¿Es continua?:" FontWeight="SemiBold" Foreground="#555555"/>
+                    <TextBlock Text="{Binding LimitVM.ExpectedContinuous}" Foreground="#7B68EE" FontWeight="Bold"/>
+                    <Separator Background="#D4D4E2" Height="1"/>
+
+                    <TextBlock Text="Tipo de discontinuidad:" FontWeight="SemiBold" Foreground="#555555"/>
+                    <TextBlock Text="{Binding LimitVM.ExpectedDiscontinuity}" Foreground="#7B68EE" FontWeight="Bold"/>
+                    <Separator Background="#D4D4E2" Height="1"/>
+
+                    <TextBlock Text="Justificación:" FontWeight="SemiBold" Foreground="#555555"/>
+                    <TextBlock Text="{Binding LimitVM.ExpectedJustification}" Foreground="#7B68EE" FontWeight="Bold" TextWrapping="Wrap"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+    </StackPanel>
+</UserControl>

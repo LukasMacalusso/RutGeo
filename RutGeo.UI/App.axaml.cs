@@ -10,10 +10,12 @@ using RutGeo.Core.Interfaces.Validation;
 using RutGeo.Core.Interfaces.Common;
 using RutGeo.Core.Interfaces.Conics;
 using RutGeo.Core.Interfaces.Generators;
+using RutGeo.Core.Interfaces.Functions;
 using RutGeo.Core.Services.Validation;
 using RutGeo.Core.Services.Common;
 using RutGeo.Core.Services.Conics;
 using RutGeo.Core.Services.Generators;
+using RutGeo.Core.Services.Functions;
 using RutGeo.UI.ViewModels;
 using RutGeo.UI.Views;
 
@@ -64,14 +66,13 @@ public partial class App : Application
     private void RegisterCoreServices(ServiceCollection serviceCollection)
     {
         serviceCollection.AddSingleton<IRutValidator, RutValidator>();
-        
-        // El nuevo logger actualizado de main:
         serviceCollection.AddSingleton<IExplanationLogger, ExplanationLogger>();
         serviceCollection.AddTransient<IConicElementsFactory, ConicElementsFactory>();
-        
-        // Tus servicios de la rama conic_view_model:
         serviceCollection.AddTransient<IRutEquationGenerator, RutEquationGenerator>();
         serviceCollection.AddTransient<IEquationTransformer, EquationTransformer>();
+        serviceCollection.AddTransient<IFunctionAnalyzer, FunctionAnalyzer>();
+        serviceCollection.AddTransient<IConicOrchestrator, ConicOrchestrator>();
+        serviceCollection.AddTransient<ILimitOrchestrator, LimitOrchestrator>();
     }
 
     private void RegisterViewModels(ServiceCollection serviceCollection)
