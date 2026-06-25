@@ -1,41 +1,74 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:RutGeo.UI.ViewModels"
+             x:DataType="vm:MainWindowViewModel"
+             x:CompileBindings="False"
              x:Class="RutGeo.UI.Views.ValuesTable">
 
-    <Border Background="#F5F5FB" BorderBrush="#D4D4E2" BorderThickness="0,1,0,0" Padding="10">
+    <Border Background="{StaticResource TableBackgroundBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,1,0,0" Padding="10">
         
         <Grid RowDefinitions="Auto, *">
             
             <Button Grid.Row="0" x:Name="ToggleValuesTable" Content="Tabla Valores" Click="ButtonClick"
-                    Foreground="White" Width="140" HorizontalContentAlignment="Center" Background="MediumSlateBlue"
+                    Foreground="{StaticResource HeaderForegroundBrush}" Width="140" HorizontalContentAlignment="Center" Background="{StaticResource PrimaryLightBrush}"
                     HorizontalAlignment="Right" Margin="0,0,10,15" CornerRadius="3" Padding="15,5"/>
 
-            <Grid Grid.Row="1" x:Name="TableContentContainer" ColumnDefinitions="*, *" Margin="10,0">
+            <Grid Grid.Row="1" x:Name="TableContentContainer" ColumnDefinitions="*, *" Margin="10,0" IsVisible="False">
                 
                 <StackPanel Grid.Column="0" Margin="0,0,20,0">
-                    <TextBlock Text="Aproximación por la Izquierda" Foreground="#333333" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                    <TextBlock Text="Aproximación por la Izquierda" Foreground="{StaticResource WindowBackgroundBrush}" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"/>
                     
-                    <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto">
-                        <Border Grid.Row="0" Grid.Column="0" BorderBrush="#D4D4E2" BorderThickness="0,0,0,2" Padding="5">
-                            <TextBlock Text="x" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    <Grid ColumnDefinitions="*, *">
+                        <Border Grid.Column="0" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,0,2" Padding="5">
+                            <TextBlock Text="x" FontWeight="Bold" HorizontalAlignment="Center" Foreground="{StaticResource WindowBackgroundBrush}"/>
                         </Border>
-                        <Border Grid.Row="0" Grid.Column="1" BorderBrush="#D4D4E2" BorderThickness="0,0,0,2" Padding="5">
-                            <TextBlock Text="f(x)" FontWeight="Bold" HorizontalAlignment="Center"/>
+                        <Border Grid.Column="1" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,0,2" Padding="5">
+                            <TextBlock Text="f(x)" FontWeight="Bold" HorizontalAlignment="Center" Foreground="{StaticResource WindowBackgroundBrush}"/>
                         </Border>
                     </Grid>
+
+                    <ItemsControl ItemsSource="{Binding LeftValues}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:ValuePoint">
+                                <Grid ColumnDefinitions="*, *">
+                                    <Border Grid.Column="0" BorderBrush="{StaticResource SubtleBorderBrush}" BorderThickness="0,0,0,1" Padding="5">
+                                        <TextBlock Text="{Binding DisplayX}" HorizontalAlignment="Center" FontSize="13" FontWeight="Bold" Foreground="{StaticResource WindowBackgroundBrush}"/>
+                                    </Border>
+                                    <Border Grid.Column="1" BorderBrush="{StaticResource SubtleBorderBrush}" BorderThickness="0,0,0,1" Padding="5">
+                                        <TextBlock Text="{Binding Fx}" HorizontalAlignment="Center" FontSize="13" FontWeight="Bold" Foreground="{StaticResource WindowBackgroundBrush}"/>
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" Margin="20,0,0,0">
-                    <TextBlock Text="Aproximación por la Derecha" Foreground="#333333" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                    <TextBlock Text="Aproximación por la Derecha" Foreground="{StaticResource WindowBackgroundBrush}" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"/>
                     
-                    <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto">
-                        <Border Grid.Row="0" Grid.Column="0" BorderBrush="#D4D4E2" BorderThickness="0,0,0,2" Padding="5">
-                            <TextBlock Text="x" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    <Grid ColumnDefinitions="*, *">
+                        <Border Grid.Column="0" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,0,2" Padding="5">
+                            <TextBlock Text="x" FontWeight="Bold" HorizontalAlignment="Center" Foreground="{StaticResource WindowBackgroundBrush}"/>
                         </Border>
-                        <Border Grid.Row="0" Grid.Column="1" BorderBrush="#D4D4E2" BorderThickness="0,0,0,2" Padding="5">
-                            <TextBlock Text="f(x)" FontWeight="Bold" HorizontalAlignment="Center"/>
+                        <Border Grid.Column="1" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,0,2" Padding="5">
+                            <TextBlock Text="f(x)" FontWeight="Bold" HorizontalAlignment="Center" Foreground="{StaticResource WindowBackgroundBrush}"/>
                         </Border>
                     </Grid>
+
+                    <ItemsControl ItemsSource="{Binding RightValues}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:ValuePoint">
+                                <Grid ColumnDefinitions="*, *">
+                                    <Border Grid.Column="0" BorderBrush="{StaticResource SubtleBorderBrush}" BorderThickness="0,0,0,1" Padding="5">
+                                        <TextBlock Text="{Binding DisplayX}" HorizontalAlignment="Center" FontSize="13" FontWeight="Bold" Foreground="{StaticResource WindowBackgroundBrush}"/>
+                                    </Border>
+                                    <Border Grid.Column="1" BorderBrush="{StaticResource SubtleBorderBrush}" BorderThickness="0,0,0,1" Padding="5">
+                                        <TextBlock Text="{Binding Fx}" HorizontalAlignment="Center" FontSize="13" FontWeight="Bold" Foreground="{StaticResource WindowBackgroundBrush}"/>
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </StackPanel>
                 
             </Grid>

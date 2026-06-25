@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using RutGeo.Core.Helpers;
 using RutGeo.Core.Interfaces.Conics;
 using RutGeo.Core.Models;
 
@@ -12,17 +12,17 @@ public class ConicElementsFactory : IConicElementsFactory
         return new CircleElements
         {
             Center = new Point2D(h, k),
-            Radius = Math.Sqrt(r2)
+            Radius = RutGeoMath.Sqrt(r2)
         };
     }
 
     public EllipseElements CreateEllipseElements(double h, double k, double a2, double b2)
     {
-        double a = Math.Sqrt(a2);
-        double b = Math.Sqrt(b2);
+        double a = RutGeoMath.Sqrt(a2);
+        double b = RutGeoMath.Sqrt(b2);
         bool isHorizontal = a2 >= b2;
-        double c2 = Math.Abs(a2 - b2);
-        double c = Math.Sqrt(c2);
+        double c2 = RutGeoMath.Abs(a2 - b2);
+        double c = RutGeoMath.Sqrt(c2);
 
         return new EllipseElements
         {
@@ -41,10 +41,10 @@ public class ConicElementsFactory : IConicElementsFactory
 
     public HyperbolaElements CreateHyperbolaElements(double h, double k, double a2, double b2, bool isHorizontal)
     {
-        double a = Math.Sqrt(a2);
-        double b = Math.Sqrt(b2);
+        double a = RutGeoMath.Sqrt(a2);
+        double b = RutGeoMath.Sqrt(b2);
         double c2 = a2 + b2;
-        double c = Math.Sqrt(c2);
+        double c = RutGeoMath.Sqrt(c2);
 
         return new HyperbolaElements
         {
@@ -71,8 +71,8 @@ public class ConicElementsFactory : IConicElementsFactory
                 Center = new Point2D(h, k),
                 Vertex = new Point2D(h, k),
                 Focus = new Point2D(h, k + p),
-                Directrix = new Line2D(0, 1, -(k - p)), // y - (k-p) = 0
-                AxisOfSymmetry = new Line2D(1, 0, -h),  // x - h = 0
+                Directrix = new Line2D(0, 1, -(k - p)),
+                AxisOfSymmetry = new Line2D(1, 0, -h),
                 FocalDistance = p
             };
         }
@@ -83,8 +83,8 @@ public class ConicElementsFactory : IConicElementsFactory
                 Center = new Point2D(h, k),
                 Vertex = new Point2D(h, k),
                 Focus = new Point2D(h + p, k),
-                Directrix = new Line2D(1, 0, -(h - p)), // x - (h-p) = 0
-                AxisOfSymmetry = new Line2D(0, 1, -k),  // y - k = 0
+                Directrix = new Line2D(1, 0, -(h - p)),
+                AxisOfSymmetry = new Line2D(0, 1, -k),
                 FocalDistance = p
             };
         }

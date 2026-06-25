@@ -1,34 +1,33 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
+<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:RutGeo.UI.ViewModels" 
              x:DataType="vm:MainWindowViewModel"
              x:CompileBindings="False"
              x:Class="RutGeo.UI.Views.RutInputView">
     
-    <Border Background="#F5F5FB" BorderBrush="#D4D4E2" BorderThickness="0,1,0,0" Padding="15">
+    <Border Background="{StaticResource InputBackgroundBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,1,0,0" Padding="15">
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Spacing="15">
             
             <StackPanel Orientation="Vertical" Spacing="15">
-                <TextBlock Text="RUT" Foreground="#333333" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                <TextBlock Text="RUT" Foreground="{StaticResource InputForegroundBrush}" VerticalAlignment="Center" FontWeight="SemiBold"/>
                 
                 <TextBox Width="200" 
-                         PlaceholderText="12345678-9" 
                          VerticalAlignment="Center"
                          Text="{Binding RutText}" />
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Spacing="15">
     
                     <Button Content="Calcular" 
-                            Command="{Binding AnalyzeRutCommand}"
-                            Background="MediumSlateBlue" 
-                            Foreground="White" 
+                            Command="{Binding AnalyzeCommand}"
+                            Background="{StaticResource PrimaryLightBrush}" 
+                            Foreground="{StaticResource HeaderForegroundBrush}" 
                             BorderThickness="0" 
                             CornerRadius="3" 
                             VerticalAlignment="Center"/>
-    
+
                     <Button Click="ToggleLogButton_Click"
-                            Background="MediumSlateBlue" 
-                            Foreground="White" 
+                            Background="{StaticResource PrimaryLightBrush}" 
+                            Foreground="{StaticResource HeaderForegroundBrush}" 
                             BorderThickness="0"
                             Cursor="Hand"
                             VerticalAlignment="Center"> 
