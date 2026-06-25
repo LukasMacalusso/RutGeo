@@ -26,6 +26,11 @@ public partial class MainWindowViewModel : ViewModelBase
 
     [ObservableProperty] private bool _isSolutionsVisible;
 
+    partial void OnValidatorResultChanged(RutValidatorResult? value)
+    {
+        ToggleSolutionsCommand.NotifyCanExecuteChanged();
+    }
+
     [ObservableProperty] private string _conicTransformationSteps = string.Empty;
 
     [ObservableProperty] private LimitAnalysisResult? _limitResult;
@@ -58,6 +63,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     private void CleanResults()
     {
+        IsSolutionsVisible = false;
         _explanationLog.Clear();
         ValidatorResult = null;
         GeneralEquation = null;
@@ -137,9 +143,11 @@ public partial class MainWindowViewModel : ViewModelBase
         ValidationMessage = string.Empty;
     }
 
-    [RelayCommand]
+    [RelayCommand(CanExecute = nameof(CanToggleSolutions))]
     private void ToggleSolutions()
     {
         IsSolutionsVisible = !IsSolutionsVisible;
     }
+
+    private bool CanToggleSolutions() => ValidatorResult?.IsValid == true;
 }

@@ -8,73 +8,91 @@
         <StackPanel Margin="15" Spacing="10">
 
             <StackPanel x:Name="ConicDefense" IsVisible="True" Spacing="8">
-                <TextBlock Text="Centro (h, k):" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
+                <TextBlock Text="{Binding ConicVM.CenterLabel}" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
                 <Grid ColumnDefinitions="*, Auto">
-                    <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding ConicVM.UserCenter}"/>
-                    <TextBlock Grid.Column="1" Text="{Binding ConicVM.CenterStatus}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="0,0,0,5"/>
+                    <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding ConicVM.Center.UserValue}" Watermark="(0,00, 0,00)"/>
+                    <TextBlock Grid.Column="1" Text="{Binding ConicVM.Center.Status}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="0,0,0,5"/>
                 </Grid>
 
-                <TextBlock Text="Vértices:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
-                <Grid ColumnDefinitions="*, Auto">
-                    <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding ConicVM.UserVertices}"/>
-                    <TextBlock Grid.Column="1" Text="{Binding ConicVM.VerticesStatus}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="0,0,0,5"/>
-                </Grid>
+                <StackPanel IsVisible="{Binding ConicVM.Radius.IsVisible}" Spacing="0">
+                    <TextBlock Text="Radio:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
+                    <Grid ColumnDefinitions="*, Auto">
+                        <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding ConicVM.Radius.UserValue}" Watermark="0,00"/>
+                        <TextBlock Grid.Column="1" Text="{Binding ConicVM.Radius.Status}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="0,0,0,5"/>
+                    </Grid>
+                </StackPanel>
 
-                <TextBlock Text="Focos:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
-                <Grid ColumnDefinitions="*, Auto">
-                    <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding ConicVM.UserFocals}"/>
-                    <TextBlock Grid.Column="1" Text="{Binding ConicVM.FocalsStatus}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="0,0,0,5"/>
-                </Grid>
+                <StackPanel IsVisible="{Binding ConicVM.Vertices.IsVisible}" Spacing="0">
+                    <TextBlock Text="Vértices:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
+                    <Grid ColumnDefinitions="*, Auto">
+                        <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding ConicVM.Vertices.UserValue}" Watermark="(0,00, 0,00), (0,00, 0,00)"/>
+                        <TextBlock Grid.Column="1" Text="{Binding ConicVM.Vertices.Status}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="0,0,0,5"/>
+                    </Grid>
+                </StackPanel>
 
-                <TextBlock Text="Eje mayor / Eje menor:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
-                <Grid ColumnDefinitions="*, Auto">
-                    <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding ConicVM.UserAxis}"/>
-                    <TextBlock Grid.Column="1" Text="{Binding ConicVM.AxisStatus}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="0,0,0,5"/>
-                </Grid>
+                <StackPanel IsVisible="{Binding ConicVM.Foci.IsVisible}" Spacing="0">
+                    <TextBlock Text="Focos:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
+                    <Grid ColumnDefinitions="*, Auto">
+                        <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding ConicVM.Foci.UserValue}" Watermark="(0,00, 0,00), (0,00, 0,00)"/>
+                        <TextBlock Grid.Column="1" Text="{Binding ConicVM.Foci.Status}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="0,0,0,5"/>
+                    </Grid>
+                </StackPanel>
 
-                <TextBlock Text="Directriz:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
-                <Grid ColumnDefinitions="*, Auto">
-                    <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding ConicVM.UserDirective}"/>
-                    <TextBlock Grid.Column="1" Text="{Binding ConicVM.DirectiveStatus}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="0,0,0,5"/>
-                </Grid>
+                <StackPanel IsVisible="{Binding ConicVM.Axis.IsVisible}" Spacing="0">
+                    <TextBlock Text="{Binding ConicVM.AxisLabel}" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
+                    <Grid ColumnDefinitions="*, Auto">
+                        <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding ConicVM.Axis.UserValue}" Watermark="0,00, 0,00"/>
+                        <TextBlock Grid.Column="1" Text="{Binding ConicVM.Axis.Status}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="0,0,0,5"/>
+                    </Grid>
+                </StackPanel>
+
+                <StackPanel IsVisible="{Binding ConicVM.Directive.IsVisible}" Spacing="0">
+                    <TextBlock Text="{Binding ConicVM.DirectrixLabel}" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
+                    <Grid ColumnDefinitions="*, Auto">
+                        <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding ConicVM.Directive.UserValue}" Watermark="0,00"/>
+                        <TextBlock Grid.Column="1" Text="{Binding ConicVM.Directive.Status}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="0,0,0,5"/>
+                    </Grid>
+                </StackPanel>
             </StackPanel>
 
             <StackPanel x:Name="LimitDefense" IsVisible="False" Spacing="8">
                 <TextBlock Text="Límite por la izquierda (x → a⁻):" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
                 <Grid ColumnDefinitions="*, Auto">
-                    <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding LimitVM.UserLeftLimit}"/>
-                    <TextBlock Grid.Column="1" Text="{Binding LimitVM.LeftLimitStatus}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="0,0,0,5"/>
+                    <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding LimitVM.LeftLimit.UserValue}" Watermark="x"/>
+                    <TextBlock Grid.Column="1" Text="{Binding LimitVM.LeftLimit.Status}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="0,0,0,5"/>
                 </Grid>
 
                 <TextBlock Text="Límite por la derecha (x → a⁺):" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
                 <Grid ColumnDefinitions="*, Auto">
-                    <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding LimitVM.UserRightLimit}"/>
-                    <TextBlock Grid.Column="1" Text="{Binding LimitVM.RightLimitStatus}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="0,0,0,5"/>
+                    <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding LimitVM.RightLimit.UserValue}" Watermark="x"/>
+                    <TextBlock Grid.Column="1" Text="{Binding LimitVM.RightLimit.Status}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="0,0,0,5"/>
                 </Grid>
 
                 <TextBlock Text="¿Existe el límite?" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
                 <Grid ColumnDefinitions="*, Auto">
-                    <ComboBox Grid.Column="0" ItemsSource="{Binding LimitVM.YesNoOptions}" SelectedItem="{Binding LimitVM.UserLimitExists}" HorizontalAlignment="Stretch" Margin="0,0,5,5"/>
-                    <TextBlock Grid.Column="1" Text="{Binding LimitVM.LimitExistsStatus}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="5,0,0,0"/>
+                    <ComboBox Grid.Column="0" ItemsSource="{Binding LimitVM.YesNoOptions}" SelectedItem="{Binding LimitVM.LimitExists.UserValue}" HorizontalAlignment="Stretch" Margin="0,0,5,5"/>
+                    <TextBlock Grid.Column="1" Text="{Binding LimitVM.LimitExists.Status}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="5,0,0,0"/>
                 </Grid>
 
                 <TextBlock Text="Valor de f(a):" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
                 <Grid ColumnDefinitions="*, Auto">
-                    <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding LimitVM.UserValueFA}"/>
-                    <TextBlock Grid.Column="1" Text="{Binding LimitVM.ValueFAStatus}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="0,0,0,5"/>
+                    <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding LimitVM.ValueFA.UserValue}" Watermark="x"/>
+                    <TextBlock Grid.Column="1" Text="{Binding LimitVM.ValueFA.Status}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="0,0,0,5"/>
                 </Grid>
 
                 <TextBlock Text="¿Es continua?" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
                 <Grid ColumnDefinitions="*, Auto">
-                    <ComboBox Grid.Column="0" ItemsSource="{Binding LimitVM.YesNoOptions}" SelectedItem="{Binding LimitVM.UserContinuous}" HorizontalAlignment="Stretch" Margin="0,0,5,5"/>
-                    <TextBlock Grid.Column="1" Text="{Binding LimitVM.ContinuousStatus}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="5,0,0,0"/>
+                    <ComboBox Grid.Column="0" ItemsSource="{Binding LimitVM.YesNoOptions}" SelectedItem="{Binding LimitVM.Continuous.UserValue}" HorizontalAlignment="Stretch" Margin="0,0,5,5"/>
+                    <TextBlock Grid.Column="1" Text="{Binding LimitVM.Continuous.Status}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="5,0,0,0"/>
                 </Grid>
 
-                <TextBlock Text="Tipo de discontinuidad:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
-                <Grid ColumnDefinitions="*, Auto">
-                    <ComboBox Grid.Column="0" ItemsSource="{Binding LimitVM.DiscontinuityOptions}" SelectedItem="{Binding LimitVM.UserDiscontinuity}" HorizontalAlignment="Stretch" Margin="0,0,5,5"/>
-                    <TextBlock Grid.Column="1" Text="{Binding LimitVM.DiscontinuityStatus}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="5,0,0,0"/>
-                </Grid>
+                <StackPanel IsVisible="{Binding LimitVM.IsDiscontinuityVisible}" Spacing="0">
+                    <TextBlock Text="Tipo de discontinuidad:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
+                    <Grid ColumnDefinitions="*, Auto">
+                        <ComboBox Grid.Column="0" ItemsSource="{Binding LimitVM.DiscontinuityOptions}" SelectedItem="{Binding LimitVM.Discontinuity.UserValue}" HorizontalAlignment="Stretch" Margin="0,0,5,5"/>
+                        <TextBlock Grid.Column="1" Text="{Binding LimitVM.Discontinuity.Status}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="5,0,0,0"/>
+                    </Grid>
+                </StackPanel>
             </StackPanel>
 
             <Button x:Name="BtnCorroborate" Content="Corroborar" 

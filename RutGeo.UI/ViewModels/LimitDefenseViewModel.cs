@@ -7,28 +7,25 @@ namespace RutGeo.UI.ViewModels;
 
 public partial class LimitDefenseViewModel : ObservableObject
 {
-    [ObservableProperty] private string _userLeftLimit = string.Empty;
-    [ObservableProperty] private string _userRightLimit = string.Empty;
-    [ObservableProperty] private string _userLimitExists = string.Empty;
-    [ObservableProperty] private string _userValueFA = string.Empty;
-    [ObservableProperty] private string _userContinuous = string.Empty;
-    [ObservableProperty] private string _userDiscontinuity = string.Empty;
+    public DefenseField LeftLimit { get; } = new();
+    public DefenseField RightLimit { get; } = new();
+    public DefenseField LimitExists { get; } = new();
+    public DefenseField ValueFA { get; } = new();
+    public DefenseField Continuous { get; } = new();
+    public DefenseField Discontinuity { get; } = new();
 
-    [ObservableProperty] private string _leftLimitStatus = string.Empty;
-    [ObservableProperty] private string _rightLimitStatus = string.Empty;
-    [ObservableProperty] private string _limitExistsStatus = string.Empty;
-    [ObservableProperty] private string _valueFAStatus = string.Empty;
-    [ObservableProperty] private string _continuousStatus = string.Empty;
-    [ObservableProperty] private string _discontinuityStatus = string.Empty;
-    [ObservableProperty] private string _limitJustificationStatus = string.Empty;
+    [ObservableProperty] private bool _isDiscontinuityVisible = true;
 
-    [ObservableProperty] private string _expectedLeftLimit = "";
-    [ObservableProperty] private string _expectedRightLimit = "";
-    [ObservableProperty] private string _expectedLimitExists = "";
-    [ObservableProperty] private string _expectedValueFA = "";
-    [ObservableProperty] private string _expectedContinuous = "";
-    [ObservableProperty] private string _expectedDiscontinuity = "";
     [ObservableProperty] private string _expectedJustification = "";
+
+    public LimitDefenseViewModel()
+    {
+        Continuous.PropertyChanged += (s, e) =>
+        {
+            if (e.PropertyName == nameof(DefenseField.UserValue))
+                IsDiscontinuityVisible = string.IsNullOrEmpty(Continuous.UserValue) || Continuous.UserValue != "Sí";
+        };
+    }
 
     public List<string> YesNoOptions { get; } = new() { "Sí", "No" };
     public List<string> DiscontinuityOptions { get; } = new() { "Removible", "De Salto", "Infinita", "Ninguna" };
@@ -38,40 +35,24 @@ public partial class LimitDefenseViewModel : ObservableObject
     public void SetExpectedValues(LimitAnalysisResult? result)
     {
         _expected = result;
-        if (_expected != null)
-        {
-            ExpectedLeftLimit = _expected.LeftLimit;
-            ExpectedRightLimit = _expected.RightLimit;
-            ExpectedLimitExists = _expected.LimitExists ? "Sí" : "No";
-            ExpectedValueFA = _expected.FunctionValueAtCriticalPoint;
-            ExpectedContinuous = _expected.IsContinuous ? "Sí" : "No";
-            ExpectedDiscontinuity = DiscontinuityLabel();
-            ExpectedJustification = _expected.Justification;
-        }
-        else
-        {
-            ExpectedLeftLimit = ExpectedRightLimit = ExpectedLimitExists = "";
-            ExpectedValueFA = ExpectedContinuous = ExpectedDiscontinuity = ExpectedJustification = "";
-        }
+
+        LeftLimit.ExpectedValue = result?.LeftLimit ?? "";
+        RightLimit.ExpectedValue = result?.RightLimit ?? "";
+        LimitExists.ExpectedValue = result != null ? (result.LimitExists ? "Sí" : "No") : "";
+        ValueFA.ExpectedValue = result?.FunctionValueAtCriticalPoint ?? "";
+        Continuous.ExpectedValue = result != null ? (result.IsContinuous ? "Sí" : "No") : "";
+        Discontinuity.ExpectedValue = result != null ? DiscontinuityLabel() : "";
+        ExpectedJustification = result?.Justification ?? "";
     }
 
     public void Corroborate()
     {
-        if (_expected == null)
-        {
-            LeftLimitStatus = RightLimitStatus = LimitExistsStatus = "";
-            ValueFAStatus = ContinuousStatus = DiscontinuityStatus = "";
-            LimitJustificationStatus = "";
-            return;
-        }
-
-        LeftLimitStatus = Compare(UserLeftLimit, _expected.LeftLimit) ? "✓" : "✗";
-        RightLimitStatus = Compare(UserRightLimit, _expected.RightLimit) ? "✓" : "✗";
-        LimitExistsStatus = Compare(UserLimitExists, _expected.LimitExists ? "Sí" : "No") ? "✓" : "✗";
-        ValueFAStatus = Compare(UserValueFA, _expected.FunctionValueAtCriticalPoint) ? "✓" : "✗";
-        ContinuousStatus = Compare(UserContinuous, _expected.IsContinuous ? "Sí" : "No") ? "✓" : "✗";
-        DiscontinuityStatus = Compare(UserDiscontinuity, DiscontinuityLabel()) ? "✓" : "✗";
-        LimitJustificationStatus = "✓";
+        LeftLimit.Corroborate();
+        RightLimit.Corroborate();
+        LimitExists.Corroborate();
+        ValueFA.Corroborate();
+        Continuous.Corroborate();
+        Discontinuity.Corroborate();
     }
 
     private string DiscontinuityLabel()
@@ -84,12 +65,5 @@ public partial class LimitDefenseViewModel : ObservableObject
             DiscontinuityType.Infinite => "Infinita",
             _ => "Ninguna"
         };
-    }
-
-    private static bool Compare(string user, string expected)
-    {
-        if (string.IsNullOrWhiteSpace(user)) return false;
-        return user.Trim().ToLowerInvariant().Replace(" ", "")
-            == expected.Trim().ToLowerInvariant().Replace(" ", "");
     }
 }
