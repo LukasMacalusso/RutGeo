@@ -26,6 +26,7 @@ public class ToGeneralTransformer : IToGeneralTransformer
             ConicType.Elipse => InverseEllipse(canonicalEquation),
             ConicType.Hyperbola => InverseHyperbola(canonicalEquation),
             ConicType.Parabola => InverseParabola(canonicalEquation),
+            ConicType.Desconocida => conic.GeneralEquation,
             _ => throw new NotImplementedException()
         };
     }
