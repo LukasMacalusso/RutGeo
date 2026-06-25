@@ -69,7 +69,8 @@ public partial class App : Application
         serviceCollection.AddSingleton<IExplanationLogger, ExplanationLogger>();
         serviceCollection.AddTransient<IConicElementsFactory, ConicElementsFactory>();
         serviceCollection.AddTransient<IRutEquationGenerator, RutEquationGenerator>();
-        serviceCollection.AddTransient<IEquationTransformer, EquationTransformer>();
+        serviceCollection.AddTransient<IToCanonicalTransformer, ToCanonicalTransformer>();
+        serviceCollection.AddTransient<IToGeneralTransformer, ToGeneralTransformer>();
         serviceCollection.AddTransient<IFunctionAnalyzer, FunctionAnalyzer>();
         serviceCollection.AddTransient<IConicOrchestrator, ConicOrchestrator>();
         serviceCollection.AddTransient<ILimitOrchestrator, LimitOrchestrator>();

@@ -1,0 +1,29 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Brushes -->
+    <SolidColorBrush x:Key="HeaderBackgroundBrush">#14122A</SolidColorBrush>
+    <SolidColorBrush x:Key="PanelBackgroundBrush">#FFFFFF</SolidColorBrush>
+    <SolidColorBrush x:Key="WindowBackgroundBrush">#000000</SolidColorBrush>
+    <SolidColorBrush x:Key="PlotBackgroundBrush">#C9C9C9</SolidColorBrush>
+
+    <SolidColorBrush x:Key="PrimaryBrush">#7B68EE</SolidColorBrush>
+    <SolidColorBrush x:Key="PrimaryLightBrush">MediumSlateBlue</SolidColorBrush>
+
+    <SolidColorBrush x:Key="InfoBackgroundBrush">#E8E8F0</SolidColorBrush>
+    <SolidColorBrush x:Key="InputBackgroundBrush">#DCDCE6</SolidColorBrush>
+    <SolidColorBrush x:Key="TableBackgroundBrush">#F5F5FB</SolidColorBrush>
+
+    <SolidColorBrush x:Key="BorderBrush">#D4D4E2</SolidColorBrush>
+    <SolidColorBrush x:Key="SubtleBorderBrush">#E0E0E0</SolidColorBrush>
+
+    <SolidColorBrush x:Key="LabelForegroundBrush">#555555</SolidColorBrush>
+    <SolidColorBrush x:Key="InputForegroundBrush">#333333</SolidColorBrush>
+    <SolidColorBrush x:Key="HeaderForegroundBrush">#FFFFFF</SolidColorBrush>
+    <SolidColorBrush x:Key="AccentForegroundBrush">#7B68EE</SolidColorBrush>
+
+    <SolidColorBrush x:Key="DangerBrush">#D45050</SolidColorBrush>
+    <SolidColorBrush x:Key="InactiveBrush">#3A205E</SolidColorBrush>
+    <SolidColorBrush x:Key="InactiveForegroundBrush">LightGray</SolidColorBrush>
+    <SolidColorBrush x:Key="SuccessBrush">Green</SolidColorBrush>
+</ResourceDictionary>

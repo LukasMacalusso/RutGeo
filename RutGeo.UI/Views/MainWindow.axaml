@@ -13,9 +13,9 @@
         Width="1200" Height="800">
     
     <Window.Background>
-        <SolidColorBrush Color="Black"/>
+        <StaticResource ResourceKey="WindowBackgroundBrush"/>
     </Window.Background>
-    <Grid Background="Black">
+    <Grid Background="{StaticResource WindowBackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
@@ -23,27 +23,27 @@
         
         <Grid Grid.Row="0" ColumnDefinitions="Auto, *">
             
-            <Border x:Name="LeftPanel" Grid.Column="0" Width="300" Background="#FFFFFF" BorderBrush="#D4D4E2" BorderThickness="0,0,1,0">
+            <Border x:Name="LeftPanel" Grid.Column="0" Width="300" Background="{StaticResource PanelBackgroundBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,1,0">
                 <Grid RowDefinitions="Auto, *, Auto">
-                    <Border Grid.Row="0" Background="#14122A" Padding="15,14">
-                        <TextBlock x:Name="ModeHeader" Text="CÓNICAS" Foreground="White" HorizontalAlignment="Center" FontWeight="Bold" FontSize="22"/>
+                    <Border Grid.Row="0" Background="{StaticResource HeaderBackgroundBrush}" Padding="15,14">
+                        <TextBlock x:Name="ModeHeader" Text="CÓNICAS" Foreground="{StaticResource HeaderForegroundBrush}" HorizontalAlignment="Center" FontWeight="Bold" FontSize="22"/>
                     </Border>
                     
                     <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
                         <StackPanel Margin="10,5" Spacing="5">
-                            <TextBlock Text="ANÁLISIS" FontSize="18" FontWeight="Bold" Foreground="MediumSlateBlue" Margin="5,5,0,0" HorizontalAlignment="Left"/>
+                            <TextBlock Text="ANÁLISIS" FontSize="18" FontWeight="Bold" Foreground="{StaticResource PrimaryLightBrush}" Margin="5,5,0,0" HorizontalAlignment="Left"/>
                             <v:Description x:Name="DescView" />
                             
-                            <Separator Background="#D4D4E2" Height="1" Margin="0,10"/>
+                            <Separator Background="{StaticResource BorderBrush}" Height="1" Margin="0,10"/>
                             
-                            <TextBlock Text="DEFENSA" FontSize="18" FontWeight="Bold" Foreground="MediumSlateBlue" Margin="5,5,0,0" HorizontalAlignment="Left"/>
+                            <TextBlock Text="DEFENSA" FontSize="18" FontWeight="Bold" Foreground="{StaticResource PrimaryLightBrush}" Margin="5,5,0,0" HorizontalAlignment="Left"/>
                             <v:Defense x:Name="DefenseView" />
 
                             <v:Solutions x:Name="SolutionsView" IsVisible="{Binding IsSolutionsVisible}" />
                         </StackPanel>
                     </ScrollViewer>
 
-                    <Border Grid.Row="2" Padding="10" Background="#DCDCE6" BorderBrush="#E0E0E0" BorderThickness="0,1,0,0">
+                    <Border Grid.Row="2" Padding="10" Background="{StaticResource InputBackgroundBrush}" BorderBrush="{StaticResource SubtleBorderBrush}" BorderThickness="0,1,0,0">
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
                             <v:RutInputView x:Name="InputView" />
                             <v:RutLog x:Name="LogView" IsVisible="False" />
@@ -54,7 +54,7 @@
             
             <Grid Grid.Column="1" RowDefinitions="Auto, *, Auto">
     
-                <Border Grid.Row="0" Background="#14122A" Padding="15,10">
+                <Border Grid.Row="0" Background="{StaticResource HeaderBackgroundBrush}" Padding="15,10">
                     <Grid>
  
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Spacing="15">
@@ -63,13 +63,13 @@
                                     Content="☰" 
                                     Click="TogglePanelButton_Click" 
                                     Background="Transparent" 
-                                    Foreground="White" 
+                                    Foreground="{StaticResource HeaderForegroundBrush}" 
                                     FontSize="20" 
                                     Padding="5,0,5,5"
                                     Cursor="Hand"/>
  
                             <TextBlock VerticalAlignment="Center" FontSize="26">
-                                <Run Text="Rut" FontWeight="Black" Foreground="#FFFFFF"/><Run Text="Geo" FontWeight="Light" Foreground="MediumSlateBlue"/>
+                                <Run Text="Rut" FontWeight="Black" Foreground="{StaticResource HeaderForegroundBrush}"/><Run Text="Geo" FontWeight="Light" Foreground="{StaticResource PrimaryLightBrush}"/>
                             </TextBlock>
                         </StackPanel>
             
@@ -81,7 +81,7 @@
                     </Grid>
                 </Border>
                 
-                <Border Grid.Row="1" Background="#C9C9C9">
+                <Border Grid.Row="1" Background="{StaticResource PlotBackgroundBrush}">
                     <v:Graphic x:Name="GraphicView" />
                 </Border>
                 

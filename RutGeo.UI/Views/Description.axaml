@@ -8,41 +8,41 @@
         <StackPanel Margin="15" Spacing="10">
 
             <StackPanel x:Name="ConicContent" IsVisible="True" Spacing="8">
-                <TextBlock Text="Ecuación General:" FontWeight="SemiBold" Foreground="#555555"/>
-                <Border Background="#E8E8F0" CornerRadius="4" Padding="10">
-                    <TextBlock Text="{Binding GeneralEquation.EquationString}" FontSize="14" Foreground="#7B68EE" FontWeight="Bold"/>
+                <TextBlock Text="Ecuación General:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
+                <Border Background="{StaticResource InfoBackgroundBrush}" CornerRadius="4" Padding="10">
+                    <TextBlock Text="{Binding GeneralEquation.EquationString}" FontSize="14" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold"/>
                 </Border>
 
-                <TextBlock Text="Ecuación Canónica:" FontWeight="SemiBold" Foreground="#555555"/>
-                <Border Background="#E8E8F0" CornerRadius="4" Padding="10">
-                    <TextBlock Text="{Binding CanonicalEquation.FormattedString}" FontSize="14" Foreground="#7B68EE" FontWeight="Bold"/>
+                <TextBlock Text="Ecuación Canónica:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
+                <Border Background="{StaticResource InfoBackgroundBrush}" CornerRadius="4" Padding="10">
+                    <TextBlock Text="{Binding CanonicalEquation.FormattedString}" FontSize="14" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold"/>
                 </Border>
                 
-                <TextBlock Text="Tipo de Cónica:" FontWeight="SemiBold" Foreground="#555555" Margin="0,5,0,0"/>
-                <Border Background="#E8E8F0" CornerRadius="4" Padding="10">
-                    <TextBlock Text="{Binding Conic.Type}" Foreground="#7B68EE" FontWeight="Bold"/>
+                <TextBlock Text="Tipo de Cónica:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}" Margin="0,5,0,0"/>
+                <Border Background="{StaticResource InfoBackgroundBrush}" CornerRadius="4" Padding="10">
+                    <TextBlock Text="{Binding Conic.Type}" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold"/>
                 </Border>
 
-                <TextBlock Text="Desarrollo paso a paso:" FontWeight="SemiBold" Foreground="#555555" Margin="0,5,0,0"/>
-                <Border Background="#E8E8F0" CornerRadius="4" Padding="4">
-                    <TextBlock Text="{Binding ConicTransformationSteps}" FontSize="12" Foreground="#7B68EE" FontWeight="Bold" TextWrapping="Wrap"/>
+                <TextBlock Text="Desarrollo paso a paso:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}" Margin="0,5,0,0"/>
+                <Border Background="{StaticResource InfoBackgroundBrush}" CornerRadius="4" Padding="4">
+                    <TextBlock Text="{Binding ConicTransformationSteps}" FontSize="12" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold" TextWrapping="Wrap"/>
                 </Border>
             </StackPanel>
 
             <StackPanel x:Name="LimitContent" IsVisible="False" Spacing="8">
-                <TextBlock Text="Caso generado desde RUT:" FontWeight="SemiBold" Foreground="#555555"/>
-                <Border Background="#E8E8F0" CornerRadius="4" Padding="10">
-                    <TextBlock Text="{Binding LimitCaseDescription}" FontSize="14" Foreground="#7B68EE" FontWeight="Bold" TextWrapping="Wrap"/>
+                <TextBlock Text="Caso generado desde RUT:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
+                <Border Background="{StaticResource InfoBackgroundBrush}" CornerRadius="4" Padding="10">
+                    <TextBlock Text="{Binding LimitCaseDescription}" FontSize="14" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold" TextWrapping="Wrap"/>
                 </Border>
 
-                <TextBlock Text="Función por tramos:" FontWeight="SemiBold" Foreground="#555555"/>
-                <Border Background="#E8E8F0" CornerRadius="4" Padding="10">
-                    <TextBlock Text="{Binding LimitFunctionExpression}" FontSize="14" Foreground="#7B68EE" FontWeight="Bold" TextWrapping="Wrap"/>
+                <TextBlock Text="Función por tramos:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
+                <Border Background="{StaticResource InfoBackgroundBrush}" CornerRadius="4" Padding="10">
+                    <TextBlock Text="{Binding LimitFunctionExpression}" FontSize="14" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold" TextWrapping="Wrap"/>
                 </Border>
 
-                <TextBlock Text="Regla de selección:" FontWeight="SemiBold" Foreground="#555555" Margin="0,5,0,0"/>
-                <Border Background="#E8E8F0" CornerRadius="4" Padding="10">
-                    <TextBlock Text="{Binding LimitSelectionRule}" FontSize="12" Foreground="#7B68EE" FontWeight="Bold" TextWrapping="Wrap"/>
+                <TextBlock Text="Regla de selección:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}" Margin="0,5,0,0"/>
+                <Border Background="{StaticResource InfoBackgroundBrush}" CornerRadius="4" Padding="10">
+                    <TextBlock Text="{Binding LimitSelectionRule}" FontSize="12" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold" TextWrapping="Wrap"/>
                 </Border>
             </StackPanel>
 

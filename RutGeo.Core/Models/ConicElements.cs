@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using RutGeo.Core.Helpers;
 
 namespace RutGeo.Core.Models;
 
@@ -7,7 +8,7 @@ public record Point2D(double X, double Y);
 
 public record Line2D(double A, double B, double C)
 {
-    public string EquationString => $"{A:F2}x + {(B >= 0 ? "+" : "")} {B:F2}y + {(C >= 0 ? "+" : "")} {C:F2} = 0";
+    public string EquationString => SignCleaner.Clean($"{A:F2}x + {(B >= 0 ? "+" : "")} {B:F2}y + {(C >= 0 ? "+" : "")} {C:F2} = 0");
 }
 
 public abstract class ConicElements

@@ -19,6 +19,12 @@ public partial class Graphic : UserControl
         _plot = this.Find<AvaPlot>("MainPlot")!;
     }
 
+    private void AddScatterNoMarkers(double[] xs, double[] ys)
+    {
+        var scatter = _plot.Plot.Add.Scatter(xs, ys);
+        scatter.MarkerSize = 0;
+    }
+
     private void DrawAxes()
     {
         var xAxis = _plot.Plot.Add.HorizontalLine(0);
@@ -80,7 +86,7 @@ public partial class Graphic : UserControl
                 if (double.IsNaN(xs[i]) || double.IsNaN(ys[i]))
                 {
                     if (segXs.Count > 1)
-                        _plot.Plot.Add.Scatter(segXs.ToArray(), segYs.ToArray());
+                        AddScatterNoMarkers(segXs.ToArray(), segYs.ToArray());
                     segXs.Clear();
                     segYs.Clear();
                 }
@@ -91,7 +97,7 @@ public partial class Graphic : UserControl
                 }
             }
             if (segXs.Count > 1)
-                _plot.Plot.Add.Scatter(segXs.ToArray(), segYs.ToArray());
+                AddScatterNoMarkers(segXs.ToArray(), segYs.ToArray());
         }
 
         _plot.Plot.Axes.AutoScale();
@@ -116,7 +122,7 @@ public partial class Graphic : UserControl
 
         if (xs.Count > 1)
         {
-            _plot.Plot.Add.Scatter(xs.ToArray(), ys.ToArray());
+            AddScatterNoMarkers(xs.ToArray(), ys.ToArray());
         }
 
         _plot.Plot.Axes.AutoScale();

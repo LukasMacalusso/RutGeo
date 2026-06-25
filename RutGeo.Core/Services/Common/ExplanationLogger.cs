@@ -1,4 +1,5 @@
 using System.Text;
+using RutGeo.Core.Helpers;
 using RutGeo.Core.Interfaces.Common;
 
 namespace RutGeo.Core.Services.Common;
@@ -20,7 +21,7 @@ public class ExplanationLogger : IExplanationLogger
 
     public void AppendEquation(string equation)
     {
-        _logBuilder.AppendLine($"  {equation}");
+        _logBuilder.AppendLine($"  {SignCleaner.Clean(equation)}");
         _logBuilder.AppendLine();
     }
 

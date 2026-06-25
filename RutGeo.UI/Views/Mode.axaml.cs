@@ -1,4 +1,5 @@
 using System;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media;
@@ -10,9 +11,19 @@ public partial class Mode : UserControl
     public event EventHandler? OnConicModeRequested;
     public event EventHandler? OnLimitsRequested;
 
+    private readonly IBrush _activeBg;
+    private readonly IBrush _activeFg;
+    private readonly IBrush _inactiveBg;
+    private readonly IBrush _inactiveFg;
+
     public Mode()
     {
         InitializeComponent();
+        var resources = Application.Current!.Resources;
+        _activeBg = (IBrush)resources["PrimaryLightBrush"]!;
+        _activeFg = (IBrush)resources["HeaderForegroundBrush"]!;
+        _inactiveBg = (IBrush)resources["InactiveBrush"]!;
+        _inactiveFg = (IBrush)resources["InactiveForegroundBrush"]!;
     }
 
     private void ConicsButton_Click(object? sender, RoutedEventArgs e)
@@ -29,11 +40,9 @@ public partial class Mode : UserControl
 
     private void UpdateButtons(bool isConic)
     {
-        var activeBrush = Brushes.MediumSlateBlue;
-        var inactiveBrush = new SolidColorBrush(Color.Parse("#3A205E"));
-        BtnConics.Background = isConic ? activeBrush : inactiveBrush;
-        BtnConics.Foreground = isConic ? Brushes.White : Brushes.LightGray;
-        BtnLimits.Background = !isConic ? activeBrush : inactiveBrush;
-        BtnLimits.Foreground = !isConic ? Brushes.White : Brushes.LightGray;
+        BtnConics.Background = isConic ? _activeBg : _inactiveBg;
+        BtnConics.Foreground = isConic ? _activeFg : _inactiveFg;
+        BtnLimits.Background = !isConic ? _activeBg : _inactiveBg;
+        BtnLimits.Foreground = !isConic ? _activeFg : _inactiveFg;
     }
 }

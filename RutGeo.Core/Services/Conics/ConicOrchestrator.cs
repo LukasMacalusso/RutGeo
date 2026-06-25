@@ -2,7 +2,6 @@ using RutGeo.Core.Interfaces.Common;
 using RutGeo.Core.Interfaces.Conics;
 using RutGeo.Core.Interfaces.Generators;
 using RutGeo.Core.Models;
-using RutGeo.Core.Models.Equations;
 using RutGeo.Core.Models.Results;
 
 namespace RutGeo.Core.Services.Conics;
@@ -10,16 +9,19 @@ namespace RutGeo.Core.Services.Conics;
 public class ConicOrchestrator : IConicOrchestrator
 {
     private readonly IRutEquationGenerator _equationGenerator;
-    private readonly IEquationTransformer _equationTransformer;
+    private readonly IToCanonicalTransformer _toCanonicalTransformer;
+    private readonly IToGeneralTransformer _toGeneralTransformer;
     private readonly IExplanationLogger _log;
 
     public ConicOrchestrator(
         IRutEquationGenerator equationGenerator,
-        IEquationTransformer equationTransformer,
+        IToCanonicalTransformer toCanonicalTransformer,
+        IToGeneralTransformer toGeneralTransformer,
         IExplanationLogger log)
     {
         _equationGenerator = equationGenerator;
-        _equationTransformer = equationTransformer;
+        _toCanonicalTransformer = toCanonicalTransformer;
+        _toGeneralTransformer = toGeneralTransformer;
         _log = log;
     }
 
@@ -33,14 +35,14 @@ public class ConicOrchestrator : IConicOrchestrator
 
         int logBeforeFwd = _log.GetFullLog().Length;
         result.Conic = new Conic(result.GeneralEquation);
-        result.CanonicalEquation = _equationTransformer.TransformToCanonical(result.GeneralEquation, result.Conic);
+        result.CanonicalEquation = _toCanonicalTransformer.TransformToCanonical(result.GeneralEquation, result.Conic);
         string afterFwdLog = _log.GetFullLog();
         string canonicalSteps = afterFwdLog.Length > logBeforeFwd
             ? afterFwdLog.Substring(logBeforeFwd).TrimStart()
             : afterFwdLog.TrimStart();
 
         int logBeforeInv = _log.GetFullLog().Length;
-        _equationTransformer.TransformToGeneral(result.CanonicalEquation, result.Conic);
+        _toGeneralTransformer.TransformToGeneral(result.CanonicalEquation, result.Conic);
         string afterInvLog = _log.GetFullLog();
         string inverseSteps = afterInvLog.Length > logBeforeInv
             ? afterInvLog.Substring(logBeforeInv).TrimStart()
