@@ -27,7 +27,7 @@
                         </Border>
                     </Grid>
 
-                    <ItemsControl ItemsSource="{Binding LeftValues}">
+                    <ItemsControl ItemsSource="{Binding LimitAnalysisVM.LeftValues}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate x:DataType="vm:ValuePoint">
                                 <Grid ColumnDefinitions="*, *">
@@ -55,7 +55,7 @@
                         </Border>
                     </Grid>
 
-                    <ItemsControl ItemsSource="{Binding RightValues}">
+                    <ItemsControl ItemsSource="{Binding LimitAnalysisVM.RightValues}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate x:DataType="vm:ValuePoint">
                                 <Grid ColumnDefinitions="*, *">

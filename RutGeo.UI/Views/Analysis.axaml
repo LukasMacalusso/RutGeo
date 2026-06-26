@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:RutGeo.UI.ViewModels"
              x:DataType="vm:MainWindowViewModel"
-             x:Class="RutGeo.UI.Views.Description">
+             x:Class="RutGeo.UI.Views.Analysis">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="15" Spacing="10">
@@ -10,39 +10,39 @@
             <StackPanel x:Name="ConicContent" IsVisible="True" Spacing="8">
                 <TextBlock Text="Ecuación General:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
                 <Border Background="{StaticResource InfoBackgroundBrush}" CornerRadius="4" Padding="10">
-                    <TextBlock Text="{Binding GeneralEquation.EquationString}" FontSize="14" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding ConicAnalysisVM.GeneralEquation.EquationString}" FontSize="14" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold"/>
                 </Border>
 
                 <TextBlock Text="Ecuación Canónica:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
                 <Border Background="{StaticResource InfoBackgroundBrush}" CornerRadius="4" Padding="10">
-                    <TextBlock Text="{Binding CanonicalEquation.FormattedString}" FontSize="14" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding ConicAnalysisVM.CanonicalEquation.FormattedString}" FontSize="14" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold"/>
                 </Border>
                 
                 <TextBlock Text="Tipo de Cónica:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}" Margin="0,5,0,0"/>
                 <Border Background="{StaticResource InfoBackgroundBrush}" CornerRadius="4" Padding="10">
-                    <TextBlock Text="{Binding Conic.Type}" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding ConicAnalysisVM.Conic.Type}" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold"/>
                 </Border>
 
                 <TextBlock Text="Desarrollo paso a paso:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}" Margin="0,5,0,0"/>
                 <Border Background="{StaticResource InfoBackgroundBrush}" CornerRadius="4" Padding="4">
-                    <TextBlock Text="{Binding ConicTransformationSteps}" FontSize="12" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold" TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding ConicAnalysisVM.ConicTransformationSteps}" FontSize="12" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold" TextWrapping="Wrap"/>
                 </Border>
             </StackPanel>
 
             <StackPanel x:Name="LimitContent" IsVisible="False" Spacing="8">
                 <TextBlock Text="Caso generado desde RUT:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
                 <Border Background="{StaticResource InfoBackgroundBrush}" CornerRadius="4" Padding="10">
-                    <TextBlock Text="{Binding LimitCaseDescription}" FontSize="14" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold" TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding LimitAnalysisVM.LimitCaseDescription}" FontSize="14" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold" TextWrapping="Wrap"/>
                 </Border>
 
                 <TextBlock Text="Función por tramos:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
                 <Border Background="{StaticResource InfoBackgroundBrush}" CornerRadius="4" Padding="10">
-                    <TextBlock Text="{Binding LimitFunctionExpression}" FontSize="14" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold" TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding LimitAnalysisVM.LimitFunctionExpression}" FontSize="14" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold" TextWrapping="Wrap"/>
                 </Border>
 
                 <TextBlock Text="Regla de selección:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}" Margin="0,5,0,0"/>
                 <Border Background="{StaticResource InfoBackgroundBrush}" CornerRadius="4" Padding="10">
-                    <TextBlock Text="{Binding LimitSelectionRule}" FontSize="12" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold" TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding LimitAnalysisVM.LimitSelectionRule}" FontSize="12" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold" TextWrapping="Wrap"/>
                 </Border>
             </StackPanel>
 

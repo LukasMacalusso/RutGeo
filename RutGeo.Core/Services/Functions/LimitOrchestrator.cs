@@ -46,7 +46,7 @@ public class LimitOrchestrator : ILimitOrchestrator
         };
 
         double[] leftX = { a - 1, a - 0.1, a - 0.01, a - 0.001 };
-        double[] rightX = { a + 0.001, a + 0.01, a + 0.1, a + 1 };
+        double[] rightX = { a + 1, a + 0.1, a + 0.01, a + 0.001 };
 
         string[] leftY = new string[leftX.Length];
         string[] rightY = new string[rightX.Length];

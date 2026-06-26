@@ -7,6 +7,8 @@ public static class LimitPlotter
 {
     public static void PlotLimitFunction(int condition, int criticalPoint, int[] digits, List<double> xs, List<double> ys)
     {
+        if (digits.Length < 5) return;
+
         double range = 5;
         double step = 0.02;
 
@@ -36,16 +38,16 @@ public static class LimitPlotter
         }
         else
         {
-            double numer = digits[4] + 1.0;
+            double numerator = digits[4] + 1.0;
             for (double x = criticalPoint - range; x < criticalPoint - 0.01; x += step)
             {
                 xs.Add(x);
-                ys.Add(numer / (x - criticalPoint));
+                ys.Add(numerator / (x - criticalPoint));
             }
             for (double x = criticalPoint + 0.01; x <= criticalPoint + range; x += step)
             {
                 xs.Add(x);
-                ys.Add(numer / (x - criticalPoint));
+                ys.Add(numerator / (x - criticalPoint));
             }
         }
     }

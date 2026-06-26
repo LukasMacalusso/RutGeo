@@ -28,27 +28,27 @@ public partial class MainWindow : Window
     {
         if (sender is not MainWindowViewModel vm) return;
 
-        if (e.PropertyName == nameof(vm.GeneralEquation) ||
-            e.PropertyName == nameof(vm.Conic) ||
-            e.PropertyName == nameof(vm.CanonicalEquation))
+        if (e.PropertyName == nameof(ConicAnalysisViewModel.GeneralEquation) ||
+            e.PropertyName == nameof(ConicAnalysisViewModel.Conic) ||
+            e.PropertyName == nameof(ConicAnalysisViewModel.CanonicalEquation))
         {
-            if (!_isLimitMode && vm.GeneralEquation != null && vm.Conic != null && vm.CanonicalEquation != null)
+            if (!_isLimitMode && vm.ConicAnalysisVM.GeneralEquation != null && vm.ConicAnalysisVM.Conic != null && vm.ConicAnalysisVM.CanonicalEquation != null)
             {
-                GraphicView.UpdatePlot(vm.GeneralEquation, vm.Conic, vm.CanonicalEquation);
+                GraphicView.UpdatePlot(vm.ConicAnalysisVM.GeneralEquation, vm.ConicAnalysisVM.Conic, vm.ConicAnalysisVM.CanonicalEquation);
             }
-            else if (vm.GeneralEquation == null)
+            else if (vm.ConicAnalysisVM.GeneralEquation == null)
             {
                 GraphicView.ClearGraph();
             }
         }
 
-        if (e.PropertyName == nameof(vm.LimitResult))
+        if (e.PropertyName == nameof(LimitAnalysisViewModel.LimitResult))
         {
-            if (_isLimitMode && vm.LimitResult != null)
+            if (_isLimitMode && vm.LimitAnalysisVM.LimitResult != null)
             {
-                GraphicView.UpdateLimitPlot(vm.LimitResult.Condition, vm.LimitResult.CriticalPoint, vm.LimitResult.Digits);
+                GraphicView.UpdateLimitPlot(vm.LimitAnalysisVM.LimitResult.Condition, vm.LimitAnalysisVM.LimitResult.CriticalPoint, vm.LimitAnalysisVM.LimitResult.Digits);
             }
-            else if (vm.LimitResult == null)
+            else if (vm.LimitAnalysisVM.LimitResult == null)
             {
                 GraphicView.ClearGraph();
             }
@@ -63,15 +63,15 @@ public partial class MainWindow : Window
     private void SwitchToConics()
     {
         _isLimitMode = false;
-        DescView.SwitchToConics();
+        AnalysisView.SwitchToConics();
         DefenseView.SwitchToConics();
         SolutionsView.SwitchToConics();
         ModeHeader.Text = "CÓNICAS";
-        LimitsTable.IsVisible = false;
+        ValuesTableView.IsVisible = false;
 
-        if (DataContext is MainWindowViewModel vm && vm.GeneralEquation != null && vm.Conic != null && vm.CanonicalEquation != null)
+        if (DataContext is MainWindowViewModel vm && vm.ConicAnalysisVM.GeneralEquation != null && vm.ConicAnalysisVM.Conic != null && vm.ConicAnalysisVM.CanonicalEquation != null)
         {
-            GraphicView.UpdatePlot(vm.GeneralEquation, vm.Conic, vm.CanonicalEquation);
+            GraphicView.UpdatePlot(vm.ConicAnalysisVM.GeneralEquation, vm.ConicAnalysisVM.Conic, vm.ConicAnalysisVM.CanonicalEquation);
         }
         else
         {
@@ -82,15 +82,15 @@ public partial class MainWindow : Window
     private void SwitchToLimits()
     {
         _isLimitMode = true;
-        DescView.SwitchToLimits();
+        AnalysisView.SwitchToLimits();
         DefenseView.SwitchToLimits();
         SolutionsView.SwitchToLimits();
         ModeHeader.Text = "LÍMITES";
-        LimitsTable.IsVisible = true;
+        ValuesTableView.IsVisible = true;
 
-        if (DataContext is MainWindowViewModel vm && vm.LimitResult != null)
+        if (DataContext is MainWindowViewModel vm && vm.LimitAnalysisVM.LimitResult != null)
         {
-            GraphicView.UpdateLimitPlot(vm.LimitResult.Condition, vm.LimitResult.CriticalPoint, vm.LimitResult.Digits);
+            GraphicView.UpdateLimitPlot(vm.LimitAnalysisVM.LimitResult.Condition, vm.LimitAnalysisVM.LimitResult.CriticalPoint, vm.LimitAnalysisVM.LimitResult.Digits);
         }
         else
         {
