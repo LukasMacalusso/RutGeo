@@ -36,5 +36,11 @@ public partial class ConicAnalysisViewModel : ViewModelBase
         CanonicalEquation = null;
         ConicTransformationSteps = string.Empty;
         ConicVM.SetExpectedValues(null);
+        ConicVM.Center.UserValue = "";
+        ConicVM.Radius.UserValue = "";
+        ConicVM.Vertices.UserValue = "";
+        ConicVM.Foci.UserValue = "";
+        ConicVM.Axis.UserValue = "";
+        ConicVM.Directrix.UserValue = "";
     }
 }
