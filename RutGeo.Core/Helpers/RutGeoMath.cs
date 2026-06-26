@@ -2,13 +2,13 @@ namespace RutGeo.Core.Helpers;
 
 public static class RutGeoMath
 {
+    private const int TaylorTerms = 10;
+    private const int NewtonIterations = 10;
     public const double PI = 3.14159265358979323846;
     public const double Epsilon = 1e-15;
     public const double NearZeroThreshold = 1e-12;
     public const double GeometryEpsilon = 1e-9;
     public const double InfinityThreshold = 1e15;
-    private const int TaylorTerms = 10;
-    private const int NewtonIterations = 10;
 
     public static double Abs(double x)
     {
