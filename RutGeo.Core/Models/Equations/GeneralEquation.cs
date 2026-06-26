@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using RutGeo.Core.Helpers;
 
 namespace RutGeo.Core.Models.Equations;
 
@@ -29,7 +30,7 @@ public class GeneralEquation
 
     private static void AddTerm(List<string> terms, double coefficient, string? variable)
     {
-        if (coefficient == 0) return;
+        if (RutGeoMath.IsNearZero(coefficient)) return;
         string sign = coefficient < 0 ? " - " : " + ";
         double abs = coefficient < 0 ? -coefficient : coefficient;
         string value = abs == (int)abs ? ((int)abs).ToString() : abs.ToString("0.##");

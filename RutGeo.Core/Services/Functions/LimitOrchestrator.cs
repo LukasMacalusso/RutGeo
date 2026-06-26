@@ -1,3 +1,4 @@
+using System;
 using RutGeo.Core.Helpers;
 using RutGeo.Core.Interfaces.Functions;
 using RutGeo.Core.Models.Results;
@@ -79,7 +80,7 @@ public class LimitOrchestrator : ILimitOrchestrator
             if (RutGeoMath.IsNaN(val)) return "Indefinido";
             return val.ToString("F4");
         }
-        catch
+        catch (DivideByZeroException)
         {
             return "Indefinido";
         }

@@ -9,7 +9,9 @@ public static class TransformationHelper
 
     public static string FormatBracket(char variable, double value)
     {
-        if (value >= 0)
+        if (value == 0)
+            return variable.ToString();
+        if (value > 0)
             return $"({variable} - {FormatNumber(value)})";
         return $"({variable} + {FormatNumber(-value)})";
     }
