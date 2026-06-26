@@ -101,11 +101,11 @@ public partial class ConicDefenseViewModel : ObservableObject
         AxisLabel = "Eje mayor / Eje menor:";
         DirectrixLabel = "Directriz:";
 
-        Center.ExpectedValue = "";
-        Radius.ExpectedValue = "";
-        Vertices.ExpectedValue = "";
-        Foci.ExpectedValue = "";
-        Axis.ExpectedValue = "";
-        Directrix.ExpectedValue = "";
+        Center.Clear();
+        Radius.Clear();
+        Vertices.Clear();
+        Foci.Clear();
+        Axis.Clear();
+        Directrix.Clear();
     }
 }
