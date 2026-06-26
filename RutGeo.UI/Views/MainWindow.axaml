@@ -32,7 +32,7 @@
                     <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
                         <StackPanel Margin="10,5" Spacing="5">
                             <TextBlock Text="ANÁLISIS" FontSize="18" FontWeight="Bold" Foreground="{StaticResource PrimaryLightBrush}" Margin="5,5,0,0" HorizontalAlignment="Left"/>
-                            <v:Description x:Name="DescView" />
+                            <v:Analysis x:Name="AnalysisView" />
                             
                             <Separator Background="{StaticResource BorderBrush}" Height="1" Margin="0,10"/>
                             
@@ -85,7 +85,7 @@
                     <v:Graphic x:Name="GraphicView" />
                 </Border>
                 
-                <v:ValuesTable x:Name="LimitsTable" Grid.Row="2" IsVisible="False" />
+                <v:ValuesTable x:Name="ValuesTableView" Grid.Row="2" IsVisible="False" />
  
             </Grid>
             

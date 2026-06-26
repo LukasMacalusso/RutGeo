@@ -5,7 +5,7 @@ namespace RutGeo.Core.Helpers;
 
 public static class ValueComparer
 {
-    public static bool AreEqual(string user, string expected, double tolerance = 0.5)
+    public static bool AreEqual(string user, string expected, double tolerance = 0.3)
     {
         if (string.IsNullOrWhiteSpace(user))
             return false;

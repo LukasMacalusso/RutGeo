@@ -9,12 +9,11 @@
                 Command="{Binding ClearAllCommand}"
                 Background="{StaticResource DangerBrush}"
                 Foreground="{StaticResource HeaderForegroundBrush}"
-                BorderThickness="0"
                 CornerRadius="3"
                 Margin="0,0,10,0"/>
         <Button x:Name="BtnLimits" Content="Límites" Click="LimitsButton_Click" 
-                Background="{StaticResource InactiveBrush}" Foreground="{StaticResource InactiveForegroundBrush}" BorderThickness="0"/>
+                Background="{StaticResource InactiveBrush}" Foreground="{StaticResource InactiveForegroundBrush}"/>
         <Button x:Name="BtnConics" Content="Cónicas" Click="ConicsButton_Click" 
-                Background="{StaticResource PrimaryLightBrush}" Foreground="{StaticResource HeaderForegroundBrush}" BorderThickness="0" CornerRadius="3"/>
+                Background="{StaticResource PrimaryLightBrush}" Foreground="{StaticResource HeaderForegroundBrush}" CornerRadius="3"/>
     </StackPanel>
 </UserControl>

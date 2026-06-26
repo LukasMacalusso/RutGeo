@@ -10,17 +10,17 @@ public static class ConicPlotter
     {
         if (RutGeoMath.Abs(eq.A) < RutGeoMath.GeometryEpsilon) return;
 
-        double h = -eq.C / (2 * eq.A);
-        double k = -eq.D / (2 * eq.A);
-        double r2 = h * h + k * k - eq.E / eq.A;
+        double centerX = -eq.C / (2 * eq.A);
+        double centerY = -eq.D / (2 * eq.A);
+        double radiusSq = centerX * centerX + centerY * centerY - eq.E / eq.A;
 
-        if (r2 <= RutGeoMath.GeometryEpsilon) return;
+        if (radiusSq <= RutGeoMath.GeometryEpsilon) return;
 
-        double r = RutGeoMath.Sqrt(r2);
-        for (double t = 0; t <= 2 * RutGeoMath.PI; t += 0.02)
+        double radius = RutGeoMath.Sqrt(radiusSq);
+        for (double angle = 0; angle <= 2 * RutGeoMath.PI; angle += 0.02)
         {
-            xs.Add(h + r * RutGeoMath.Cos(t));
-            ys.Add(k + r * RutGeoMath.Sin(t));
+            xs.Add(centerX + radius * RutGeoMath.Cos(angle));
+            ys.Add(centerY + radius * RutGeoMath.Sin(angle));
         }
     }
 
@@ -28,21 +28,21 @@ public static class ConicPlotter
     {
         if (RutGeoMath.Abs(eq.A) < RutGeoMath.GeometryEpsilon || RutGeoMath.Abs(eq.B) < RutGeoMath.GeometryEpsilon) return;
 
-        double eh = -eq.C / (2 * eq.A);
-        double ek = -eq.D / (2 * eq.B);
-        double rhsE = -eq.E + eq.A * eh * eh + eq.B * ek * ek;
+        double centerX = -eq.C / (2 * eq.A);
+        double centerY = -eq.D / (2 * eq.B);
+        double rhs = -eq.E + eq.A * centerX * centerX + eq.B * centerY * centerY;
 
-        if (rhsE <= RutGeoMath.GeometryEpsilon) return;
+        if (rhs <= RutGeoMath.GeometryEpsilon) return;
 
-        double ea = RutGeoMath.Sqrt(rhsE / eq.A);
-        double eb = RutGeoMath.Sqrt(rhsE / eq.B);
+        double semiAxisA = RutGeoMath.Sqrt(rhs / eq.A);
+        double semiAxisB = RutGeoMath.Sqrt(rhs / eq.B);
 
-        if (ea <= RutGeoMath.GeometryEpsilon || eb <= RutGeoMath.GeometryEpsilon) return;
+        if (semiAxisA <= RutGeoMath.GeometryEpsilon || semiAxisB <= RutGeoMath.GeometryEpsilon) return;
 
-        for (double t = 0; t <= 2 * RutGeoMath.PI; t += 0.02)
+        for (double angle = 0; angle <= 2 * RutGeoMath.PI; angle += 0.02)
         {
-            xs.Add(eh + ea * RutGeoMath.Cos(t));
-            ys.Add(ek + eb * RutGeoMath.Sin(t));
+            xs.Add(centerX + semiAxisA * RutGeoMath.Cos(angle));
+            ys.Add(centerY + semiAxisB * RutGeoMath.Sin(angle));
         }
     }
 
@@ -50,23 +50,23 @@ public static class ConicPlotter
     {
         if (RutGeoMath.Abs(eq.A) < RutGeoMath.GeometryEpsilon || RutGeoMath.Abs(eq.B) < RutGeoMath.GeometryEpsilon) return;
 
-        double hh = -eq.C / (2 * eq.A);
-        double hk = -eq.D / (2 * eq.B);
-        double rhsH = -eq.E + eq.A * hh * hh + eq.B * hk * hk;
+        double centerX = -eq.C / (2 * eq.A);
+        double centerY = -eq.D / (2 * eq.B);
+        double rhs = -eq.E + eq.A * centerX * centerX + eq.B * centerY * centerY;
 
-        if (RutGeoMath.Abs(rhsH) < RutGeoMath.GeometryEpsilon) return;
+        if (RutGeoMath.Abs(rhs) < RutGeoMath.GeometryEpsilon) return;
 
-        if (rhsH > 0)
+        if (rhs > 0)
         {
-            double ah = RutGeoMath.Sqrt(rhsH / eq.A);
-            double bh = RutGeoMath.Sqrt(RutGeoMath.Abs(rhsH / eq.B));
+            double semiAxisA = RutGeoMath.Sqrt(rhs / eq.A);
+            double semiAxisB = RutGeoMath.Sqrt(RutGeoMath.Abs(rhs / eq.B));
             for (double t = -1.5; t <= 1.5; t += 0.03)
             {
                 double cosT = RutGeoMath.Cos(t);
                 if (RutGeoMath.Abs(cosT) > 0.01)
                 {
-                    xs.Add(hh + ah / cosT);
-                    ys.Add(hk + bh * RutGeoMath.Tan(t));
+                    xs.Add(centerX + semiAxisA / cosT);
+                    ys.Add(centerY + semiAxisB * RutGeoMath.Tan(t));
                 }
             }
             xs.Add(double.NaN);
@@ -76,22 +76,22 @@ public static class ConicPlotter
                 double cosT = RutGeoMath.Cos(t);
                 if (RutGeoMath.Abs(cosT) > 0.01)
                 {
-                    xs.Add(hh - ah / cosT);
-                    ys.Add(hk + bh * RutGeoMath.Tan(t));
+                    xs.Add(centerX - semiAxisA / cosT);
+                    ys.Add(centerY + semiAxisB * RutGeoMath.Tan(t));
                 }
             }
         }
         else
         {
-            double ah = RutGeoMath.Sqrt(RutGeoMath.Abs(rhsH / eq.A));
-            double bh = RutGeoMath.Sqrt(RutGeoMath.Abs(rhsH / eq.B));
+            double semiAxisA = RutGeoMath.Sqrt(RutGeoMath.Abs(rhs / eq.A));
+            double semiAxisB = RutGeoMath.Sqrt(RutGeoMath.Abs(rhs / eq.B));
             for (double t = -1.5; t <= 1.5; t += 0.03)
             {
                 double cosT = RutGeoMath.Cos(t);
                 if (RutGeoMath.Abs(cosT) > 0.01)
                 {
-                    xs.Add(hh + ah * RutGeoMath.Tan(t));
-                    ys.Add(hk + bh / cosT);
+                    xs.Add(centerX + semiAxisA * RutGeoMath.Tan(t));
+                    ys.Add(centerY + semiAxisB / cosT);
                 }
             }
             xs.Add(double.NaN);
@@ -101,8 +101,8 @@ public static class ConicPlotter
                 double cosT = RutGeoMath.Cos(t);
                 if (RutGeoMath.Abs(cosT) > 0.01)
                 {
-                    xs.Add(hh + ah * RutGeoMath.Tan(t));
-                    ys.Add(hk - bh / cosT);
+                    xs.Add(centerX + semiAxisA * RutGeoMath.Tan(t));
+                    ys.Add(centerY - semiAxisB / cosT);
                 }
             }
         }

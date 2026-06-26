@@ -10,38 +10,38 @@
             <Border Background="{StaticResource InfoBackgroundBrush}" CornerRadius="4" Padding="10">
                 <StackPanel Spacing="6">
                     <StackPanel>
-                        <TextBlock Text="{Binding ConicVM.CenterLabel}" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
-                        <TextBlock Text="{Binding ConicVM.Center.ExpectedValue}" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding ConicAnalysisVM.ConicVM.CenterLabel}" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
+                        <TextBlock Text="{Binding ConicAnalysisVM.ConicVM.Center.ExpectedValue}" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold"/>
                     </StackPanel>
                     <Separator Background="{StaticResource BorderBrush}" Height="1"/>
 
-                    <StackPanel IsVisible="{Binding ConicVM.Radius.IsVisible}">
+                    <StackPanel IsVisible="{Binding ConicAnalysisVM.ConicVM.Radius.IsVisible}">
                         <TextBlock Text="Radio:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
-                        <TextBlock Text="{Binding ConicVM.Radius.ExpectedValue}" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding ConicAnalysisVM.ConicVM.Radius.ExpectedValue}" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold"/>
                     </StackPanel>
-                    <Separator IsVisible="{Binding ConicVM.Radius.IsVisible}" Background="{StaticResource BorderBrush}" Height="1"/>
+                    <Separator IsVisible="{Binding ConicAnalysisVM.ConicVM.Radius.IsVisible}" Background="{StaticResource BorderBrush}" Height="1"/>
 
-                    <StackPanel IsVisible="{Binding ConicVM.Vertices.IsVisible}">
+                    <StackPanel IsVisible="{Binding ConicAnalysisVM.ConicVM.Vertices.IsVisible}">
                         <TextBlock Text="Vértices:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
-                        <TextBlock Text="{Binding ConicVM.Vertices.ExpectedValue}" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold" TextWrapping="Wrap"/>
+                        <TextBlock Text="{Binding ConicAnalysisVM.ConicVM.Vertices.ExpectedValue}" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold" TextWrapping="Wrap"/>
                     </StackPanel>
-                    <Separator IsVisible="{Binding ConicVM.Vertices.IsVisible}" Background="{StaticResource BorderBrush}" Height="1"/>
+                    <Separator IsVisible="{Binding ConicAnalysisVM.ConicVM.Vertices.IsVisible}" Background="{StaticResource BorderBrush}" Height="1"/>
 
-                    <StackPanel IsVisible="{Binding ConicVM.Foci.IsVisible}">
+                    <StackPanel IsVisible="{Binding ConicAnalysisVM.ConicVM.Foci.IsVisible}">
                         <TextBlock Text="Focos:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
-                        <TextBlock Text="{Binding ConicVM.Foci.ExpectedValue}" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold" TextWrapping="Wrap"/>
+                        <TextBlock Text="{Binding ConicAnalysisVM.ConicVM.Foci.ExpectedValue}" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold" TextWrapping="Wrap"/>
                     </StackPanel>
-                    <Separator IsVisible="{Binding ConicVM.Foci.IsVisible}" Background="{StaticResource BorderBrush}" Height="1"/>
+                    <Separator IsVisible="{Binding ConicAnalysisVM.ConicVM.Foci.IsVisible}" Background="{StaticResource BorderBrush}" Height="1"/>
 
-                    <StackPanel IsVisible="{Binding ConicVM.Axis.IsVisible}">
-                        <TextBlock Text="{Binding ConicVM.AxisLabel}" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
-                        <TextBlock Text="{Binding ConicVM.Axis.ExpectedValue}" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold" TextWrapping="Wrap"/>
+                    <StackPanel IsVisible="{Binding ConicAnalysisVM.ConicVM.Axis.IsVisible}">
+                        <TextBlock Text="{Binding ConicAnalysisVM.ConicVM.AxisLabel}" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
+                        <TextBlock Text="{Binding ConicAnalysisVM.ConicVM.Axis.ExpectedValue}" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold" TextWrapping="Wrap"/>
                     </StackPanel>
-                    <Separator IsVisible="{Binding ConicVM.Axis.IsVisible}" Background="{StaticResource BorderBrush}" Height="1"/>
+                    <Separator IsVisible="{Binding ConicAnalysisVM.ConicVM.Axis.IsVisible}" Background="{StaticResource BorderBrush}" Height="1"/>
 
-                    <StackPanel IsVisible="{Binding ConicVM.Directive.IsVisible}">
-                        <TextBlock Text="{Binding ConicVM.DirectrixLabel}" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
-                        <TextBlock Text="{Binding ConicVM.Directive.ExpectedValue}" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold" TextWrapping="Wrap"/>
+                    <StackPanel IsVisible="{Binding ConicAnalysisVM.ConicVM.Directrix.IsVisible}">
+                        <TextBlock Text="{Binding ConicAnalysisVM.ConicVM.DirectrixLabel}" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
+                        <TextBlock Text="{Binding ConicAnalysisVM.ConicVM.Directrix.ExpectedValue}" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold" TextWrapping="Wrap"/>
                     </StackPanel>
                 </StackPanel>
             </Border>
@@ -51,31 +51,31 @@
             <Border Background="{StaticResource InfoBackgroundBrush}" CornerRadius="4" Padding="10">
                 <StackPanel Spacing="6">
                     <TextBlock Text="Límite por la izquierda:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
-                    <TextBlock Text="{Binding LimitVM.LeftLimit.ExpectedValue}" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding LimitAnalysisVM.LimitVM.LeftLimit.ExpectedValue}" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold"/>
                     <Separator Background="{StaticResource BorderBrush}" Height="1"/>
 
                     <TextBlock Text="Límite por la derecha:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
-                    <TextBlock Text="{Binding LimitVM.RightLimit.ExpectedValue}" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding LimitAnalysisVM.LimitVM.RightLimit.ExpectedValue}" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold"/>
                     <Separator Background="{StaticResource BorderBrush}" Height="1"/>
 
                     <TextBlock Text="¿Existe el límite?:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
-                    <TextBlock Text="{Binding LimitVM.LimitExists.ExpectedValue}" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding LimitAnalysisVM.LimitVM.LimitExists.ExpectedValue}" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold"/>
                     <Separator Background="{StaticResource BorderBrush}" Height="1"/>
 
                     <TextBlock Text="Valor de f(a):" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
-                    <TextBlock Text="{Binding LimitVM.ValueFA.ExpectedValue}" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding LimitAnalysisVM.LimitVM.ValueFA.ExpectedValue}" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold"/>
                     <Separator Background="{StaticResource BorderBrush}" Height="1"/>
 
                     <TextBlock Text="¿Es continua?:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
-                    <TextBlock Text="{Binding LimitVM.Continuous.ExpectedValue}" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding LimitAnalysisVM.LimitVM.Continuous.ExpectedValue}" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold"/>
                     <Separator Background="{StaticResource BorderBrush}" Height="1"/>
 
                     <TextBlock Text="Tipo de discontinuidad:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
-                    <TextBlock Text="{Binding LimitVM.Discontinuity.ExpectedValue}" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding LimitAnalysisVM.LimitVM.Discontinuity.ExpectedValue}" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold"/>
                     <Separator Background="{StaticResource BorderBrush}" Height="1"/>
 
                     <TextBlock Text="Justificación:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
-                    <TextBlock Text="{Binding LimitVM.ExpectedJustification}" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold" TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding LimitAnalysisVM.LimitVM.ExpectedJustification}" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold" TextWrapping="Wrap"/>
                 </StackPanel>
             </Border>
         </StackPanel>

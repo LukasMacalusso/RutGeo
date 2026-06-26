@@ -28,7 +28,8 @@ RutGeo/
 | `Interfaces/Functions/ILimitOrchestrator.cs` | Interface | Contrato: `Execute(RutValidatorResult)` -> `LimitOrchestrationResult` |
 | `Services/Validation/RutValidator.cs` | Servicio | Valida RUT chileno (módulo 11), normaliza entrada, extrae cuerpo y dígito verificador |
 | `Services/Generators/RutEquationGenerator.cs` | Servicio | Genera ecuación general Ax²+By²+Cx+Dy+E=0 a partir de los dígitos del RUT |
-| `Services/Conics/EquationTransformer.cs` | Servicio | Transforma ecuación general a canónica y viceversa para círculo, elipse, hipérbola y parábola. Registra cada paso en el logger |
+| `Services/Conics/ToCanonicalTransformer.cs` | Servicio | Transforma ecuación general → canónica para cada tipo de cónica. Registra pasos en el logger |
+| `Services/Conics/ToGeneralTransformer.cs` | Servicio | Transforma ecuación canónica → general (inversa) |
 | `Services/Conics/ConicElementsFactory.cs` | Servicio | Crea objetos con propiedades geométricas de cada cónica (centro, vértices, focos, radios, excentricidad, etc.) |
 | `Services/Functions/FunctionAnalyzer.cs` | Servicio | Analiza la función de límites según los dígitos del RUT: determina tipo de discontinuidad, límites laterales, expresión. Expone `EvaluateAt()` estático |
 | `Services/Common/ExplanationLogger.cs` | Servicio | Implementación con StringBuilder del logger incremental de pasos |
@@ -53,21 +54,27 @@ RutGeo/
 | `App.axaml.cs` | DI | Configura contenedor de dependencias, registra servicios e interfaces |
 | `ViewLocator.cs` | View | Resuelve View a partir de ViewModel por convención de nombres |
 | `ViewModels/ViewModelBase.cs` | ViewModel | Clase base abstracta (ObservableObject) |
-| `ViewModels/MainWindowViewModel.cs` | ViewModel | VM principal: valida RUT, llama a orquestadores, bindea propiedades, comandos Analyze/ClearAll/CorroborateAll/ToggleSolutions |
+| `ViewModels/MainWindowViewModel.cs` | ViewModel | VM principal: valida RUT, orquesta los VMs hijos (ConicAnalysisVM, LimitAnalysisVM), comandos Analyze/ClearAll/CorroborateAll/ToggleSolutions |
+| `ViewModels/ConicAnalysisViewModel.cs` | ViewModel | VM hijo de cónicas: bindea GeneralEquation, Conic, CanonicalEquation, pasos de transformación. Contiene ConicDefenseViewModel |
+| `ViewModels/LimitAnalysisViewModel.cs` | ViewModel | VM hijo de límites: bindea resultado del análisis, descripción, expresión, tabla de valores laterales. Contiene LimitDefenseViewModel |
 | `ViewModels/ConicDefenseViewModel.cs` | ViewModel | Panel de defensa de cónicas: campos para que el alumno ingrese centro, vértices, focos, ejes, directriz y corrobora |
 | `ViewModels/LimitDefenseViewModel.cs` | ViewModel | Panel de defensa de límites: campos para límites laterales, existencia, f(a), continuidad, tipo y corrobora |
+| `ViewModels/DefenseField.cs` | ViewModel | Clase reutilizable ObservableObject con UserValue/ExpectedValue/Status/IsVisible + método Corroborate() |
 | `ViewModels/ValuePoint.cs` | ViewModel | DTO para tabla de valores: X (double), Fx (string formateado) |
 | `Views/MainWindow.axaml.cs` | View | Window principal: maneja modo cónicas/límites, toggle paneles, actualiza gráfico al cambiar propiedades del VM |
-| `Views/Graphic.axaml.cs` | View | Renderiza curvas cónicas y funciones de límite vía ScottPlot. Divide segmentos por NaN |
+| `Views/Graphic.axaml.cs` | View | View del gráfico ScottPlot. Delega renderizado a ConicPlotService y LimitPlotService |
+| `Views/Analysis.axaml.cs` | View | Panel de análisis del caso (cónica o límite). Switchea visibilidad. Renombrado desde Description |
+| `Views/Defense.axaml.cs` | View | Panel de defensa. Switchea entre conic-defense y limit-defense |
+| `Views/Solutions.axaml.cs` | View | Panel de soluciones. Switchea visibilidad |
 | `Views/Mode.axaml.cs` | View | Botones de selector: Cónicas / Límites |
 | `Views/RutInputView.axaml.cs` | View | Input de RUT + botón toggle del log |
 | `Views/RutLog.axaml.cs` | View | Panel del log de explicaciones |
-| `Views/Description.axaml.cs` | View | Panel de descripción del caso (cónica o límite). Switchea visibilidad |
-| `Views/Defense.axaml.cs` | View | Panel de defensa. Switchea entre conic-defense y limit-defense |
-| `Views/Solutions.axaml.cs` | View | Panel de soluciones. Switchea visibilidad |
 | `Views/ValuesTable.axaml.cs` | View | Tabla de valores laterales con botón mostrar/ocultar |
-| `Helpers/ConicPlotter.cs` | Helper | Genera puntos (x,y) paramétricos para graficar cada tipo de cónica |
-| `Helpers/LimitPlotter.cs` | Helper | Genera puntos (x,y) para graficar la función de límites (3 casos) |
+| `Helpers/ConicPlotter.cs` | Helper | Genera puntos (x,y) paramétricos para graficar cada tipo de cónica (cálculo puro, sin ScottPlot) |
+| `Helpers/LimitPlotter.cs` | Helper | Genera puntos (x,y) para graficar la función de límites (3 casos). Cálculo puro sin ScottPlot |
+| `Helpers/ConicPlotService.cs` | Helper | Renderiza curvas cónicas en AvaPlot: llama a ConicPlotter, segmenta por NaN, autoescala |
+| `Helpers/LimitPlotService.cs` | Helper | Renderiza funciones de límite en AvaPlot: llama a LimitPlotter, autoescala |
+| `Helpers/PlotRenderer.cs` | Helper | Extension methods de AvaPlot: DrawAxes(), AddScatterNoMarkers(), ClearAndReset() |
 
 ## Reglas del proyecto
 

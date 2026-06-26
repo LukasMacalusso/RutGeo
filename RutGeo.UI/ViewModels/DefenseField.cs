@@ -12,6 +12,12 @@ public partial class DefenseField : ObservableObject
 
     public void Corroborate()
     {
-        Status = IsVisible ? (ValueComparer.AreEqual(UserValue, ExpectedValue) ? "✓" : "✗") : "✓";
+        if (!IsVisible)
+        {
+            Status = "✓";
+            return;
+        }
+
+        Status = ValueComparer.AreEqual(UserValue, ExpectedValue) ? "✓" : "✗";
     }
 }

@@ -21,14 +21,12 @@
                             Command="{Binding AnalyzeCommand}"
                             Background="{StaticResource PrimaryLightBrush}" 
                             Foreground="{StaticResource HeaderForegroundBrush}" 
-                            BorderThickness="0" 
                             CornerRadius="3" 
                             VerticalAlignment="Center"/>
 
                     <Button Click="ToggleLogButton_Click"
                             Background="{StaticResource PrimaryLightBrush}" 
                             Foreground="{StaticResource HeaderForegroundBrush}" 
-                            BorderThickness="0"
                             Cursor="Hand"
                             VerticalAlignment="Center"> 
                         <Image Source="/Assets/eye-symbol.png" Width="24" Height="17" />

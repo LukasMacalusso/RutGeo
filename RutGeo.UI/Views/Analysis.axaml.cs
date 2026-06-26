@@ -2,9 +2,9 @@ using Avalonia.Controls;
 
 namespace RutGeo.UI.Views;
 
-public partial class Description : UserControl
+public partial class Analysis : UserControl
 {
-    public Description()
+    public Analysis()
     {
         InitializeComponent();
     }
