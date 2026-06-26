@@ -42,7 +42,8 @@ public class ConicOrchestrator : IConicOrchestrator
             : afterFwdLog.TrimStart();
 
         int logBeforeInv = _log.GetFullLog().Length;
-        _toGeneralTransformer.TransformToGeneral(result.CanonicalEquation, result.Conic);
+        if (result.CanonicalEquation?.Elements != null)
+            _toGeneralTransformer.TransformToGeneral(result.CanonicalEquation, result.Conic);
         string afterInvLog = _log.GetFullLog();
         string inverseSteps = afterInvLog.Length > logBeforeInv
             ? afterInvLog.Substring(logBeforeInv).TrimStart()

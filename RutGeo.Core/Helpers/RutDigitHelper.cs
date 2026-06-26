@@ -11,6 +11,5 @@ public static class RutDigitHelper
         return digits;
     }
 
-    public static int GetD8(int[] digits) => digits[7];
     public static int GetLimitCondition(int d8) => d8 % 3;
 }

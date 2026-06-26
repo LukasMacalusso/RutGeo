@@ -26,13 +26,14 @@ public class ToGeneralTransformer : IToGeneralTransformer
             ConicType.Elipse => InverseEllipse(canonicalEquation),
             ConicType.Hyperbola => InverseHyperbola(canonicalEquation),
             ConicType.Parabola => InverseParabola(canonicalEquation),
+            ConicType.Desconocida => conic.GeneralEquation,
             _ => throw new NotImplementedException()
         };
     }
 
     private GeneralEquation InverseCircle(CanonicalEquation canon)
     {
-        var c = (CircleElements)canon.Elements!;
+        if (canon.Elements is not CircleElements c) return new GeneralEquation();
         double h = c.Center!.X;
         double k = c.Center.Y;
         double r = c.Radius;
@@ -58,7 +59,7 @@ public class ToGeneralTransformer : IToGeneralTransformer
 
     private GeneralEquation InverseEllipse(CanonicalEquation canon)
     {
-        var e = (EllipseElements)canon.Elements!;
+        if (canon.Elements is not EllipseElements e) return new GeneralEquation();
         double h = e.Center!.X;
         double k = e.Center.Y;
         double a = e.MajorAxisLength / 2;
@@ -106,7 +107,7 @@ public class ToGeneralTransformer : IToGeneralTransformer
 
     private GeneralEquation InverseHyperbola(CanonicalEquation canon)
     {
-        var h = (HyperbolaElements)canon.Elements!;
+        if (canon.Elements is not HyperbolaElements h) return new GeneralEquation();
         double hc = h.Center!.X;
         double k = h.Center.Y;
         double a = h.TransverseAxisLength / 2;
@@ -154,7 +155,7 @@ public class ToGeneralTransformer : IToGeneralTransformer
 
     private GeneralEquation InverseParabola(CanonicalEquation canon)
     {
-        var p = (ParabolaElements)canon.Elements!;
+        if (canon.Elements is not ParabolaElements p) return new GeneralEquation();
         double h = p.Vertex.X;
         double k = p.Vertex.Y;
         double focal = p.FocalDistance;

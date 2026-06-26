@@ -1,9 +1,9 @@
-using System.Collections.Generic;
-
 namespace RutGeo.Core.Helpers;
 
 public static class RutGeoMath
 {
+    private const int TaylorTerms = 10;
+    private const int NewtonIterations = 10;
     public const double PI = 3.14159265358979323846;
     public const double Epsilon = 1e-15;
     public const double NearZeroThreshold = 1e-12;
@@ -21,10 +21,8 @@ public static class RutGeoMath
         if (x < Epsilon) return 0;
 
         double guess = x;
-        for (int i = 0; i < 10; i++)
-        {
+        for (int i = 0; i < NewtonIterations; i++)
             guess = (guess + x / guess) / 2;
-        }
         return guess;
     }
 
@@ -33,7 +31,7 @@ public static class RutGeoMath
         x = ReduceAngle(x);
         double term = x;
         double sum = x;
-        for (int n = 1; n < 10; n++)
+        for (int n = 1; n < TaylorTerms; n++)
         {
             term *= -x * x / ((2 * n) * (2 * n + 1));
             sum += term;
@@ -46,7 +44,7 @@ public static class RutGeoMath
         x = ReduceAngle(x);
         double term = 1;
         double sum = 1;
-        for (int n = 1; n < 10; n++)
+        for (int n = 1; n < TaylorTerms; n++)
         {
             term *= -x * x / ((2 * n - 1) * (2 * n));
             sum += term;
