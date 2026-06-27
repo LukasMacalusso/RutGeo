@@ -65,10 +65,6 @@ public class ToCanonicalTransformer : IToCanonicalTransformer
 
         _log.AppendStep("Completar cuadrados para x e y.");
         _log.AppendEquation($"(x + {TransformationHelper.FormatNumber(eq.C / (2 * eq.A))})² + (y + {TransformationHelper.FormatNumber(eq.D / (2 * eq.A))})² = {TransformationHelper.FormatNumber(r2)}");
-
-        _log.AppendStep("Identificar centro (h, k) y radio al cuadrado (r²).");
-        _log.AppendStep($"Centro: ({TransformationHelper.FormatNumber(h)}, {TransformationHelper.FormatNumber(k)})");
-        _log.AppendStep($"Radio: {TransformationHelper.FormatNumber(RutGeoMath.Sqrt(r2))}");
     }
 
 

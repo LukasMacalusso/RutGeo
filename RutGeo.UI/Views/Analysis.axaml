@@ -30,11 +30,6 @@
             </StackPanel>
 
             <StackPanel x:Name="LimitContent" IsVisible="False" Spacing="8">
-                <TextBlock Text="Caso generado desde RUT:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
-                <Border Background="{StaticResource InfoBackgroundBrush}" CornerRadius="4" Padding="10">
-                    <TextBlock Text="{Binding LimitAnalysisVM.LimitCaseDescription}" FontSize="14" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold" TextWrapping="Wrap"/>
-                </Border>
-
                 <TextBlock Text="Función por tramos:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
                 <Border Background="{StaticResource InfoBackgroundBrush}" CornerRadius="4" Padding="10">
                     <TextBlock Text="{Binding LimitAnalysisVM.LimitFunctionExpression}" FontSize="14" Foreground="{StaticResource AccentForegroundBrush}" FontWeight="Bold" TextWrapping="Wrap"/>
