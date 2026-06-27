@@ -29,13 +29,13 @@ public class RutEquationGenerator : IRutEquationGenerator
         _log.AppendStep($"B = (d₃ + d₄) / v = ({d[2]} + {d[3]}) / {validationModulo} = {(d[2] + d[3]) / (double)validationModulo:F4}");
         _log.AppendStep($"C = -(d₅ + d₆) = -({d[4]} + {d[5]}) = {-(d[4] + d[5])}");
         _log.AppendStep($"D = -(d₇ + d₈) = -({d[6]} + {d[7]}) = {-(d[6] + d[7])}");
-        _log.AppendStep($"E = -(d₁ + d₃ + d₅ + d₇) = -({d[0]} + {d[2]} + {d[4]} + {d[6]}) = {-(d[0] + d[2] + d[4] + d[6])}");
+        _log.AppendStep($"E = d₁ + d₃ + d₅ + d₇ = {d[0]} + {d[2]} + {d[4]} + {d[6]} = {d[0] + d[2] + d[4] + d[6]}");
 
         double a = (double)(d[0] + d[1]) / validationModulo;
         double b = (double)(d[2] + d[3]) / validationModulo;
         double c = -(d[4] + d[5]);
         double dd = -(d[6] + d[7]);
-        double e = -(d[0] + d[2] + d[4] + d[6]);
+        double e = d[0] + d[2] + d[4] + d[6];
 
         _log.AppendStep("");
         _log.AppendStep("--- Aplicando reglas de ajuste ---");
