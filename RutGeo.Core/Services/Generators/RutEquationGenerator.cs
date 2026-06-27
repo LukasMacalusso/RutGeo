@@ -86,5 +86,4 @@ public class RutEquationGenerator : IRutEquationGenerator
             _ => (int)char.GetNumericValue(dv)
         };
     }
-
 }
