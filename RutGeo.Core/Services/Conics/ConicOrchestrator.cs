@@ -29,16 +29,16 @@ public class ConicOrchestrator : IConicOrchestrator
     {
         var result = new ConicOrchestrationResult();
 
+        int logBeforeGen = _log.GetFullLog().Length;
         result.GeneralEquation = _equationGenerator.GenerateGeneralEquation(validatorResult);
         if (result.GeneralEquation == null)
             return result;
 
-        int logBeforeFwd = _log.GetFullLog().Length;
         result.Conic = new Conic(result.GeneralEquation);
         result.CanonicalEquation = _toCanonicalTransformer.TransformToCanonical(result.GeneralEquation, result.Conic);
         string afterFwdLog = _log.GetFullLog();
-        string canonicalSteps = afterFwdLog.Length > logBeforeFwd
-            ? afterFwdLog.Substring(logBeforeFwd).TrimStart()
+        string canonicalSteps = afterFwdLog.Length > logBeforeGen
+            ? afterFwdLog.Substring(logBeforeGen).TrimStart()
             : afterFwdLog.TrimStart();
 
         int logBeforeInv = _log.GetFullLog().Length;

@@ -1,3 +1,4 @@
+using RutGeo.Core.Helpers;
 using RutGeo.Core.Models.Types;
 using RutGeo.Core.Models.Equations;
 
@@ -11,11 +12,11 @@ public class Conic
     {
         get
         {
-            if (GeneralEquation.A != 0 && GeneralEquation.B == 0 && GeneralEquation.D != 0) return ConicType.Parabola;
-            if (GeneralEquation.A == 0 && GeneralEquation.B != 0 && GeneralEquation.C != 0) return ConicType.Parabola;
+            if (!RutGeoMath.IsNearZero(GeneralEquation.A) && RutGeoMath.IsNearZero(GeneralEquation.B) && !RutGeoMath.IsNearZero(GeneralEquation.D)) return ConicType.Parabola;
+            if (RutGeoMath.IsNearZero(GeneralEquation.A) && !RutGeoMath.IsNearZero(GeneralEquation.B) && !RutGeoMath.IsNearZero(GeneralEquation.C)) return ConicType.Parabola;
 
             if (GeneralEquation.A * GeneralEquation.B < 0) return ConicType.Hyperbola;
-            if (GeneralEquation.A == GeneralEquation.B && GeneralEquation.A != 0) return ConicType.Circunferencia;
+            if (RutGeoMath.IsNearZero(GeneralEquation.A - GeneralEquation.B) && !RutGeoMath.IsNearZero(GeneralEquation.A)) return ConicType.Circunferencia;
             if (GeneralEquation.A * GeneralEquation.B > 0) return ConicType.Elipse;
 
             return ConicType.Desconocida;
