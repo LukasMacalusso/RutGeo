@@ -103,109 +103,114 @@ public class ConicPlotService
     {
         if (elements == null) return;
         
-        var mainColor = Colors.Red;
-        var subColor = Colors.Orange;
+        RenderCenterIfPresent(elements.Center);
+
+        switch (elements)
+        {
+            case EllipseElements ellipse:
+                RenderEllipseElements(ellipse);
+                break;
+            case ParabolaElements parabola:
+                RenderParabolaElements(parabola);
+                break;
+            case HyperbolaElements hyperbola:
+                RenderHyperbolaElements(hyperbola);
+                break;
+        }
+    }
+
+    private void RenderCenterIfPresent(Point2D? center)
+    {
+        if (center != null)
+            AddMarker(center.X, center.Y, Colors.Red, MarkerShape.FilledCircle);
+    }
+
+    private void RenderEllipseElements(EllipseElements ellipse)
+    {
+        RenderPoints(ellipse.Foci, Colors.Orange, MarkerShape.OpenCircle);
+        RenderPoints(ellipse.MajorVertices, Colors.Red, MarkerShape.FilledCircle);
+        RenderPoints(ellipse.MinorVertices, Colors.Red, MarkerShape.FilledCircle);
+    }
+
+    private void RenderParabolaElements(ParabolaElements parabola)
+    {
+        AddMarker(parabola.Vertex.X, parabola.Vertex.Y, Colors.Red, MarkerShape.FilledCircle);
+        AddMarker(parabola.Focus.X, parabola.Focus.Y, Colors.Orange, MarkerShape.OpenCircle);
         
-        if (elements.Center != null)
-        {
-            var m = _plot.Plot.Add.Marker(elements.Center.X, elements.Center.Y);
-            m.Color = mainColor;
-            m.Shape = MarkerShape.FilledCircle;
-        }
+        DrawLine2D(parabola.Directrix, Colors.Gray);
+        RenderLatusRectum(parabola);
+    }
 
-        if (elements is EllipseElements ellipse)
-        {
-            foreach (var f in ellipse.Foci)
-            {
-                var m = _plot.Plot.Add.Marker(f.X, f.Y);
-                m.Color = subColor;
-                m.Shape = MarkerShape.OpenCircle;
-            }
-            foreach (var v in ellipse.MajorVertices)
-            {
-                var m = _plot.Plot.Add.Marker(v.X, v.Y);
-                m.Color = mainColor;
-                m.Shape = MarkerShape.FilledCircle;
-            }
-            foreach (var v in ellipse.MinorVertices)
-            {
-                var m = _plot.Plot.Add.Marker(v.X, v.Y);
-                m.Color = mainColor;
-                m.Shape = MarkerShape.FilledCircle;
-            }
-        }
-        else if (elements is ParabolaElements parabola)
-        {
-            var m = _plot.Plot.Add.Marker(parabola.Vertex.X, parabola.Vertex.Y);
-            m.Color = mainColor;
-            m.Shape = MarkerShape.FilledCircle;
+    private void RenderLatusRectum(ParabolaElements parabola)
+    {
+        double halfLatusRectum = 2 * RutGeoMath.Abs(parabola.FocalDistance);
+        bool isVerticalParabola = RutGeoMath.Abs(parabola.AxisOfSymmetry.A) > 0.5;
 
-            var f = _plot.Plot.Add.Marker(parabola.Focus.X, parabola.Focus.Y);
-            f.Color = subColor;
-            f.Shape = MarkerShape.OpenCircle;
-
-            DrawLine2D(parabola.Directrix, Colors.Gray);
-            
-            double halfLr = 2 * RutGeoMath.Abs(parabola.FocalDistance);
-            if (RutGeoMath.Abs(parabola.AxisOfSymmetry.A) > 0.5)
-            {
-                var lr = _plot.Plot.Add.Line(parabola.Focus.X - halfLr, parabola.Focus.Y, parabola.Focus.X + halfLr, parabola.Focus.Y);
-                lr.Color = Colors.Blue;
-                lr.LinePattern = LinePattern.Dashed;
-            }
-            else
-            {
-                var lr = _plot.Plot.Add.Line(parabola.Focus.X, parabola.Focus.Y - halfLr, parabola.Focus.X, parabola.Focus.Y + halfLr);
-                lr.Color = Colors.Blue;
-                lr.LinePattern = LinePattern.Dashed;
-            }
-        }
-        else if (elements is HyperbolaElements hyperbola)
+        if (isVerticalParabola)
         {
-            foreach (var f in hyperbola.Foci)
-            {
-                var m = _plot.Plot.Add.Marker(f.X, f.Y);
-                m.Color = subColor;
-                m.Shape = MarkerShape.OpenCircle;
-            }
-            foreach (var v in hyperbola.Vertices)
-            {
-                var m = _plot.Plot.Add.Marker(v.X, v.Y);
-                m.Color = mainColor;
-                m.Shape = MarkerShape.FilledCircle;
-            }
-            foreach (var asympt in hyperbola.Asymptotes)
-            {
-                DrawLine2D(asympt, Colors.Gray);
-            }
+            DrawDashedLine(parabola.Focus.X - halfLatusRectum, parabola.Focus.Y, 
+                           parabola.Focus.X + halfLatusRectum, parabola.Focus.Y, Colors.Blue);
         }
+        else
+        {
+            DrawDashedLine(parabola.Focus.X, parabola.Focus.Y - halfLatusRectum, 
+                           parabola.Focus.X, parabola.Focus.Y + halfLatusRectum, Colors.Blue);
+        }
+    }
+
+    private void RenderHyperbolaElements(HyperbolaElements hyperbola)
+    {
+        RenderPoints(hyperbola.Foci, Colors.Orange, MarkerShape.OpenCircle);
+        RenderPoints(hyperbola.Vertices, Colors.Red, MarkerShape.FilledCircle);
+
+        foreach (var asymptote in hyperbola.Asymptotes)
+            DrawLine2D(asymptote, Colors.Gray);
+    }
+
+    private void RenderPoints(IEnumerable<Point2D> points, Color color, MarkerShape shape)
+    {
+        foreach (var point in points)
+            AddMarker(point.X, point.Y, color, shape);
+    }
+
+    private void AddMarker(double x, double y, Color color, MarkerShape shape)
+    {
+        var marker = _plot.Plot.Add.Marker(x, y);
+        marker.Color = color;
+        marker.Shape = shape;
+    }
+
+    private void DrawDashedLine(double x1, double y1, double x2, double y2, Color color)
+    {
+        var line = _plot.Plot.Add.Line(x1, y1, x2, y2);
+        line.Color = color;
+        line.LinePattern = LinePattern.Dashed;
     }
 
     private void DrawLine2D(Line2D line, Color color)
     {
-        
-        if (RutGeoMath.Abs(line.B) < 0.0001)
+        bool isVerticalLine = RutGeoMath.Abs(line.B) < 0.0001;
+
+        if (isVerticalLine)
         {
-            
-            if (RutGeoMath.Abs(line.A) > 0.0001)
+            bool isValidEquation = RutGeoMath.Abs(line.A) > 0.0001;
+            if (isValidEquation)
             {
                 double x = -line.C / line.A;
-                var vl = _plot.Plot.Add.VerticalLine(x);
-                vl.Color = color;
-                vl.LinePattern = LinePattern.Dashed;
+                var verticalLine = _plot.Plot.Add.VerticalLine(x);
+                verticalLine.Color = color;
+                verticalLine.LinePattern = LinePattern.Dashed;
             }
         }
         else
         {
+            double leftBoundaryX = -10000;
+            double leftBoundaryY = (-line.A * leftBoundaryX - line.C) / line.B;
             
-            double x1 = -10000;
-            double y1 = (-line.A * x1 - line.C) / line.B;
-            double x2 = 10000;
-            double y2 = (-line.A * x2 - line.C) / line.B;
+            double rightBoundaryX = 10000;
+            double rightBoundaryY = (-line.A * rightBoundaryX - line.C) / line.B;
             
-            var l = _plot.Plot.Add.Line(x1, y1, x2, y2);
-            l.Color = color;
-            l.LinePattern = LinePattern.Dashed;
+            DrawDashedLine(leftBoundaryX, leftBoundaryY, rightBoundaryX, rightBoundaryY, color);
         }
     }
 }
