@@ -44,6 +44,7 @@ public class HyperbolaElements : ConicElements
 {
     public required List<Point2D> Foci { get; init; } = new();
     public required List<Point2D> Vertices { get; init; } = new();
+    public required List<Point2D> CoVertices { get; init; } = new();
     public required List<Line2D> Asymptotes { get; init; } = new();
     public required double TransverseAxisLength { get; init; }
     public required double ConjugateAxisLength { get; init; }
