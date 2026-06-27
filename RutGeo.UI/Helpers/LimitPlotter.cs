@@ -9,7 +9,7 @@ public static class LimitPlotter
     {
         if (digits.Length < 5) return;
 
-        double range = 5;
+        double range = 1000;
         double step = 0.02;
 
         if (condition == 0)

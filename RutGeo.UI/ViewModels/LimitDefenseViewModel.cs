@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using RutGeo.Core.Models.Results;
 using RutGeo.Core.Models.Types;
 
@@ -36,14 +37,38 @@ public partial class LimitDefenseViewModel : ObservableObject
     {
         _expected = result;
 
-        LeftLimit.ExpectedValue = result?.LeftLimit ?? "";
-        RightLimit.ExpectedValue = result?.RightLimit ?? "";
-        LimitExists.ExpectedValue = result != null ? (result.LimitExists ? "Sí" : "No") : "";
-        ValueFA.ExpectedValue = result?.FunctionValueAtCriticalPoint ?? "";
-        Continuous.ExpectedValue = result != null ? (result.IsContinuous ? "Sí" : "No") : "";
-        Discontinuity.ExpectedValue = result != null ? DiscontinuityLabel() : "";
-        ExpectedJustification = result?.Justification ?? "";
+        if (result == null)
+        {
+            LeftLimit.Clear();
+            RightLimit.Clear();
+            LimitExists.Clear();
+            ValueFA.Clear();
+            Continuous.Clear();
+            Discontinuity.Clear();
+            ExpectedJustification = "";
+            return;
+        }
+
+        LeftLimit.ExpectedValue = result.LeftLimit;
+        RightLimit.ExpectedValue = result.RightLimit;
+        LimitExists.ExpectedValue = result.LimitExists ? "Sí" : "No";
+        ValueFA.ExpectedValue = result.FunctionValueAtCriticalPoint;
+        Continuous.ExpectedValue = result.IsContinuous ? "Sí" : "No";
+        Discontinuity.ExpectedValue = DiscontinuityLabel();
+        ExpectedJustification = result.Justification;
     }
+
+    [RelayCommand]
+    private void SetLeftMinusInfinity() => LeftLimit.UserValue = "-∞";
+
+    [RelayCommand]
+    private void SetLeftPlusInfinity() => LeftLimit.UserValue = "+∞";
+
+    [RelayCommand]
+    private void SetRightMinusInfinity() => RightLimit.UserValue = "-∞";
+
+    [RelayCommand]
+    private void SetRightPlusInfinity() => RightLimit.UserValue = "+∞";
 
     public void Corroborate()
     {

@@ -64,7 +64,7 @@ public partial class ConicDefenseViewModel : ObservableObject
         Foci.ExpectedValue = string.Join("; ", h.Foci.Select(f => UiFormat.Point(f)));
         Vertices.ExpectedValue = string.Join("; ", h.Vertices.Select(v => UiFormat.Point(v)));
         Axis.ExpectedValue = $"Transverso = {h.TransverseAxisLength:F2}\nConjugado = {h.ConjugateAxisLength:F2}";
-        Directrix.ExpectedValue = string.Join("; ", h.Asymptotes.Select(a => a.EquationString));
+        Directrix.ExpectedValue = string.Join("\n", h.Asymptotes.Select(a => a.EquationString));
     }
 
     private void SetupParabola(ParabolaElements p)
@@ -102,10 +102,16 @@ public partial class ConicDefenseViewModel : ObservableObject
         DirectrixLabel = "Directriz:";
 
         Center.ExpectedValue = "";
+        Center.Status = "";
         Radius.ExpectedValue = "";
+        Radius.Status = "";
         Vertices.ExpectedValue = "";
+        Vertices.Status = "";
         Foci.ExpectedValue = "";
+        Foci.Status = "";
         Axis.ExpectedValue = "";
+        Axis.Status = "";
         Directrix.ExpectedValue = "";
+        Directrix.Status = "";
     }
 }

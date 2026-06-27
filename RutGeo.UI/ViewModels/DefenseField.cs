@@ -10,6 +10,13 @@ public partial class DefenseField : ObservableObject
     [ObservableProperty] private string _status = "";
     [ObservableProperty] private bool _isVisible = true;
 
+    public void Clear()
+    {
+        UserValue = "";
+        ExpectedValue = "";
+        Status = "";
+    }
+
     public void Corroborate()
     {
         if (!IsVisible)
