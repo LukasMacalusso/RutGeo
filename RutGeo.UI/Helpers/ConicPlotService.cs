@@ -162,6 +162,7 @@ public class ConicPlotService
     {
         RenderPoints(hyperbola.Foci, Colors.Orange, MarkerShape.OpenCircle);
         RenderPoints(hyperbola.Vertices, Colors.Red, MarkerShape.FilledCircle);
+        RenderPoints(hyperbola.CoVertices, Colors.Red, MarkerShape.FilledCircle);
 
         foreach (var asymptote in hyperbola.Asymptotes)
             DrawLine2D(asymptote, Colors.Gray);
