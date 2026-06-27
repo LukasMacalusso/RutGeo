@@ -56,18 +56,17 @@ public static class ConicPlotter
 
         if (RutGeoMath.Abs(rhs) < RutGeoMath.GeometryEpsilon) return;
 
-        int pointsPerSide = 314;
-        double maxT = 1.569;
+        double limitT = 1.56;
+        double stepT = 0.01;
 
         if (rhs > 0)
         {
             double semiAxisA = RutGeoMath.Sqrt(rhs / eq.A);
             double semiAxisB = RutGeoMath.Sqrt(RutGeoMath.Abs(rhs / eq.B));
-            for (int i = -pointsPerSide; i <= pointsPerSide; i++)
+            for (double t = -limitT; t <= limitT; t += stepT)
             {
-                double t = maxT * i / pointsPerSide;
                 double cosT = RutGeoMath.Cos(t);
-                if (RutGeoMath.Abs(cosT) > 0.0001)
+                if (RutGeoMath.Abs(cosT) > 0.01)
                 {
                     xs.Add(centerX + semiAxisA / cosT);
                     ys.Add(centerY + semiAxisB * RutGeoMath.Tan(t));
@@ -75,11 +74,10 @@ public static class ConicPlotter
             }
             xs.Add(double.NaN);
             ys.Add(double.NaN);
-            for (int i = -pointsPerSide; i <= pointsPerSide; i++)
+            for (double t = -limitT; t <= limitT; t += stepT)
             {
-                double t = maxT * i / pointsPerSide;
                 double cosT = RutGeoMath.Cos(t);
-                if (RutGeoMath.Abs(cosT) > 0.0001)
+                if (RutGeoMath.Abs(cosT) > 0.01)
                 {
                     xs.Add(centerX - semiAxisA / cosT);
                     ys.Add(centerY + semiAxisB * RutGeoMath.Tan(t));
@@ -90,11 +88,10 @@ public static class ConicPlotter
         {
             double semiAxisA = RutGeoMath.Sqrt(RutGeoMath.Abs(rhs / eq.A));
             double semiAxisB = RutGeoMath.Sqrt(RutGeoMath.Abs(rhs / eq.B));
-            for (int i = -pointsPerSide; i <= pointsPerSide; i++)
+            for (double t = -limitT; t <= limitT; t += stepT)
             {
-                double t = maxT * i / pointsPerSide;
                 double cosT = RutGeoMath.Cos(t);
-                if (RutGeoMath.Abs(cosT) > 0.0001)
+                if (RutGeoMath.Abs(cosT) > 0.01)
                 {
                     xs.Add(centerX + semiAxisA * RutGeoMath.Tan(t));
                     ys.Add(centerY + semiAxisB / cosT);
@@ -102,11 +99,10 @@ public static class ConicPlotter
             }
             xs.Add(double.NaN);
             ys.Add(double.NaN);
-            for (int i = -pointsPerSide; i <= pointsPerSide; i++)
+            for (double t = -limitT; t <= limitT; t += stepT)
             {
-                double t = maxT * i / pointsPerSide;
                 double cosT = RutGeoMath.Cos(t);
-                if (RutGeoMath.Abs(cosT) > 0.0001)
+                if (RutGeoMath.Abs(cosT) > 0.01)
                 {
                     xs.Add(centerX + semiAxisA * RutGeoMath.Tan(t));
                     ys.Add(centerY - semiAxisB / cosT);
@@ -117,9 +113,12 @@ public static class ConicPlotter
 
     public static void PlotParabola(GeneralEquation eq, List<double> xs, List<double> ys)
     {
+        double range = 2000;
+
         if (RutGeoMath.Abs(eq.B) < RutGeoMath.GeometryEpsilon && RutGeoMath.Abs(eq.D) > RutGeoMath.GeometryEpsilon)
         {
-            for (double x = -10; x <= 10; x += 0.1)
+            double vertexX = -eq.C / (2 * eq.A);
+            for (double x = vertexX - range; x <= vertexX + range; x += 0.1)
             {
                 xs.Add(x);
                 ys.Add((-eq.A / eq.D) * x * x + (-eq.C / eq.D) * x + (-eq.E / eq.D));
@@ -127,7 +126,8 @@ public static class ConicPlotter
         }
         else if (RutGeoMath.Abs(eq.A) < RutGeoMath.GeometryEpsilon && RutGeoMath.Abs(eq.C) > RutGeoMath.GeometryEpsilon)
         {
-            for (double y = -10; y <= 10; y += 0.1)
+            double vertexY = -eq.D / (2 * eq.B);
+            for (double y = vertexY - range; y <= vertexY + range; y += 0.1)
             {
                 ys.Add(y);
                 xs.Add((-eq.B / eq.C) * y * y + (-eq.D / eq.C) * y + (-eq.E / eq.C));
