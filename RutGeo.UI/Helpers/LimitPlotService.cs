@@ -34,7 +34,9 @@ public class LimitPlotService
         if (xs.Count > 1)
             _plot.AddScatterNoMarkers(xs.ToArray(), ys.ToArray());
 
-        _plot.Plot.Axes.AutoScale();
+        // Forzamos la escala visual a una ventana "normal" de ±6 en X alrededor del punto crítico,
+        // aunque el arreglo tenga 1000 puntos generados.
+        _plot.Plot.Axes.SetLimits(criticalPoint - 6, criticalPoint + 6, -10, 30);
         _plot.Refresh();
     }
 }

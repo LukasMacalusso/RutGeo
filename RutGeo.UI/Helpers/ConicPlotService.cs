@@ -51,7 +51,22 @@ public class ConicPlotService
         if (xs.Count > 1)
             RenderSegments(xs, ys);
 
-        _plot.Plot.Axes.AutoScale();
+        // Si es circunferencia o elipse, AutoScale funciona perfecto.
+        // Si es hipérbola o parábola generada masivamente, limitamos la vista inicial 
+        // para que no se vea minúscula.
+        if (conic.Type == ConicType.Circunferencia || conic.Type == ConicType.Elipse)
+        {
+            _plot.Plot.Axes.AutoScale();
+        }
+        else
+        {
+            double centerX = eq.A != 0 ? -eq.C / (2 * eq.A) : 0;
+            double centerY = eq.B != 0 ? -eq.D / (2 * eq.B) : 0;
+            
+            // Fija la vista en un marco de ±15 unidades alrededor del centro o vértice principal
+            _plot.Plot.Axes.SetLimits(centerX - 15, centerX + 15, centerY - 15, centerY + 15);
+        }
+        
         _plot.Refresh();
     }
 
