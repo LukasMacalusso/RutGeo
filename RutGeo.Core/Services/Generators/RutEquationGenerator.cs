@@ -16,7 +16,7 @@ public class RutEquationGenerator : IRutEquationGenerator
         double b = CalculateBaseCoefficient(digits[2], digits[3], validationModulo);
         double c = -(digits[4] + digits[5]);
         double d = -(digits[6] + digits[7]);
-        double e = -(digits[0] + digits[2] + digits[4] + digits[6]);
+        double e = digits[0] + digits[2] + digits[4] + digits[6];
 
         b = AdjustBForOddEighthDigit(b, digits[7]);
         b = AdjustBForEqualFirstDigits(a, b, digits[0], digits[1]);
