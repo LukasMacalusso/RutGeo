@@ -1,7 +1,6 @@
 using System;
 using System.ComponentModel;
 using Avalonia.Controls;
-using Avalonia.Interactivity;
 using RutGeo.UI.ViewModels;
 
 namespace RutGeo.UI.Views;
@@ -98,8 +97,4 @@ public partial class MainWindow : Window
         }
     }
 
-    private void TogglePanelButton_Click(object? sender, RoutedEventArgs e)
-    {
-        LeftPanel.IsVisible = !LeftPanel.IsVisible;
-    }
 }

@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace RutGeo.Core.Helpers;
 
@@ -10,19 +12,34 @@ public static class ValueComparer
         if (string.IsNullOrWhiteSpace(user))
             return false;
 
-        if (TryParseDouble(user, out double userVal) && TryParseDouble(expected, out double expVal))
-            return Math.Abs(userVal - expVal) <= tolerance;
+        double[] userNums = ExtractNumbers(user);
+        double[] expNums = ExtractNumbers(expected);
+
+        if (userNums.Length > 0 && expNums.Length > 0)
+        {
+            int minLen = Math.Min(userNums.Length, expNums.Length);
+            for (int i = 0; i < minLen; i++)
+            {
+                if (RutGeoMath.Abs(userNums[i] - expNums[i]) > tolerance)
+                    return false;
+            }
+            return true;
+        }
 
         return Normalize(user) == Normalize(expected);
     }
 
-    private static bool TryParseDouble(string s, out double val)
+    private static double[] ExtractNumbers(string s)
     {
-        return double.TryParse(
-            s.Trim().Replace(',', '.'),
-            NumberStyles.Float,
-            CultureInfo.InvariantCulture,
-            out val);
+        string normalized = s.Trim().Replace(',', '.');
+        var matches = Regex.Matches(normalized, @"-?\d+\.?\d*");
+        var result = new List<double>(matches.Count);
+        foreach (Match match in matches)
+        {
+            if (double.TryParse(match.Value, NumberStyles.Float, CultureInfo.InvariantCulture, out double val))
+                result.Add(val);
+        }
+        return result.ToArray();
     }
 
     private static string Normalize(string s)

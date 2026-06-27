@@ -10,14 +10,14 @@
             <StackPanel x:Name="ConicDefense" IsVisible="True" Spacing="8">
                 <TextBlock Text="{Binding ConicAnalysisVM.ConicVM.CenterLabel}" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
                 <Grid ColumnDefinitions="*, Auto">
-                    <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding ConicAnalysisVM.ConicVM.Center.UserValue}" Watermark="(0,00, 0,00)"/>
+                    <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding ConicAnalysisVM.ConicVM.Center.UserValue}" Watermark="(0.00, 0.00)"/>
                     <TextBlock Grid.Column="1" Text="{Binding ConicAnalysisVM.ConicVM.Center.Status}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="0,0,0,5"/>
                 </Grid>
 
                 <StackPanel IsVisible="{Binding ConicAnalysisVM.ConicVM.Radius.IsVisible}" Spacing="0">
                     <TextBlock Text="Radio:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
                     <Grid ColumnDefinitions="*, Auto">
-                        <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding ConicAnalysisVM.ConicVM.Radius.UserValue}" Watermark="0,00"/>
+                        <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding ConicAnalysisVM.ConicVM.Radius.UserValue}" Watermark="0.00"/>
                         <TextBlock Grid.Column="1" Text="{Binding ConicAnalysisVM.ConicVM.Radius.Status}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="0,0,0,5"/>
                     </Grid>
                 </StackPanel>
@@ -25,7 +25,7 @@
                 <StackPanel IsVisible="{Binding ConicAnalysisVM.ConicVM.Vertices.IsVisible}" Spacing="0">
                     <TextBlock Text="Vértices:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
                     <Grid ColumnDefinitions="*, Auto">
-                        <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding ConicAnalysisVM.ConicVM.Vertices.UserValue}" Watermark="(0,00, 0,00), (0,00, 0,00)"/>
+                        <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding ConicAnalysisVM.ConicVM.Vertices.UserValue}" Watermark="(0.00, 0.00), (0.00, 0.00)"/>
                         <TextBlock Grid.Column="1" Text="{Binding ConicAnalysisVM.ConicVM.Vertices.Status}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="0,0,0,5"/>
                     </Grid>
                 </StackPanel>
@@ -33,7 +33,7 @@
                 <StackPanel IsVisible="{Binding ConicAnalysisVM.ConicVM.Foci.IsVisible}" Spacing="0">
                     <TextBlock Text="Focos:" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
                     <Grid ColumnDefinitions="*, Auto">
-                        <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding ConicAnalysisVM.ConicVM.Foci.UserValue}" Watermark="(0,00, 0,00), (0,00, 0,00)"/>
+                        <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding ConicAnalysisVM.ConicVM.Foci.UserValue}" Watermark="(0.00, 0.00), (0.00, 0.00)"/>
                         <TextBlock Grid.Column="1" Text="{Binding ConicAnalysisVM.ConicVM.Foci.Status}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="0,0,0,5"/>
                     </Grid>
                 </StackPanel>
@@ -41,7 +41,7 @@
                 <StackPanel IsVisible="{Binding ConicAnalysisVM.ConicVM.Axis.IsVisible}" Spacing="0">
                     <TextBlock Text="{Binding ConicAnalysisVM.ConicVM.AxisLabel}" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
                     <Grid ColumnDefinitions="*, Auto">
-                        <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding ConicAnalysisVM.ConicVM.Axis.UserValue}" Watermark="0,00, 0,00"/>
+                        <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding ConicAnalysisVM.ConicVM.Axis.UserValue}" Watermark="0.00, 0.00"/>
                         <TextBlock Grid.Column="1" Text="{Binding ConicAnalysisVM.ConicVM.Axis.Status}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="0,0,0,5"/>
                     </Grid>
                 </StackPanel>
@@ -49,7 +49,7 @@
                 <StackPanel IsVisible="{Binding ConicAnalysisVM.ConicVM.Directrix.IsVisible}" Spacing="0">
                     <TextBlock Text="{Binding ConicAnalysisVM.ConicVM.DirectrixLabel}" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
                     <Grid ColumnDefinitions="*, Auto">
-                        <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding ConicAnalysisVM.ConicVM.Directrix.UserValue}" Watermark="0,00"/>
+                        <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding ConicAnalysisVM.ConicVM.Directrix.UserValue}" Watermark="y = mx + b"/>
                         <TextBlock Grid.Column="1" Text="{Binding ConicAnalysisVM.ConicVM.Directrix.Status}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="0,0,0,5"/>
                     </Grid>
                 </StackPanel>
@@ -57,15 +57,27 @@
 
             <StackPanel x:Name="LimitDefense" IsVisible="False" Spacing="8">
                 <TextBlock Text="Límite por la izquierda (x → a⁻):" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
-                <Grid ColumnDefinitions="*, Auto">
+                <Grid ColumnDefinitions="*, Auto, Auto, Auto">
                     <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding LimitAnalysisVM.LimitVM.LeftLimit.UserValue}" Watermark="x"/>
-                    <TextBlock Grid.Column="1" Text="{Binding LimitAnalysisVM.LimitVM.LeftLimit.Status}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="0,0,0,5"/>
+                    <Button Grid.Column="1" Content="-∞" Command="{Binding LimitAnalysisVM.LimitVM.SetLeftMinusInfinityCommand}"
+                            Background="{StaticResource PrimaryLightBrush}" Foreground="{StaticResource HeaderForegroundBrush}"
+                            FontSize="14" Padding="4,0" Margin="0,0,2,5" MinWidth="30" Height="22"/>
+                    <Button Grid.Column="2" Content="+∞" Command="{Binding LimitAnalysisVM.LimitVM.SetLeftPlusInfinityCommand}"
+                            Background="{StaticResource PrimaryLightBrush}" Foreground="{StaticResource HeaderForegroundBrush}"
+                            FontSize="14" Padding="4,0" Margin="0,0,5,5" MinWidth="30" Height="22"/>
+                    <TextBlock Grid.Column="3" Text="{Binding LimitAnalysisVM.LimitVM.LeftLimit.Status}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="0,0,0,5"/>
                 </Grid>
 
                 <TextBlock Text="Límite por la derecha (x → a⁺):" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>
-                <Grid ColumnDefinitions="*, Auto">
+                <Grid ColumnDefinitions="*, Auto, Auto, Auto">
                     <TextBox Grid.Column="0" Margin="0,0,5,5" Text="{Binding LimitAnalysisVM.LimitVM.RightLimit.UserValue}" Watermark="x"/>
-                    <TextBlock Grid.Column="1" Text="{Binding LimitAnalysisVM.LimitVM.RightLimit.Status}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="0,0,0,5"/>
+                    <Button Grid.Column="1" Content="-∞" Command="{Binding LimitAnalysisVM.LimitVM.SetRightMinusInfinityCommand}"
+                            Background="{StaticResource PrimaryLightBrush}" Foreground="{StaticResource HeaderForegroundBrush}"
+                            FontSize="14" Padding="4,0" Margin="0,0,2,5" MinWidth="30" Height="22"/>
+                    <Button Grid.Column="2" Content="+∞" Command="{Binding LimitAnalysisVM.LimitVM.SetRightPlusInfinityCommand}"
+                            Background="{StaticResource PrimaryLightBrush}" Foreground="{StaticResource HeaderForegroundBrush}"
+                            FontSize="14" Padding="4,0" Margin="0,0,5,5" MinWidth="30" Height="22"/>
+                    <TextBlock Grid.Column="3" Text="{Binding LimitAnalysisVM.LimitVM.RightLimit.Status}" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}" Margin="0,0,0,5"/>
                 </Grid>
 
                 <TextBlock Text="¿Existe el límite?" FontWeight="SemiBold" Foreground="{StaticResource LabelForegroundBrush}"/>

@@ -49,5 +49,11 @@ public partial class LimitAnalysisViewModel : ViewModelBase
         LeftValues.Clear();
         RightValues.Clear();
         LimitVM.SetExpectedValues(null);
+        LimitVM.LeftLimit.UserValue = "";
+        LimitVM.RightLimit.UserValue = "";
+        LimitVM.LimitExists.UserValue = "";
+        LimitVM.ValueFA.UserValue = "";
+        LimitVM.Continuous.UserValue = "";
+        LimitVM.Discontinuity.UserValue = "";
     }
 }
