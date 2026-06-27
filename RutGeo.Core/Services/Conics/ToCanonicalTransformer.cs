@@ -53,6 +53,12 @@ public class ToCanonicalTransformer : IToCanonicalTransformer
 
         LogTransformCircleSteps(equation, h, k, r2);
 
+        if (r2 < 0)
+        {
+            _log.AppendStep("La circunferencia no tiene solución real (r² < 0).");
+            return ($"{TransformationHelper.FormatBracket('x', h)}² + {TransformationHelper.FormatBracket('y', k)}² = {TransformationHelper.FormatNumber(r2)} (Sin solución real)", null);
+        }
+
         var elements = _elementsFactory.CreateCircleElements(h, k, r2);
 
         return ($"{TransformationHelper.FormatBracket('x', h)}² + {TransformationHelper.FormatBracket('y', k)}² = {TransformationHelper.FormatNumber(r2)}", elements);
@@ -73,11 +79,17 @@ public class ToCanonicalTransformer : IToCanonicalTransformer
         double h = -equation.C / (2 * equation.A);
         double k = -equation.D / (2 * equation.B);
         double rhs = -equation.E + equation.A * h * h + equation.B * k * k;
-        double a2 = rhs / equation.A;
-        double b2 = rhs / equation.B;
 
         LogTransformEllipseSteps(equation, h, k, rhs);
 
+        if (rhs <= 0)
+        {
+            _log.AppendStep("La elipse no tiene solución real (término independiente ≤ 0).");
+            return ($"{TransformationHelper.FormatBracket('x', h)}² / {TransformationHelper.FormatNumber(rhs / equation.A)} + {TransformationHelper.FormatBracket('y', k)}² / {TransformationHelper.FormatNumber(rhs / equation.B)} = 1 (Sin solución real)", null);
+        }
+
+        double a2 = rhs / equation.A;
+        double b2 = rhs / equation.B;
         var elements = _elementsFactory.CreateEllipseElements(h, k, a2, b2);
 
         return ($"{TransformationHelper.FormatBracket('x', h)}² / {TransformationHelper.FormatNumber(a2)} + {TransformationHelper.FormatBracket('y', k)}² / {TransformationHelper.FormatNumber(b2)} = 1", elements);
