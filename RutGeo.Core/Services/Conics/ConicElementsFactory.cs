@@ -56,6 +56,8 @@ public class ConicElementsFactory : IConicElementsFactory
                                 : new List<Point2D> { new Point2D(h, k - c), new Point2D(h, k + c) },
             Vertices = isHorizontal ? new List<Point2D> { new Point2D(h - a, k), new Point2D(h + a, k) }
                                     : new List<Point2D> { new Point2D(h, k - a), new Point2D(h, k + a) },
+            CoVertices = isHorizontal ? new List<Point2D> { new Point2D(h, k - b), new Point2D(h, k + b) }
+                                      : new List<Point2D> { new Point2D(h - b, k), new Point2D(h + b, k) },
             Asymptotes = isHorizontal
                 ? new List<Line2D> { new Line2D(b, -a, a * k - b * h), new Line2D(b, a, -a * k - b * h) }
                 : new List<Line2D> { new Line2D(a, -b, b * k - a * h), new Line2D(a, b, -b * k - a * h) }
